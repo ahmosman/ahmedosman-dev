@@ -3,97 +3,93 @@
 namespace App\Tests;
 
 use App\Entity\Homepage;
+use App\Entity\HomepageTranslation;
+use Doctrine\DBAL\Exception\NotNullConstraintViolationException;
 
 class HomepageTest extends DatabaseDependantTestCase
 {
 
     /** @test */
-    public function homepageRecordCanBeCreatedInDatabaseInEnglish()
+    public function homepageRecordCannotBeCreatedInDatabaseWithoutUsingTranslation()
     {
-        $homepage = new Homepage();
-        $homepage->setHeading('Hello on my site');
-        $homepage->setSubheading('I\'m interested in programming');
+        $this->expectException(NotNullConstraintViolationException::class);
 
-        $this->entityManager->persist($homepage);
+        $homepageTranslation = new HomepageTranslation();
+        $homepageTranslation->setHeading('Hello on my site');
+        $homepageTranslation->setSubheading('I\'m interested in programming');
+
+        $this->entityManager->persist($homepageTranslation);
         $this->entityManager->flush();
-
-        $homepageRepository = $this->entityManager->getRepository(
-            Homepage::class
-        );
-        $homepageRecord = $homepageRepository->findOneBy(
-            ['heading' => 'Hello on my site']
-        );
-
-        $this->assertEquals('Hello on my site', $homepageRecord->getHeading());
-        $this->assertEquals(
-            'I\'m interested in programming',
-            $homepageRecord->getSubheading()
-        );
-    }
-
-    /** @test */
-    public function homepageRecordCanBeCreatedInDatabaseInPolish()
-    {
-        $homepage = new Homepage();
-        $homepage->setHeading('Cześć na mojej stronie!');
-        $homepage->setSubheading('Zażółć gęślą jaźń');
-
-        $this->entityManager->persist($homepage);
-        $this->entityManager->flush();
-
-        $homepageRepository = $this->entityManager->getRepository(
-            Homepage::class
-        );
-        $homepageRecord = $homepageRepository->findOneBy(
-            ['heading' => 'Cześć na mojej stronie!']
-        );
-
-        $this->assertEquals(
-            'Cześć na mojej stronie!',
-            $homepageRecord->getHeading()
-        );
-        $this->assertEquals(
-            'Zażółć gęślą jaźń',
-            $homepageRecord->getSubheading()
-        );
     }
 
     /** @test */
     public function homepageTranslationRecordCanBeCreatedInDatabaseInEnglish()
     {
+        $LOCALE = 'en';
         $homepage = new Homepage();
-        $homepageTranslateEnglish = $homepage->translate('en');
-        $homepageTranslateEnglish->setHeading('Hello on my site');
-        $homepageTranslateEnglish->setSubheading(
+        $homepageTranslate = $homepage->translate($LOCALE);
+        $homepageTranslate->setHeading('Hello on my site');
+        $homepageTranslate->setSubheading(
             'I\'m interested in programming'
         );
 
+
         $this->entityManager->persist($homepage);
+
+        $homepage->mergeNewTranslations();
+
         $this->entityManager->flush();
 
         $homepageRepository = $this->entityManager->getRepository(
             Homepage::class
         );
-        $homepageRecord = $homepageRepository->findOneBy(
-            ['heading' => 'Hello on my site']
-        );
 
-        $homepageTranslateEnglishRecord = $homepageRecord->translate('en');
+        $homepageRecordTranslate = $homepageRepository->find(1)->translate($LOCALE);
+
 
         $this->assertEquals(
             'Hello on my site',
-            $homepageTranslateEnglishRecord->getHeading()
+            $homepageRecordTranslate->getHeading()
         );
         $this->assertEquals(
             'I\'m interested in programming',
-            $homepageTranslateEnglishRecord->getSubheading()
+            $homepageRecordTranslate->getSubheading()
         );
     }
 
-//    /** @test
-//     */
-//    public function homepageTranslationRecordCanBeCreatedInDatabaseInPolish()
-//    {
-//
-//    }
+    /** @test
+     */
+    public function homepageTranslationRecordCanBeCreatedInDatabaseInPolish()
+    {
+        $LOCALE = 'pl';
+        $homepage = new Homepage();
+        $homepageTranslate = $homepage->translate($LOCALE);
+        $homepageTranslate->setHeading('Cześć na mojej stronie!');
+        $homepageTranslate->setSubheading(
+            'Zażółć gęślą jaźń'
+        );
+
+
+        $this->entityManager->persist($homepage);
+
+        $homepage->mergeNewTranslations();
+
+        $this->entityManager->flush();
+
+        $homepageRepository = $this->entityManager->getRepository(
+            Homepage::class
+        );
+
+        $homepageRecordTranslate = $homepageRepository->find(1)->translate($LOCALE);
+
+
+        $this->assertEquals(
+            'Cześć na mojej stronie!',
+            $homepageRecordTranslate->getHeading()
+        );
+        $this->assertEquals(
+            'Zażółć gęślą jaźń',
+            $homepageRecordTranslate->getSubheading()
+        );
+    }
 }
