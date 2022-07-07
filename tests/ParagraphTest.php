@@ -3,48 +3,42 @@
 namespace App\Tests;
 
 use App\Entity\Paragraph;
+use App\Tests\TestCases\LocaleAndDatabaseDependantWebTestCase;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use Gedmo\Translatable\Entity\Translation;
 
-class ParagraphTest extends DatabaseDependantTestCase
+class ParagraphTest extends LocaleAndDatabaseDependantWebTestCase
 {
     /** @test */
-    public function paragraphCanBeAddedInBothLanguages()
+    public function paragraphCanBeAddedWithPlAndEnLocale()
     {
+        $this->requestToMainWithLocale('pl');
+
+        $translationRepository = $this->entityManager->getRepository(Translation::class);
+
         $paragraph = new Paragraph();
         $paragraph->setTextID('about-me');
-        $paragraphEn = $paragraph->translate('en');
-
-        $paragraphEn->setTitle('About me');
-        $paragraphEn->setDescription(
-            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi ducimus eaque quis quod rerum ut. Consequatur debitis error, ipsam itaque laborum magni minima molestias non omnis quas reiciendis sed.'
-        );
-
-        $paragraphPl = $paragraph->translate('pl');
-        $paragraphPl->setTitle('O mnie');
-        $paragraphPl->setDescription(
+        $paragraph->setTitle('O mnie');
+        $paragraph->setContent(
             'Zażółć gęślą jaźń'
         );
 
-
+        $translationRepository->translate($paragraph, 'title','en','About me')
+            ->translate($paragraph,'content','en', 'my english paragraph content');
         $this->entityManager->persist($paragraph);
         $this->entityManager->flush();
+        $translation = $translationRepository->findTranslations($paragraph);
 
         $paragraphRepository = $this->entityManager->getRepository(Paragraph::class);
-        $paragraphRecord = $paragraphRepository->findOneBy(['textID'=> 'about-me']);
-        $paragraphEnRecord = $paragraphRecord->translate('en');
-        $paragraphPlRecord = $paragraphRecord->translate('pl');
-
-
-        $this->assertEquals('About me', $paragraphEnRecord->getTitle());
-        $this->assertEquals(
-            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi ducimus eaque quis quod rerum ut. Consequatur debitis error, ipsam itaque laborum magni minima molestias non omnis quas reiciendis sed.',
-                    $paragraphEnRecord->getDescription()
-        );
-        $this->assertEquals('O mnie', $paragraphPlRecord->getTitle());
-        $this->assertEquals('Zażółć gęślą jaźń', $paragraphPlRecord->getDescription());
+        $paragraphRecord = $paragraphRepository->findOneBy(['textID' => 'about-me']);
+        $paragraphRecord->setTranslatableLocale('en');
+        dump($paragraphRecord->getTitle());
+        $paragraphRecord->setTranslatableLocale('pl');
+        dump($paragraphRecord->getTitle());
 
 
     }
+
     /** @test */
     public function paragraphsAreUniqueByTextID()
     {
@@ -64,7 +58,7 @@ class ParagraphTest extends DatabaseDependantTestCase
     }
 
     /** @test */
-    public function paragraphTitleAndDescriptionAreNullByDefault()
+    public function paragraphTitleAndcontentAreNullByDefault()
     {
         $paragraph = new Paragraph();
         $paragraph->setTextID('contact');
@@ -78,9 +72,9 @@ class ParagraphTest extends DatabaseDependantTestCase
         $paragraphPlRecord = $paragraphRecord->translate('pl');
 
         $this->assertEquals(null, $paragraphEnRecord->getTitle());
-        $this->assertEquals(null, $paragraphEnRecord->getDescription());
+        $this->assertEquals(null, $paragraphEnRecord->getContent());
         $this->assertEquals(null, $paragraphPlRecord->getTitle());
-        $this->assertEquals(null, $paragraphPlRecord->getDescription());
+        $this->assertEquals(null, $paragraphPlRecord->getContent());
     }
 
 }

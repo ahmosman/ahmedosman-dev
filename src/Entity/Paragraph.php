@@ -4,23 +4,30 @@ namespace App\Entity;
 
 use App\Repository\ParagraphRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface;
-use Knp\DoctrineBehaviors\Model\Translatable\TranslatableTrait;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
 
 #[ORM\Entity(repositoryClass: ParagraphRepository::class)]
-#[UniqueEntity(fields: 'textID')]
-class Paragraph implements TranslatableInterface
+class Paragraph implements Translatable
 {
-    use TranslatableTrait;
-
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 50, unique: true)]
+    #[ORM\Column(type: 'string', length: 50)]
     private $textID;
+
+    #[Gedmo\Translatable]
+    #[ORM\Column(type: 'string', length: 50, nullable: true)]
+    private $title;
+
+    #[Gedmo\Translatable]
+    #[ORM\Column(type: 'text', nullable: true)]
+    private $content;
+
+    #[Gedmo\Locale]
+    private $locale;
 
     public function getId(): ?int
     {
@@ -37,5 +44,34 @@ class Paragraph implements TranslatableInterface
         $this->textID = $textID;
 
         return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(?string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(?string $content): self
+    {
+        $this->content = $content;
+
+        return $this;
+    }
+
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
     }
 }

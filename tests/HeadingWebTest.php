@@ -3,9 +3,10 @@
 namespace App\Tests;
 
 use App\Entity\Heading;
+use App\Entity\HeadingTranslation;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
-class HeadingTest extends DatabaseDependantTestCase
+class HeadingWebTest extends DatabaseDependantWebTestCase
 {
     /** @test */
     public function HeadingsCanBeAddedInBothLanguages()
@@ -47,7 +48,27 @@ class HeadingTest extends DatabaseDependantTestCase
         $this->entityManager->persist($heading1);
         $this->entityManager->persist($heading2);
         $this->entityManager->flush();
+    }
 
+    /** @test */
+    public function headingTranslationCannotBeUpdatedWithoutTextID()
+    {
+        $headingTranslation = new HeadingTranslation();
+        $headingTranslation->setName('About me');
+        $headingTranslation->setLocale('en');
+
+
+        $this->entityManager->persist($headingTranslation);
+        $this->entityManager->flush();
+
+        $headingTranslationRepository = $this->entityManager->getRepository(HeadingTranslation::class);
+        dump($headingTranslationRepository);
+        $headingTranslationRecord = $headingTranslationRepository->findOneBy(['name' => 'About me']);
+
+
+
+        $this->assertEquals('About me', $headingTranslationRecord->getName());
+        $this->assertEquals('en', $headingTranslationRecord->getLocale());
     }
 
 }
