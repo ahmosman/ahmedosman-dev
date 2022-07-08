@@ -15,6 +15,7 @@
         "symfony/console": "6.0.*",
         "symfony/dotenv": "6.0.*",
         "symfony/flex": "^2",
+        "symfony/form": "6.0.*",
         "symfony/framework-bundle": "6.0.*",
         "symfony/maker-bundle": "^1.43",
         "symfony/proxy-manager-bridge": "6.0.*",
@@ -22,6 +23,7 @@
         "symfony/security-bundle": "6.0.*",
         "symfony/validator": "6.0.*",
         "symfony/var-dumper": "6.0.*",
+        "symfony/webpack-encore-bundle": "^1.15",
         "symfony/yaml": "6.0.*"
     },
     "config": {
@@ -80,6 +82,9 @@
         "phpunit/phpunit": "^9.5",
         "symfony/browser-kit": "6.0.*",
         "symfony/css-selector": "6.0.*",
-        "symfony/phpunit-bridge": "^6.1"
+        "symfony/phpunit-bridge": "^6.1",
+        "symfony/stopwatch": "6.0.*",
+        "symfony/web-profiler-bundle": "6.0.*",
+      "ext-dom": "*"
     }
 }

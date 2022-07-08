@@ -5,7 +5,7 @@ namespace App\Tests;
 use App\Entity\Paragraph;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
-class ParagraphWebTest extends DatabaseDependantWebTestCase
+class ParagraphTest extends DatabaseDependantWebTestCase
 {
     /** @test */
     public function paragraphCanBeAddedInBothLanguages()
@@ -26,6 +26,8 @@ class ParagraphWebTest extends DatabaseDependantWebTestCase
         );
 
 
+        $this->entityManager->persist($paragraphPl);
+        $this->entityManager->persist($paragraphEn);
         $this->entityManager->persist($paragraph);
         $this->entityManager->flush();
 
@@ -42,8 +44,6 @@ class ParagraphWebTest extends DatabaseDependantWebTestCase
         );
         $this->assertEquals('O mnie', $paragraphPlRecord->getTitle());
         $this->assertEquals('Zażółć gęślą jaźń', $paragraphPlRecord->getDescription());
-
-
     }
     /** @test */
     public function paragraphsAreUniqueByTextID()

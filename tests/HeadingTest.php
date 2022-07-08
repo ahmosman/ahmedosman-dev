@@ -5,7 +5,7 @@ namespace App\Tests;
 use App\Entity\Heading;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
-class HeadingWebTest extends DatabaseDependantWebTestCase
+class HeadingTest extends DatabaseDependantWebTestCase
 {
     /** @test */
     public function HeadingsCanBeAddedInBothLanguages()

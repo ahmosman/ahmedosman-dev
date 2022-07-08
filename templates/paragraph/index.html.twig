@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paragraph index{% endblock %}
+
+{% block body %}
+    <h1>Paragraph index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>TextID</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for paragraph in paragraphs %}
+            <tr>
+                <td>{{ paragraph.id }}</td>
+                <td>{{ paragraph.textID }}</td>
+                <td>
+                    <a href="{{ path('app_paragraph_show', {'id': paragraph.id}) }}">show</a>
+                    <a href="{{ path('app_paragraph_edit', {'id': paragraph.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_paragraph_new') }}">Create new</a>
+{% endblock %}

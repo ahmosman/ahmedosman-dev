@@ -5,7 +5,7 @@ namespace App\Tests;
 use App\Entity\Category;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
-class CategoryWebTest extends DatabaseDependantWebTestCase
+class CategoryTest extends DatabaseDependantWebTestCase
 {
     /** @test */
     public function differentCategoriesCanBeAdded()
