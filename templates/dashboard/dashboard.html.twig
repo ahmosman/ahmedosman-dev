@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin dashboard{% endblock %}
+
+{% block body %}
+    <main>
+        <nav class="dashboard__menu">
+            <a href="{{ path('dashboard_heading') }}">Heading</a>
+            <a href="{{ path('dashboard_paragraph') }}">Paragraph</a>
+        </nav>
+        <section class="dashboard__list">
+            {% block crud_list %}
+            {% endblock %}
+        </section>
+    </main>
+{% endblock %}

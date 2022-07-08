@@ -5,7 +5,7 @@ namespace App\Tests;
 use App\Entity\Paragraph;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
-class ParagraphTest extends DatabaseDependantTestCase
+class ParagraphWebTest extends DatabaseDependantWebTestCase
 {
     /** @test */
     public function paragraphCanBeAddedInBothLanguages()

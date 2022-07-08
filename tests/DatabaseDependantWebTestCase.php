@@ -3,20 +3,27 @@
 namespace App\Tests;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class DatabaseDependantTestCase extends KernelTestCase
+class DatabaseDependantWebTestCase extends WebTestCase
 {
     protected EntityManagerInterface|null $entityManager;
+    protected KernelBrowser $client;
+    protected Router|null $router;
 
     protected function setUp(): void
     {
-        $kernel = self::bootKernel();
+        $this->client = self::createClient();
+        $kernel = $this->client->getKernel();
 
         DatabasePrimer::prime($kernel);
 
         $this->entityManager = $kernel->getContainer()->get('doctrine')
             ->getManager();
+
+        $this->router = $kernel->getContainer()->get('router');
     }
 
     protected function tearDown(): void
