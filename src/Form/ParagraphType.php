@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Paragraph;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,19 +15,15 @@ class ParagraphType extends AbstractType
     {
         $builder
             ->add('textID')
-            ->add('title', TextType::class, [
-                'mapped' => false
-            ])
-            ->add('description', TextType::class, [
-                'mapped' => false
-            ])
+            ->add('title', TextType::class)
+            ->add('description', TextareaType::class)
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        $resolver->setDefaults([
-            'data_class' => Paragraph::class,
-        ]);
-    }
+//    public function configureOptions(OptionsResolver $resolver): void
+//    {
+//        $resolver->setDefaults([
+//            'data_class' => null,
+//        ]);
+//    }
 }

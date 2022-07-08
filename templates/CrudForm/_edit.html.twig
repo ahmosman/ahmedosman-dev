@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Paragraph{% endblock %}
+
+{% block body %}
+    <h1>Edit Paragraph</h1>
+
+    {{ include('CrudForm/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('dashboard') }}">back to list</a>
+
+    {{ include('CrudForm/_delete_form.html.twig') }}
+{% endblock %}

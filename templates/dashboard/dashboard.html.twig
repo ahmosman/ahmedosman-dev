@@ -3,12 +3,15 @@
 {% block title %}Admin dashboard{% endblock %}
 
 {% block body %}
-    <main>
+    <main class="dashboard">
         <nav class="dashboard__menu">
-            <a href="{{ path('dashboard_heading') }}">Heading</a>
-            <a href="{{ path('dashboard_paragraph') }}">Paragraph</a>
+            <ul>
+                <li><a href="{{ path('dashboard_heading') }}">Heading</a></li>
+                <li><a href="{{ path('dashboard_paragraph') }}">Paragraph</a></li>
+            </ul>
         </nav>
         <section class="dashboard__list">
+            <a href="{% block newPath %}{% endblock %}">Add new</a>
             {% block crud_list %}
             {% endblock %}
         </section>

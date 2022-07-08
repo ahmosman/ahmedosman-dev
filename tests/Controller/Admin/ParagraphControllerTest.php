@@ -28,7 +28,7 @@ class ParagraphControllerTest extends DatabaseDependantWebTestCase
 
         self::assertResponseStatusCodeSame(200);
 
-        $this->client->submitForm('Save', [
+        $this->client->submitForm('btn-save', [
             'paragraph[textID]' => 'about-me',
             'paragraph[title]' => 'O mnie',
             'paragraph[description]' => 'Po zakończeniu gimnazjum zacząłem zastanawiać się co mnie satysfakcjonuje w życiu.',
@@ -54,7 +54,7 @@ class ParagraphControllerTest extends DatabaseDependantWebTestCase
 
         self::assertResponseStatusCodeSame(200);
 
-        $this->client->submitForm('Save', [
+        $this->client->submitForm('btn-save', [
             'paragraph[textID]' => 'about-me',
             'paragraph[title]' => 'About me',
             'paragraph[description]' => 'After ending middle school I started to wonder.',
@@ -78,7 +78,7 @@ class ParagraphControllerTest extends DatabaseDependantWebTestCase
 
         self::assertResponseStatusCodeSame(200);
 
-        $this->client->submitForm('Save', [
+        $this->client->submitForm('btn-save', [
             'paragraph[textID]' => 'about-me',
             'paragraph[title]' => 'New title',
             'paragraph[description]' => 'New description',
@@ -121,7 +121,7 @@ class ParagraphControllerTest extends DatabaseDependantWebTestCase
 
         self::assertResponseStatusCodeSame(200);
 
-        $this->client->submitForm('Save', [
+        $this->client->submitForm('btn-save', [
             'paragraph[textID]' => 'about-me',
             'paragraph[title]' => 'New title',
             'paragraph[description]' => 'New description',

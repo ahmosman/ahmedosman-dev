@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New{% endblock %}
+
+{% block body %}
+    <h1>Create new</h1>
+
+    {{ include('CrudForm/_form.html.twig') }}
+
+    <a href="{{ path('dashboard') }}">back to list</a>
+{% endblock %}

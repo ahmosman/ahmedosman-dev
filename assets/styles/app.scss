@@ -1,0 +1,18 @@
+@import "config", "admin";
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: $background-color;
+  color: white;
+  font-family: Lato, sans-serif;
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
