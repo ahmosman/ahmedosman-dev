@@ -178,48 +178,6 @@ class ParagraphControllerTest extends DatabaseDependantWebTestCase
     }
 
     /** @test */
-    public function paragraphIsDisplayedProperlyDuringEditionInPl()
-    {
-        $locale = 'pl';
-
-        $this->client->request(
-            'GET',
-            $this->router->generate(
-                'paragraph_new',
-                ['_locale' => $locale]
-            )
-        );
-        self::assertResponseStatusCodeSame(200);
-
-        $this->client->submitForm('btn-save', [
-            'paragraph[textID]'      => 'about-me',
-            'paragraph[title]'       => 'O mnie',
-            'paragraph[description]' => 'Po zakończeniu gimnazjum zacząłem zastanawiać się co mnie satysfakcjonuje w życiu.'
-        ]);
-
-        $crawler = $this->client->request(
-            'GET',
-            $this->router->generate(
-                'paragraph_edit',
-                ['_locale' => $locale, 'id' => 1]
-            )
-        );
-        self::assertResponseStatusCodeSame(200);
-        self::assertEquals(
-            'about-me',
-            $crawler->filter('#paragraph_textID')->attr('value')
-        );
-        self::assertEquals(
-            'O mnie',
-            $crawler->filter('#paragraph_title')->attr('value')
-        );
-        self::assertEquals(
-            'Po zakończeniu gimnazjum zacząłem zastanawiać się co mnie satysfakcjonuje w życiu.',
-            $crawler->filter('#paragraph_description')->text()
-        );
-    }
-
-    /** @test */
     public function paragraphIsDisplayedProperlyDuringEditionInEn()
     {
         $locale = 'en';
@@ -247,6 +205,7 @@ class ParagraphControllerTest extends DatabaseDependantWebTestCase
             )
         );
         self::assertResponseStatusCodeSame(200);
+
 
         self::assertEquals(
             'about-me',

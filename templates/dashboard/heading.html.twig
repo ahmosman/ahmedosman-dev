@@ -7,6 +7,13 @@
             <th>Name</th>
             <th>Actions</th>
         </tr>
+        {% for heading in headings %}
+            <tr>
+                <td>{{ heading.textID }}</td>
+                <td>{{ heading.name }}</td>
+                <td>{{ include ('CrudForm/crudActionButtons.html.twig',{'edit_path': paths.edit, 'delete_path': paths.delete, 'id': heading.id}) }}</td>
+            </tr>
+        {% endfor %}
     </table>
 {% endblock %}
 

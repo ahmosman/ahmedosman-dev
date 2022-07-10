@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController
 {
+
     #[Route('/')]
     public function indexNoLocale(): Response
     {
@@ -22,4 +23,5 @@ class MainController extends AbstractController
             'controller_name' => 'MainController',
         ]);
     }
+
 }

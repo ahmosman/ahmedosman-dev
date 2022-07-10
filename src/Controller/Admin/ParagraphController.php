@@ -4,8 +4,6 @@ namespace App\Controller\Admin;
 
 use App\Entity\Paragraph;
 use App\Form\ParagraphType;
-use App\Repository\ParagraphRepository;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,16 +19,6 @@ class ParagraphController extends AbstractTranslatableCrudController
         $this->entityTranslation->setDescription(
             $form['description']->getData()
         );
-    }
-
-
-    public function createFormData(): array
-    {
-        return [
-            'textID' => $this->entity->getTextID(),
-            'title' => $this->entityTranslation->getTitle(),
-            'description' => $this->entityTranslation->getDescription()
-        ];
     }
 
     #[Route('/new', name: 'paragraph_new', methods: ['GET', 'POST'])]
@@ -55,11 +43,10 @@ class ParagraphController extends AbstractTranslatableCrudController
             'form' => $form,
         ]);
     }
+
     #[Route('/{id}/edit', name: 'paragraph_edit', methods: ['GET', 'POST'])]
-    public function edit(
-        Request $request,
-        Paragraph $paragraph
-    ): Response {
+    public function edit( Request   $request, Paragraph $paragraph): Response
+    {
         $this->setTranslatableEntity($paragraph);
 
         $form = $this->createForm(
@@ -68,9 +55,9 @@ class ParagraphController extends AbstractTranslatableCrudController
         );
         $form->handleRequest($request);
 
-
         if ($form->isSubmitted() && $form->isValid()) {
             $this->setTranslatableFieldsAndFlushForm($form);
+
             return $this->redirectToRoute(
                 'dashboard_paragraph',
                 [],
@@ -84,10 +71,18 @@ class ParagraphController extends AbstractTranslatableCrudController
         ]);
     }
 
+    public function createFormData(): array
+    {
+        return [
+            'textID' => $this->entity->getTextID(),
+            'title' => $this->entityTranslation->getTitle(),
+            'description' => $this->entityTranslation->getDescription(),
+        ];
+    }
+
     #[Route('/{id}/delete', name: 'paragraph_delete')]
-    public function delete(
-        Paragraph $paragraph
-    ): Response {
+    public function delete(Paragraph $paragraph): Response
+    {
         $this->entityManager->remove($paragraph);
         $this->entityManager->flush();
 
@@ -97,4 +92,5 @@ class ParagraphController extends AbstractTranslatableCrudController
             Response::HTTP_SEE_OTHER
         );
     }
+
 }

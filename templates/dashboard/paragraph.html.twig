@@ -1,5 +1,5 @@
 {% extends 'dashboard/dashboard.html.twig' %}
-{% block newPath %}{{ path( paths.new )}} {% endblock %}
+{% block newPath %}{{ path( paths.new ) }} {% endblock %}
 {% block crud_list %}
     <table>
         <tr>
@@ -7,5 +7,13 @@
             <th>Title</th>
             <th>Actions</th>
         </tr>
+        {% for paragraph in paragraphs %}
+            <tr>
+                <td>{{ paragraph.textID }}</td>
+                <td>{{ paragraph.title }}</td>
+                <td>{{ include ('CrudForm/crudActionButtons.html.twig',{'edit_path': paths.edit, 'delete_path': paths.delete, 'id': paragraph.id}) }}</td>
+            </tr>
+        {% endfor %}
     </table>
+
 {% endblock %}

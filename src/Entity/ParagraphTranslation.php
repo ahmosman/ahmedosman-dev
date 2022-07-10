@@ -11,6 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[UniqueEntity(fields: 'textID')]
 class ParagraphTranslation implements TranslationInterface
 {
+
     use TranslationTrait;
 
     #[ORM\Id]
@@ -53,4 +54,5 @@ class ParagraphTranslation implements TranslationInterface
 
         return $this;
     }
+
 }

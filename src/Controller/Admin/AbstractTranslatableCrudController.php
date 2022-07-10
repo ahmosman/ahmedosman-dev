@@ -9,19 +9,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 
-abstract class AbstractTranslatableCrudController extends AbstractController implements TranslatableCrudControllerInterface
+abstract class AbstractTranslatableCrudController extends AbstractLocaleController implements TranslatableCrudControllerInterface
 {
-    protected string $locale;
+
     protected EntityManagerInterface $entityManager;
     protected TranslatableInterface $entity;
     protected TranslationInterface $entityTranslation;
     protected $form;
 
-    public function __construct(
-        RequestStack $requestStack,
-        EntityManagerInterface $entityManager
-    ) {
-        $this->locale = $requestStack->getCurrentRequest()->getLocale();
+    public function __construct(RequestStack $requestStack, EntityManagerInterface $entityManager)
+    {
+        parent::__construct($requestStack);
         $this->entityManager = $entityManager;
     }
 
@@ -31,13 +29,6 @@ abstract class AbstractTranslatableCrudController extends AbstractController imp
         $this->entityTranslation = $entity->translate($this->locale);
     }
 
-//    protected function mergeNewTranslationsAndFlush(): void
-//    {
-//        $this->entity->mergeNewTranslations();
-//        $this->entityManager->persist($this->entity);
-//        $this->entityManager->flush();
-//    }
-
     protected function setTranslatableFieldsAndFlushForm($form): void
     {
         $this->setTranslatableEntityFieldsFromForm($form);
@@ -45,4 +36,5 @@ abstract class AbstractTranslatableCrudController extends AbstractController imp
         $this->entityManager->persist($this->entity);
         $this->entityManager->flush();
     }
+
 }

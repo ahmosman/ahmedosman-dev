@@ -10,6 +10,7 @@ use Knp\DoctrineBehaviors\Model\Translatable\TranslationTrait;
 #[ORM\Entity(repositoryClass: HeadingRepository::class)]
 class HeadingTranslation implements TranslationInterface
 {
+
     use TranslationTrait;
 
     #[ORM\Id]
@@ -36,4 +37,5 @@ class HeadingTranslation implements TranslationInterface
 
         return $this;
     }
+
 }

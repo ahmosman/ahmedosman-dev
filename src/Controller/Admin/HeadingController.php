@@ -51,15 +51,17 @@ class HeadingController extends AbstractTranslatableCrudController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->setTranslatableFieldsAndFlushForm($form);
+
             return $this->redirectToRoute(
                 'dashboard_heading',
                 [],
                 Response::HTTP_SEE_OTHER
             );
         }
+
         return $this->renderForm('CrudForm/_edit.html.twig', [
             'entity' => $heading,
-            'form'   => $form,
+            'form' => $form,
         ]);
     }
 
@@ -67,7 +69,7 @@ class HeadingController extends AbstractTranslatableCrudController
     {
         return [
             'textID' => $this->entity->getTextID(),
-            'name'   => $this->entityTranslation->getName(),
+            'name' => $this->entityTranslation->getName(),
         ];
     }
 
@@ -83,4 +85,5 @@ class HeadingController extends AbstractTranslatableCrudController
             Response::HTTP_SEE_OTHER
         );
     }
+
 }
