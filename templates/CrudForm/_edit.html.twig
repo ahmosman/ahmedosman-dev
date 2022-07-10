@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Edit Paragraph</h1>
 
-    {{ include('CrudForm/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('CrudForm/_form.html.twig', {'button_label': 'Update', 'button_id': 'btn-update', 'button_class': 'btn-update'}) }}
 
     <a href="{{ path('dashboard') }}">back to list</a>
 

@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Create new</h1>
 
-    {{ include('CrudForm/_form.html.twig') }}
+    {{ include('CrudForm/_form.html.twig', {'button_label': 'Save', 'button_id': 'btn-save', 'button_class': 'btn-save'}) }}
 
     <a href="{{ path('dashboard') }}">back to list</a>
 {% endblock %}

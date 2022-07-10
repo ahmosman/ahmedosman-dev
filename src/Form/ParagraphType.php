@@ -15,15 +15,8 @@ class ParagraphType extends AbstractType
     {
         $builder
             ->add('textID')
-            ->add('title', TextType::class)
+            ->add('title')
             ->add('description', TextareaType::class)
         ;
     }
-
-//    public function configureOptions(OptionsResolver $resolver): void
-//    {
-//        $resolver->setDefaults([
-//            'data_class' => null,
-//        ]);
-//    }
 }

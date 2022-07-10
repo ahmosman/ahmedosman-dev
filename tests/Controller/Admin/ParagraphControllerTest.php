@@ -5,18 +5,11 @@ namespace App\Test\Controller;
 use App\Entity\Paragraph;
 use App\Repository\ParagraphRepository;
 use App\Tests\DatabaseDependantWebTestCase;
-use Symfony\Bundle\FrameworkBundle\KernelBrowser;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\Response;
 
 class ParagraphControllerTest extends DatabaseDependantWebTestCase
 {
     private ParagraphRepository $repository;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->repository = $this->entityManager->getRepository(Paragraph::class);
-    }
 
     /** @test */
     public function newParagraphCanBeCreatedInPl(): void
@@ -24,117 +17,256 @@ class ParagraphControllerTest extends DatabaseDependantWebTestCase
         $locale = 'pl';
         $originalNumObjectsInRepository = count($this->repository->findAll());
 
-        $this->client->request('GET', $this->router->generate('paragraph_new',['_locale' => $locale]));
-
+        $this->client->request(
+            'GET',
+            $this->router->generate(
+                'paragraph_new',
+                ['_locale' => $locale]
+            )
+        );
         self::assertResponseStatusCodeSame(200);
 
         $this->client->submitForm('btn-save', [
-            'paragraph[textID]' => 'about-me',
-            'paragraph[title]' => 'O mnie',
+            'paragraph[textID]'      => 'about-me',
+            'paragraph[title]'       => 'O mnie',
             'paragraph[description]' => 'Po zakończeniu gimnazjum zacząłem zastanawiać się co mnie satysfakcjonuje w życiu.',
         ]);
 
-        $paragraphRecord = $this->repository->findOneBy(['textID' => 'about-me']);
+        $paragraphRecord = $this->repository->findOneBy(['textID' => 'about-me']
+        );
         $paragraphTranslation = $paragraphRecord->translate($locale);
 
         self::assertEquals('about-me', $paragraphRecord->getTextID());
         self::assertEquals('O mnie', $paragraphTranslation->getTitle());
-        self::assertEquals('Po zakończeniu gimnazjum zacząłem zastanawiać się co mnie satysfakcjonuje w życiu.', $paragraphTranslation->getDescription());
-        self::assertResponseRedirects($this->router->generate('dashboard_paragraph'));
-        self::assertSame($originalNumObjectsInRepository + 1, count($this->repository->findAll()));
-    }
-
-    /** @test */
-    public function newParagraphCanBeCreatedInEn(): void
-    {
-        $locale = 'en';
-        $originalNumObjectsInRepository = count($this->repository->findAll());
-
-        $this->client->request('GET', $this->router->generate('paragraph_new',['_locale' => $locale]));
-
-        self::assertResponseStatusCodeSame(200);
-
-        $this->client->submitForm('btn-save', [
-            'paragraph[textID]' => 'about-me',
-            'paragraph[title]' => 'About me',
-            'paragraph[description]' => 'After ending middle school I started to wonder.',
-        ]);
-
-        $paragraphRecord = $this->repository->findOneBy(['textID' => 'about-me']);
-        $paragraphTranslation = $paragraphRecord->translate($locale);
-
-        self::assertEquals('about-me', $paragraphRecord->getTextID());
-        self::assertEquals('About me', $paragraphTranslation->getTitle());
-        self::assertEquals('After ending middle school I started to wonder.', $paragraphTranslation->getDescription());
-        self::assertResponseRedirects($this->router->generate('dashboard_paragraph'));
-        self::assertSame($originalNumObjectsInRepository + 1, count($this->repository->findAll()));
+        self::assertEquals(
+            'Po zakończeniu gimnazjum zacząłem zastanawiać się co mnie satysfakcjonuje w życiu.',
+            $paragraphTranslation->getDescription()
+        );
+        self::assertResponseRedirects(
+            $this->router->generate('dashboard_paragraph')
+        );
+        self::assertSame(
+            $originalNumObjectsInRepository + 1,
+            count($this->repository->findAll())
+        );
     }
 
     /** @test */
     public function paragraphCanBeEditedDependingOnLocale(): void
     {
         $locale = 'pl';
-        $this->client->request('GET', $this->router->generate('paragraph_new',['_locale' => $locale]));
-
+        $this->client->request(
+            'GET',
+            $this->router->generate(
+                'paragraph_new',
+                ['_locale' => $locale]
+            )
+        );
         self::assertResponseStatusCodeSame(200);
 
         $this->client->submitForm('btn-save', [
-            'paragraph[textID]' => 'about-me',
-            'paragraph[title]' => 'New title',
+            'paragraph[textID]'      => 'about-me',
+            'paragraph[title]'       => 'New title',
             'paragraph[description]' => 'New description',
         ]);
 
-        $paragraphRecord = $this->repository->findOneBy(['textID' => 'about-me']);
+        $paragraphRecord = $this->repository->findOneBy(['textID' => 'about-me']
+        );
 
-        $this->client->request('GET', $this->router->generate('paragraph_edit', ['_locale' => $locale, 'id' => $paragraphRecord->getId()]));
+        $this->client->request(
+            'GET',
+            $this->router->generate(
+                'paragraph_edit',
+                [
+                    '_locale' => $locale,
+                    'id'      => $paragraphRecord->getId()
+                ]
+            )
+        );
+        self::assertResponseStatusCodeSame(200);
+
         $this->client->submitForm('Update', [
-            'paragraph[title]' => 'O mnie',
+            'paragraph[title]'       => 'O mnie',
             'paragraph[description]' => 'Po zakończeniu gimnazjum zacząłem zastanawiać się co mnie satysfakcjonuje w życiu.',
         ]);
 
         $locale = 'en';
-        $this->client->request('GET', $this->router->generate('paragraph_edit', ['_locale' => $locale, 'id' => $paragraphRecord->getId()]));
+        $this->client->request(
+            'GET',
+            $this->router->generate(
+                'paragraph_edit',
+                [
+                    '_locale' => $locale,
+                    'id'      => $paragraphRecord->getId()
+                ]
+            )
+        );
+        self::assertResponseStatusCodeSame(200);
+
+
         $this->client->submitForm('Update', [
-            'paragraph[title]' => 'About me',
+            'paragraph[title]'       => 'About me',
             'paragraph[description]' => 'After ending middle school I started to wonder.',
         ]);
 
-        $paragraphRecord = $this->repository->findOneBy(['textID' => 'about-me']);
+        $paragraphRecord = $this->repository->findOneBy(['textID' => 'about-me']
+        );
         $paragraphPl = $paragraphRecord->translate('pl');
         $paragraphEn = $paragraphRecord->translate('en');
 
+        self::assertSame('about-me', $paragraphRecord->getTextID());
         self::assertSame('About me', $paragraphEn->getTitle());
-        self::assertSame('After ending middle school I started to wonder.', $paragraphEn->getDescription());
+        self::assertSame(
+            'After ending middle school I started to wonder.',
+            $paragraphEn->getDescription()
+        );
         self::assertSame('O mnie', $paragraphPl->getTitle());
-        self::assertSame('Po zakończeniu gimnazjum zacząłem zastanawiać się co mnie satysfakcjonuje w życiu.', $paragraphPl->getDescription());
-        self::assertResponseRedirects($this->router->generate('dashboard_paragraph',['_locale' => 'en']));
+        self::assertSame(
+            'Po zakończeniu gimnazjum zacząłem zastanawiać się co mnie satysfakcjonuje w życiu.',
+            $paragraphPl->getDescription()
+        );
+        self::assertResponseRedirects(
+            $this->router->generate('dashboard_paragraph', ['_locale' => 'en'])
+        );
     }
 
     /** @test */
     public function paragraphCanBeRemoved(): void
     {
-
         $originalNumObjectsInRepository = count($this->repository->findAll());
 
         $locale = 'pl';
-        $this->client->request('GET', $this->router->generate('paragraph_new',['_locale' => $locale]));
-
+        $this->client->request(
+            'GET',
+            $this->router->generate(
+                'paragraph_new',
+                ['_locale' => $locale]
+            )
+        );
         self::assertResponseStatusCodeSame(200);
 
         $this->client->submitForm('btn-save', [
-            'paragraph[textID]' => 'about-me',
-            'paragraph[title]' => 'New title',
+            'paragraph[textID]'      => 'about-me',
+            'paragraph[title]'       => 'New title',
             'paragraph[description]' => 'New description',
         ]);
 
-        $paragraphRecord = $this->repository->findOneBy(['textID' => 'about-me']);
+        $paragraphRecord = $this->repository->findOneBy(['textID' => 'about-me']
+        );
+        self::assertSame(
+            $originalNumObjectsInRepository + 1,
+            count($this->repository->findAll())
+        );
+
+        $this->client->request(
+            'GET',
+            $this->router->generate(
+                'paragraph_delete',
+                ['id' => $paragraphRecord->getId()]
+            )
+        );
+        self::assertResponseStatusCodeSame(Response::HTTP_SEE_OTHER);
 
 
-        self::assertSame($originalNumObjectsInRepository + 1, count($this->repository->findAll()));
-        $this->client->request('GET', $this->router->generate('paragraph_delete',['id' => $paragraphRecord->getId()]));
+        self::assertSame(
+            $originalNumObjectsInRepository,
+            count($this->repository->findAll())
+        );
+        self::assertResponseRedirects(
+            $this->router->generate('dashboard_paragraph')
+        );
+    }
 
+    /** @test */
+    public function paragraphIsDisplayedProperlyDuringEditionInPl()
+    {
+        $locale = 'pl';
 
-        self::assertSame($originalNumObjectsInRepository, count($this->repository->findAll()));
-        self::assertResponseRedirects($this->router->generate('dashboard_paragraph'));
+        $this->client->request(
+            'GET',
+            $this->router->generate(
+                'paragraph_new',
+                ['_locale' => $locale]
+            )
+        );
+        self::assertResponseStatusCodeSame(200);
+
+        $this->client->submitForm('btn-save', [
+            'paragraph[textID]'      => 'about-me',
+            'paragraph[title]'       => 'O mnie',
+            'paragraph[description]' => 'Po zakończeniu gimnazjum zacząłem zastanawiać się co mnie satysfakcjonuje w życiu.'
+        ]);
+
+        $crawler = $this->client->request(
+            'GET',
+            $this->router->generate(
+                'paragraph_edit',
+                ['_locale' => $locale, 'id' => 1]
+            )
+        );
+        self::assertResponseStatusCodeSame(200);
+        self::assertEquals(
+            'about-me',
+            $crawler->filter('#paragraph_textID')->attr('value')
+        );
+        self::assertEquals(
+            'O mnie',
+            $crawler->filter('#paragraph_title')->attr('value')
+        );
+        self::assertEquals(
+            'Po zakończeniu gimnazjum zacząłem zastanawiać się co mnie satysfakcjonuje w życiu.',
+            $crawler->filter('#paragraph_description')->text()
+        );
+    }
+
+    /** @test */
+    public function paragraphIsDisplayedProperlyDuringEditionInEn()
+    {
+        $locale = 'en';
+
+        $this->client->request(
+            'GET',
+            $this->router->generate(
+                'paragraph_new',
+                ['_locale' => $locale]
+            )
+        );
+        self::assertResponseStatusCodeSame(200);
+
+        $this->client->submitForm('btn-save', [
+            'paragraph[textID]'      => 'about-me',
+            'paragraph[title]'       => 'About me',
+            'paragraph[description]' => 'After ending middle school I started to wonder.'
+        ]);
+
+        $crawler = $this->client->request(
+            'GET',
+            $this->router->generate(
+                'paragraph_edit',
+                ['_locale' => $locale, 'id' => 1]
+            )
+        );
+        self::assertResponseStatusCodeSame(200);
+
+        self::assertEquals(
+            'about-me',
+            $crawler->filter('#paragraph_textID')->attr('value')
+        );
+        self::assertEquals(
+            'About me',
+            $crawler->filter('#paragraph_title')->attr('value')
+        );
+        self::assertEquals(
+            'After ending middle school I started to wonder.',
+            $crawler->filter('#paragraph_description')->text()
+        );
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->repository = $this->entityManager->getRepository(
+            Paragraph::class
+        );
     }
 }

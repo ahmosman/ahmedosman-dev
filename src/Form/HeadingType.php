@@ -14,16 +14,7 @@ class HeadingType extends AbstractType
     {
         $builder
             ->add('textID')
-            ->add('name', TextType::class,[
-                'mapped' => false
-            ])
+            ->add('name')
         ;
-    }
-
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        $resolver->setDefaults([
-            'data_class' => Heading::class,
-        ]);
     }
 }
