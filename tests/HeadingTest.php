@@ -19,8 +19,18 @@ class HeadingTest extends DatabaseDependantWebTestCase
         $headingPl = $heading->translate('pl');
         $headingPl->setName('Cześć, jestem Ahmed');
 
+        $heading2 = new Heading();
+        $heading2->setTextID('homepage-2');
+
+        $heading2Pl = $heading2->translate('pl');
+        $heading2Pl->setName('Interesuję się programowaniem');
+
+        $heading2En = $heading2->translate('en');
+        $heading2En->setName('I\'m interested in programming');
+
 
         $this->entityManager->persist($heading);
+        $this->entityManager->persist($heading2);
         $this->entityManager->flush();
 
         $headingRepository = $this->entityManager->getRepository(Heading::class);
@@ -28,10 +38,15 @@ class HeadingTest extends DatabaseDependantWebTestCase
         $headingRecord = $headingRepository->findOneBy(['textID'=> 'about-me']);
         $headingEnRecord = $headingRecord->translate('en');
         $headingPlRecord = $headingRecord->translate('pl');
+        $heading2Record = $headingRepository->findOneBy(['textID'=> 'homepage-2']);
+        $heading2EnRecord = $heading2Record->translate('en');
+        $heading2PlRecord = $heading2Record->translate('pl');
 
 
         $this->assertEquals('Hi, I\'m Ahmed', $headingEnRecord->getName());
         $this->assertEquals('Cześć, jestem Ahmed', $headingPlRecord->getName());
+        $this->assertEquals('I\'m interested in programming', $heading2EnRecord->getName());
+        $this->assertEquals('Interesuję się programowaniem', $heading2PlRecord->getName());
     }
 
     /** @test */
