@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Controller\AbstractLocaleController;
 use App\Repository\HeadingRepository;
 use App\Repository\ParagraphRepository;
 use App\Service\TranslatableDashboardFieldsGenerator;

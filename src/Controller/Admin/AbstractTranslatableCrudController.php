@@ -2,25 +2,20 @@
 
 namespace App\Controller\Admin;
 
+use App\Controller\AbstractEntityLocaleController;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface;
 use Knp\DoctrineBehaviors\Contract\Entity\TranslationInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Response;
 
-abstract class AbstractTranslatableCrudController extends AbstractLocaleController implements TranslatableCrudControllerInterface
+abstract class AbstractTranslatableCrudController extends AbstractEntityLocaleController implements TranslatableCrudControllerInterface
 {
-
-    protected EntityManagerInterface $entityManager;
     protected TranslatableInterface $entity;
     protected TranslationInterface $entityTranslation;
-    protected $form;
 
     public function __construct(RequestStack $requestStack, EntityManagerInterface $entityManager)
     {
-        parent::__construct($requestStack);
-        $this->entityManager = $entityManager;
+        parent::__construct($requestStack, $entityManager);
     }
 
     protected function setTranslatableEntity(TranslatableInterface $entity): void
