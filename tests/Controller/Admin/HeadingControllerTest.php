@@ -39,7 +39,7 @@ class HeadingControllerTest extends DatabaseDependantWebTestCase
             $headingTranslation->getName()
         );
         self::assertResponseRedirects(
-            $this->router->generate('dashboard_paragraph')
+            $this->router->generate('dashboard_heading')
         );
         self::assertSame(
             $originalNumObjectsInRepository + 1,
@@ -65,8 +65,7 @@ class HeadingControllerTest extends DatabaseDependantWebTestCase
             'heading[name]' => 'adsds Cześć, jestem Ahmeadsd',
         ]);
 
-        $headingRecord = $this->repository->findOneBy(['textID' => 'homepage-1']
-        );
+        $headingRecord = $this->repository->findOneBy(['textID' => 'homepage-1']);
 
         $this->client->request(
             'GET',

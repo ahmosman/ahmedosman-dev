@@ -23,7 +23,7 @@ class TranslatableDashboardFieldsGenerator extends DashboardFieldsGenerator
     {
         $generatedTable = [];
         foreach ($this->entityRecords as $record) {
-            $entityRecordMergedArray = array_merge($this->prepareArrayFromRecord($record), $this->prepareTranslatableArrayFromRecord($record->translate($this->locale)));
+            $entityRecordMergedArray = array_merge($this->prepareArrayFromRecord($record), $this->prepareTranslatableArrayFromRecord($record->translate($this->locale, false)));
             array_push($generatedTable, $entityRecordMergedArray);
         }
 

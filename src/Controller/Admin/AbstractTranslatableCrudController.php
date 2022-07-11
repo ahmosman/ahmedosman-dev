@@ -26,7 +26,7 @@ abstract class AbstractTranslatableCrudController extends AbstractLocaleControll
     protected function setTranslatableEntity(TranslatableInterface $entity): void
     {
         $this->entity = $entity;
-        $this->entityTranslation = $entity->translate($this->locale);
+        $this->entityTranslation = $entity->translate($this->locale, false);
     }
 
     protected function setTranslatableFieldsAndFlushForm($form): void

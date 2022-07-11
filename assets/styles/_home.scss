@@ -1,0 +1,43 @@
+.home {
+  height: calc(100% - 45px);
+  display: flex;
+  justify-content: center;
+  &::before {
+    content: '';
+    background: linear-gradient(rgba(0, 0, 0, 0.4),
+            rgba(0, 0, 0, 0.4)), url("../images/background-circuit-board-purple.jpg") no-repeat center;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 35%;
+  }
+
+  &__container {
+    height: 100%;
+    text-align: center;
+    line-height: 2.3em;
+    width: 70vw;
+    * {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+  }
+
+  &__headings {
+    height: 60%;
+
+    * {
+      font-weight: normal;
+    }
+  }
+
+  &__links {
+    height: 40%;
+    font-size: 2em;
+  }
+}

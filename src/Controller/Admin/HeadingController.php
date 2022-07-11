@@ -30,7 +30,7 @@ class HeadingController extends AbstractTranslatableCrudController
             $this->setTranslatableFieldsAndFlushForm($form);
 
             return $this->redirectToRoute(
-                'dashboard_paragraph',
+                'dashboard_heading',
                 [],
                 Response::HTTP_SEE_OTHER
             );

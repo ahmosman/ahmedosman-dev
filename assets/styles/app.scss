@@ -1,18 +1,48 @@
-@import "config", "admin";
+@import 'config', 'admin', 'home';
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 body {
   background-color: $background-color;
   color: white;
   font-family: Lato, sans-serif;
+  font-size: 16px;
   width: 100%;
 }
 
 a {
   text-decoration: none;
   color: white;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  height: 45px;
+  align-items: center;
+  background-color: $background-color-transparent;
+
+  .main {
+    margin-left: 20px;
+  }
+
+  .bars {
+    margin-left: auto;
+    margin-right: 20px;
+    font-size: 1.7em;
+    display: flex;
+    align-items: center;
+  }
 }
