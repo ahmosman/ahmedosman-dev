@@ -42,15 +42,26 @@ header {
   align-items: center;
   background-color: $background-color-transparent;
 
-  .main {
-    margin-left: 20px;
+  .nav {
+    &__main {
+      margin-left: 20px;
+    }
+
+    &__languages {
+      padding-left: 20px;
+
+      a {
+        font-weight: 200;
+      }
+    }
+
+    &__bars {
+      margin-left: auto;
+      margin-right: 20px;
+      font-size: 1.7em;
+      display: flex;
+      align-items: center;
+    }
   }
 
-  .bars {
-    margin-left: auto;
-    margin-right: 20px;
-    font-size: 1.7em;
-    display: flex;
-    align-items: center;
-  }
 }

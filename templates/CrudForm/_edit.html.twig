@@ -1,5 +1,12 @@
 {% extends 'base.html.twig' %}
 
+{% block enPath %}
+    {{ path(app.request.get('_route'),{'_locale':'en','id':entity.id}) }}
+{% endblock %}
+{% block plPath %}
+    {{ path(app.request.get('_route'),{'_locale':'pl','id':entity.id}) }}
+{% endblock %}
+
 {% block body %}
     <main class="edit">
         <h1 class="edit__heading">Edit {{ entity_name }}</h1>

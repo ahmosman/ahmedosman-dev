@@ -18,8 +18,22 @@
 </head>
 <body>
 <header>
-    <div class="main"><a href="{{ path('homepage',{'_locale': app.request.locale}) }}">ahmedosman.dev</a></div>
-    <div class="bars">
+    <div class="nav__main">
+        <a href="{{ path('homepage',{'_locale': app.request.locale}) }}">ahmedosman.dev</a>
+        <span class="nav__languages">
+        {% if app.request.locale == 'pl' %}
+
+            <span>PL</span>
+            |
+            <a href="{% block enPath %}{{ path(app.request.get('_route'),{'_locale':'en'}) }}{% endblock %}">EN</a>
+        {% elseif app.request.locale == 'en' %}
+            <a href="{% block plPath %}{{ path(app.request.get('_route'),{'_locale':'pl'}) }}{% endblock %}">PL</a>
+            |
+            <span>EN</span>
+        {% endif %}
+        </span>
+    </div>
+    <div class="nav__bars">
         <i class="fa-solid fa-bars"></i>
     </div>
 </header>
