@@ -3,6 +3,7 @@
 namespace App\Tests\Service;
 
 use App\Entity\Heading;
+use App\Entity\Paragraph;
 use App\Service\TranslatableContentException;
 use App\Service\TranslatableContentGenerator;
 use App\Tests\DatabaseDependantWebTestCase;
@@ -87,6 +88,38 @@ class TranslatableContentGeneratorTest extends DatabaseDependantWebTestCase
         $this->assertEquals('Hi, I\'m Ahmed', $headings['homepage-1']['name']);
         $this->assertEquals('I\'m interested in programming', $headings['homepage-2']['name']);
         $this->assertEquals('You can learn about me on this website', $headings['homepage-3']['name']);
+
+    }
+
+    /** @test */
+    public function paragraphsAreGeneratedInPl()
+    {
+        $locale = 'pl';
+
+        $paragraph = new Paragraph();
+        $paragraph->setTextID('about_me');
+        $paragraphPl = $paragraph->translate('pl');
+        $paragraphPl->setTitle('O mnie');
+        $paragraphPl->setDescription('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur, cumque.');
+
+        $paragraph2 = new Paragraph();
+        $paragraph2->setTextID('my_intentions');
+        $paragraph2Pl = $paragraph2->translate('pl');
+        $paragraph2Pl->setTitle('Co zamierzam');
+        $paragraph2Pl->setDescription('Pracować, uczyć się itp.');
+
+        $this->entityManager->persist($paragraph);
+        $this->entityManager->persist($paragraph2);
+        $this->entityManager->flush();
+
+        $paragraphs = $this->contentGenerator->generateContentTextIDArray(Paragraph::class, $locale);
+
+        self::assertSame(1, $paragraphs['about_me']['id']);
+        self::assertSame(2, $paragraphs['my_intentions']['id']);
+        self::assertEquals('O mnie', $paragraphs['about_me']['title']);
+        self::assertEquals('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur, cumque.', $paragraphs['about_me']['description']);
+        self::assertEquals('Co zamierzam', $paragraphs['my_intentions']['title']);
+        self::assertEquals('Pracować, uczyć się itp.', $paragraphs['my_intentions']['description']);
 
     }
 

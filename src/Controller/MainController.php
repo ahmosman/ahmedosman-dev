@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Heading;
+use App\Entity\Paragraph;
 use App\Service\TranslatableContentException;
 use App\Service\TranslatableContentGenerator;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,6 +15,7 @@ class MainController extends AbstractTranslatablePageContentController
 {
 
     private array $headings;
+    private array $paragraphs;
 
     /**
      * @throws TranslatableContentException
@@ -22,6 +24,7 @@ class MainController extends AbstractTranslatablePageContentController
     {
         parent::__construct($requestStack, $entityManager, $contentGenerator);
         $this->headings = $this->contentGenerator->generateContentTextIDArray(Heading::class, $this->locale);
+        $this->paragraphs = $this->contentGenerator->generateContentTextIDArray(Paragraph::class, $this->locale);
     }
 
     #[Route('/')]
@@ -43,7 +46,8 @@ class MainController extends AbstractTranslatablePageContentController
     public function about(): Response
     {
         return $this->render('main/about.html.twig', [
-            'headings' => $this->headings
+            'headings' => $this->headings,
+            'paragraphs' => $this->paragraphs
         ]);
     }
 

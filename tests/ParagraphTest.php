@@ -25,9 +25,6 @@ class ParagraphTest extends DatabaseDependantWebTestCase
             'Zażółć gęślą jaźń'
         );
 
-
-        $this->entityManager->persist($paragraphPl);
-        $this->entityManager->persist($paragraphEn);
         $this->entityManager->persist($paragraph);
         $this->entityManager->flush();
 

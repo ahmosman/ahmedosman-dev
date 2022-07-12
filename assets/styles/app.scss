@@ -15,13 +15,21 @@ body {
   background-color: $background-color;
   color: white;
   font-family: Lato, sans-serif;
-  font-size: 16px;
+  font-size: 12px;
   width: 100%;
+}
+
+h1, h2, h3 {
+  font-weight: normal;
 }
 
 a {
   text-decoration: none;
   color: white;
+}
+
+p{
+  line-height: 1.3em;
 }
 
 button {
@@ -41,6 +49,7 @@ header {
   height: 45px;
   align-items: center;
   background-color: $background-color-transparent;
+  font-size: 1rem;
 
   .nav {
     &__main {
@@ -58,7 +67,7 @@ header {
     &__bars {
       margin-left: auto;
       margin-right: 20px;
-      font-size: 1.7em;
+      font-size: 1.7rem;
       display: flex;
       align-items: center;
     }

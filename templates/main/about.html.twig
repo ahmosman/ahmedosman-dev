@@ -7,5 +7,17 @@
                 {{ headings.about_banner.name|raw }}
             </div>
         </div>
+        <section class="me">
+            <h1>{{ paragraphs.about_me.title }}</h1>
+            <img src="{{ asset('images/ahmedosman-portrait.jpg') }}" alt="Ahmed Osman Photo">
+            <p>{{ paragraphs.about_me.description|nl2br }}</p>
+        </section>
+        <section class="intentions">
+            <h1>{{ paragraphs.my_intentions.title }}</h1>
+            <p>{{ paragraphs.my_intentions.description }}</p>
+        </section>
+        <section class="skills">
+            <h1>{{ headings.skills.name }}</h1>
+        </section>
     </main>
 {% endblock %}
