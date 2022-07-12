@@ -3,7 +3,7 @@
 namespace App\Tests\Service;
 
 use App\Entity\Heading;
-use App\Service\NonExistingTextIDException;
+use App\Service\TranslatableContentException;
 use App\Service\TranslatableContentGenerator;
 use App\Tests\DatabaseDependantWebTestCase;
 
@@ -40,7 +40,7 @@ class TranslatableContentGeneratorTest extends DatabaseDependantWebTestCase
         $this->entityManager->persist($heading3);
         $this->entityManager->flush();
 
-        $headings = $this->contentGenerator->generateContentArrayForTextID(Heading::class, ['homepage-1', 'homepage-2', 'homepage-3'], $locale);
+        $headings = $this->contentGenerator->generateContentTextIDArray(Heading::class, $locale);
 
         $this->assertEquals(1,$headings['homepage-1']['id']);
         $this->assertEquals(2,$headings['homepage-2']['id']);
@@ -79,7 +79,7 @@ class TranslatableContentGeneratorTest extends DatabaseDependantWebTestCase
         $this->entityManager->persist($heading3);
         $this->entityManager->flush();
 
-        $headings = $this->contentGenerator->generateContentArrayForTextID(Heading::class, ['homepage-1', 'homepage-2', 'homepage-3'], $locale);
+        $headings = $this->contentGenerator->generateContentTextIDArray(Heading::class, $locale);
 
         $this->assertEquals(1,$headings['homepage-1']['id']);
         $this->assertEquals(2,$headings['homepage-2']['id']);
@@ -90,19 +90,16 @@ class TranslatableContentGeneratorTest extends DatabaseDependantWebTestCase
 
     }
 
-    /** @test */
-    public function generatorCannotGenerateNonExistingTextID()
+// TODO   /** @test */
+    public function translatableGeneratorCannotGenerateForNonTranslatableEntity()
     {
-        $this->expectException(NonExistingTextIDException::class);
+        $this->expectException(TranslatableContentException::class);
+    }
 
-        $locale = 'pl';
-        $heading = new Heading();
-        $heading->setTextID('homepage-1');
-
-        $this->entityManager->persist($heading);
-        $this->entityManager->flush();
-
-        $this->contentGenerator->generateContentArrayForTextID(Heading::class, ['homepage-1', 'homepage-2'], $locale);
+// TODO   /** @test */
+    public function translatableGeneratorCannotGenerateTextIDArrayIfThereIsNoTextIDInEntity()
+    {
+        $this->expectException(TranslatableContentException::class);
     }
 
     protected function setUp(): void

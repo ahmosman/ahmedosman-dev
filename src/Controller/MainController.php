@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Heading;
-use App\Service\NonExistingTextIDException;
+use App\Service\TranslatableContentException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -17,12 +17,12 @@ class MainController extends AbstractTranslatablePageContentController
     }
 
     /**
-     * @throws NonExistingTextIDException
+     * @throws TranslatableContentException
      */
     #[Route('/{_locale<%app.supported_locales%>}/', name: 'homepage')]
     public function index(): Response
     {
-        $headings = $this->contentGenerator->generateContentArrayForTextID(Heading::class, ['home_1','home_2','home_3','home_portfolio','home_me','home_contact'],$this->locale);
+        $headings = $this->contentGenerator->generateContentTextIDArray(Heading::class,$this->locale);
         return $this->render('main/home.html.twig', [
             'headings' => $headings,
         ]);
