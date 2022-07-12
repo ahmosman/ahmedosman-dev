@@ -19,7 +19,7 @@ class TranslatableContentGenerator
     /**
      * @throws TranslatableContentException
      */
-//    TODO: without $textIDArray, just all IDs
+
     public function generateContentTextIDArray(string $entity, string $locale): array
     {
         $this->setDelimiterStringsForEntity($entity);
@@ -29,8 +29,8 @@ class TranslatableContentGenerator
         $allRecords = $repository->findAll();
 
         foreach ($allRecords as $record) {
-            $textID = $record->getTextID() ?? throw new TranslatableContentException('Record from '.$entity.' hasn\'t got TextID');
-            $recordTranslation = $record->translate($locale) ?? throw new TranslatableContentException('Record with TextID "'.$textID.'" is not translatable.');
+            $textID = $record->getTextID() ?? throw new TranslatableContentException('Record from ' . $entity . ' hasn\'t got TextID');
+            $recordTranslation = $record->translate($locale) ?? throw new TranslatableContentException('Record with TextID "' . $textID . '" is not translatable.');
 
             $preparedRecordArray = $this->prepareRecordArray($this->delimiterString, (array)$record);
             $preparedTranslationRecordArray = $this->prepareRecordArray($this->delimiterTranslationString, (array)$recordTranslation);

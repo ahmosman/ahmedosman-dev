@@ -1,13 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Paragraph{% endblock %}
-
 {% block body %}
-    <h1>Edit Paragraph</h1>
+    <main class="edit">
+        <h1 class="edit__heading">Edit {{ entity_name }}</h1>
+        {{ include('CrudForm/_form.html.twig', {'button_label': 'Update', 'button_id': 'btn-update', 'button_class': 'btn-hotpink'}) }}
 
-    {{ include('CrudForm/_form.html.twig', {'button_label': 'Update', 'button_id': 'btn-update', 'button_class': 'btn-update'}) }}
+        <a href="{{ path('dashboard_'~ app.request.get('_route')|split('_')[0]) }}">back to list</a>
 
-    <a href="{{ path('dashboard') }}">back to list</a>
-
-    {{ include('CrudForm/_delete_form.html.twig') }}
+        {{ include('CrudForm/_delete_form.html.twig') }}
+    </main>
 {% endblock %}

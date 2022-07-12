@@ -4,13 +4,22 @@ namespace App\Controller\Admin;
 
 use App\Entity\Heading;
 use App\Form\HeadingType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/{_locale<%app.supported_locales%>}/admin/heading')]
 class HeadingController extends AbstractTranslatableCrudController
 {
+    private string $entityName;
+
+    public function __construct(RequestStack $requestStack, EntityManagerInterface $entityManager)
+    {
+        parent::__construct($requestStack, $entityManager);
+        $this->entityName = 'Heading';
+    }
 
     public function setTranslatableEntityFieldsFromForm($form)
     {
@@ -38,6 +47,7 @@ class HeadingController extends AbstractTranslatableCrudController
 
         return $this->renderForm('CrudForm/_new.html.twig', [
             'form' => $form,
+            'entity_name' => $this->entityName
         ]);
     }
 
@@ -62,6 +72,7 @@ class HeadingController extends AbstractTranslatableCrudController
         return $this->renderForm('CrudForm/_edit.html.twig', [
             'entity' => $heading,
             'form' => $form,
+            'entity_name' => $this->entityName
         ]);
     }
 

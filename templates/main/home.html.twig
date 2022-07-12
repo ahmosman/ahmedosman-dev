@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<main class="home">
-    <div class="home__container">
-        <div class="home__headings">
-            <h1>{{ headings.home_1.name|raw }}</h1>
-            <h2>{{ headings.home_2.name }}</h2>
-            <h2>{{ headings.home_3.name }}</h2>
+    <main class="home">
+        <div class="home__container">
+            <div class="home__headings">
+                <h1>{{ headings.home_1.name|raw }}</h1>
+                <h2>{{ headings.home_2.name }}</h2>
+                <h2>{{ headings.home_3.name }}</h2>
+            </div>
+            <div class="home__links">
+                <a href="#">{{ headings.home_portfolio.name }}</a>
+                <a href="{{ path('about') }}">{{ headings.home_me.name }}</a>
+                <a href="#">{{ headings.home_contact.name }}</a>
+            </div>
         </div>
-        <div class="home__links">
-            <a href="#">{{ headings.home_portfolio.name }}</a>
-            <a href="#">{{ headings.home_me.name }}</a>
-            <a href="#">{{ headings.home_contact.name }}</a>
-        </div>
-    </div>
-</main>
+    </main>
 {% endblock %}

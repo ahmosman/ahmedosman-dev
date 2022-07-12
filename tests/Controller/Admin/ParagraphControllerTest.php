@@ -27,8 +27,8 @@ class ParagraphControllerTest extends DatabaseDependantWebTestCase
         self::assertResponseStatusCodeSame(200);
 
         $this->client->submitForm('btn-save', [
-            'paragraph[textID]'      => 'about-me',
-            'paragraph[title]'       => 'O mnie',
+            'paragraph[textID]' => 'about-me',
+            'paragraph[title]' => 'O mnie',
             'paragraph[description]' => 'Po zakończeniu gimnazjum zacząłem zastanawiać się co mnie satysfakcjonuje w życiu.',
         ]);
 
@@ -65,8 +65,8 @@ class ParagraphControllerTest extends DatabaseDependantWebTestCase
         self::assertResponseStatusCodeSame(200);
 
         $this->client->submitForm('btn-save', [
-            'paragraph[textID]'      => 'about-me',
-            'paragraph[title]'       => 'New title',
+            'paragraph[textID]' => 'about-me',
+            'paragraph[title]' => 'New title',
             'paragraph[description]' => 'New description',
         ]);
 
@@ -79,14 +79,14 @@ class ParagraphControllerTest extends DatabaseDependantWebTestCase
                 'paragraph_edit',
                 [
                     '_locale' => $locale,
-                    'id'      => $paragraphRecord->getId()
+                    'id' => $paragraphRecord->getId()
                 ]
             )
         );
         self::assertResponseStatusCodeSame(200);
 
         $this->client->submitForm('Update', [
-            'paragraph[title]'       => 'O mnie',
+            'paragraph[title]' => 'O mnie',
             'paragraph[description]' => 'Po zakończeniu gimnazjum zacząłem zastanawiać się co mnie satysfakcjonuje w życiu.',
         ]);
 
@@ -97,7 +97,7 @@ class ParagraphControllerTest extends DatabaseDependantWebTestCase
                 'paragraph_edit',
                 [
                     '_locale' => $locale,
-                    'id'      => $paragraphRecord->getId()
+                    'id' => $paragraphRecord->getId()
                 ]
             )
         );
@@ -105,7 +105,7 @@ class ParagraphControllerTest extends DatabaseDependantWebTestCase
 
 
         $this->client->submitForm('Update', [
-            'paragraph[title]'       => 'About me',
+            'paragraph[title]' => 'About me',
             'paragraph[description]' => 'After ending middle school I started to wonder.',
         ]);
 
@@ -146,8 +146,8 @@ class ParagraphControllerTest extends DatabaseDependantWebTestCase
         self::assertResponseStatusCodeSame(200);
 
         $this->client->submitForm('btn-save', [
-            'paragraph[textID]'      => 'about-me',
-            'paragraph[title]'       => 'New title',
+            'paragraph[textID]' => 'about-me',
+            'paragraph[title]' => 'New title',
             'paragraph[description]' => 'New description',
         ]);
 
@@ -192,8 +192,8 @@ class ParagraphControllerTest extends DatabaseDependantWebTestCase
         self::assertResponseStatusCodeSame(200);
 
         $this->client->submitForm('btn-save', [
-            'paragraph[textID]'      => 'about-me',
-            'paragraph[title]'       => 'About me',
+            'paragraph[textID]' => 'about-me',
+            'paragraph[title]' => 'About me',
             'paragraph[description]' => 'After ending middle school I started to wonder.'
         ]);
 
@@ -219,6 +219,40 @@ class ParagraphControllerTest extends DatabaseDependantWebTestCase
             'After ending middle school I started to wonder.',
             $crawler->filter('#paragraph_description')->text()
         );
+    }
+
+
+    /** @test */
+    public function newEntityNameIsDisplayedCorrectlyDuringCreatingNew()
+    {
+        $locale = 'pl';
+        $crawler = $this->client->request('GET',
+            $this->router->generate('paragraph_new', ['_locale' => $locale]));
+        self::assertResponseStatusCodeSame(200);
+        self::assertEquals('Create new Paragraph', $crawler->filter('.edit__heading')->text());
+    }
+
+    /** @test */
+    public function editEntityNameIsDisplayedCorrectlyDuringEdition()
+    {
+        $locale = 'pl';
+        $this->client->request('GET',
+            $this->router->generate('paragraph_new', ['_locale' => $locale]));
+        self::assertResponseStatusCodeSame(200);
+
+        $this->client->submitForm('btn-save', [
+            'paragraph[textID]' => 'about-me',
+            'paragraph[title]' => 'New title',
+            'paragraph[description]' => 'New description',
+        ]);
+
+
+        $crawler = $this->client->request(
+            'GET',
+            $this->router->generate('paragraph_edit', ['_locale' => $locale, 'id' => 1]));
+
+        self::assertResponseStatusCodeSame(200);
+        self::assertEquals('Edit Paragraph', $crawler->filter('.edit__heading')->text());
     }
 
     protected function setUp(): void

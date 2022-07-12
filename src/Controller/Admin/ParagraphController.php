@@ -4,13 +4,22 @@ namespace App\Controller\Admin;
 
 use App\Entity\Paragraph;
 use App\Form\ParagraphType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/{_locale<%app.supported_locales%>}/admin/paragraph')]
 class ParagraphController extends AbstractTranslatableCrudController
 {
+    private string $entityName;
+
+    public function __construct(RequestStack $requestStack, EntityManagerInterface $entityManager)
+    {
+        parent::__construct($requestStack, $entityManager);
+        $this->entityName = 'Paragraph';
+    }
 
     public function setTranslatableEntityFieldsFromForm($form)
     {
@@ -41,11 +50,12 @@ class ParagraphController extends AbstractTranslatableCrudController
 
         return $this->renderForm('CrudForm/_new.html.twig', [
             'form' => $form,
+            'entity_name' => $this->entityName
         ]);
     }
 
     #[Route('/{id}/edit', name: 'paragraph_edit', methods: ['GET', 'POST'])]
-    public function edit( Request   $request, Paragraph $paragraph): Response
+    public function edit(Request $request, Paragraph $paragraph): Response
     {
         $this->setTranslatableEntity($paragraph);
 
@@ -68,6 +78,7 @@ class ParagraphController extends AbstractTranslatableCrudController
         return $this->renderForm('CrudForm/_edit.html.twig', [
             'form' => $form,
             'entity' => $paragraph,
+            'entity_name' => $this->entityName
         ]);
     }
 

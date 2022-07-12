@@ -14,7 +14,6 @@ class HeadingType extends AbstractType
     {
         $builder
             ->add('textID')
-            ->add('name')
-        ;
+            ->add('name');
     }
 }

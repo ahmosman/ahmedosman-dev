@@ -12,10 +12,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ParagraphType extends AbstractType
 {
 
-    public function buildForm(
-        FormBuilderInterface $builder,
-        array $options
-    ): void {
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
         $builder
             ->add('textID')
             ->add('title')

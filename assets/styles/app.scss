@@ -1,4 +1,4 @@
-@import 'config', 'admin', 'home';
+@import 'config', 'buttons', 'admin', 'home', 'about';
 
 * {
   box-sizing: border-box;
@@ -22,6 +22,14 @@ body {
 a {
   text-decoration: none;
   color: white;
+}
+
+button {
+  outline: none;
+  border: 0;
+  padding: 5px 10px;
+  color: white;
+  border-radius: 15px;
 }
 
 header {

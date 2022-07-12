@@ -1,1 +1,2 @@
-<a href="{{ path(edit_path,{'id': id}) }}">Edit</a> <a href = "{{ path(delete_path,{'id': id}) }} " onclick="confirm('Are you sure you want to delete?')">Delete</a>
+<a href="{{ path(edit_path,{'id': id}) }}">Edit</a> <a href="{{ path(delete_path,{'id': id}) }} "
+                                                       onclick="return confirm('Are you sure you want to delete?')">Delete</a>

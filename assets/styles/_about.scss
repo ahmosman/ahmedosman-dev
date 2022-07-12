@@ -1,0 +1,25 @@
+.about {
+  &__banner {
+    //background: url("../images/ahmedosman-about-banner.jpg") no-repeat -20px 0;
+    //background-size: 125vw;
+    height: 75vw;
+
+    &::before {
+      content: '';
+      background: url("../images/ahmedosman-about-banner.jpg") no-repeat -20px 0;
+      background-size: 125vw;
+      width: 100vw;
+      height: 75vw;
+      position: absolute;
+      z-index: -1;
+      opacity: 35%;
+    }
+
+    .headings {
+      font-size: 1em;
+      line-height: 1.3em;
+      padding-left: 10%;
+      padding-top: 15%;
+    }
+  }
+}

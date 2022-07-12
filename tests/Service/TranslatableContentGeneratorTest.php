@@ -42,9 +42,9 @@ class TranslatableContentGeneratorTest extends DatabaseDependantWebTestCase
 
         $headings = $this->contentGenerator->generateContentTextIDArray(Heading::class, $locale);
 
-        $this->assertEquals(1,$headings['homepage-1']['id']);
-        $this->assertEquals(2,$headings['homepage-2']['id']);
-        $this->assertEquals(3,$headings['homepage-3']['id']);
+        $this->assertEquals(1, $headings['homepage-1']['id']);
+        $this->assertEquals(2, $headings['homepage-2']['id']);
+        $this->assertEquals(3, $headings['homepage-3']['id']);
         $this->assertEquals('Cześć, jestem Ahmed', $headings['homepage-1']['name']);
         $this->assertEquals('Interesuję się programowaniem', $headings['homepage-2']['name']);
         $this->assertEquals('Dzięki tej stronie dowiesz się o mnie więcej', $headings['homepage-3']['name']);
@@ -81,9 +81,9 @@ class TranslatableContentGeneratorTest extends DatabaseDependantWebTestCase
 
         $headings = $this->contentGenerator->generateContentTextIDArray(Heading::class, $locale);
 
-        $this->assertEquals(1,$headings['homepage-1']['id']);
-        $this->assertEquals(2,$headings['homepage-2']['id']);
-        $this->assertEquals(3,$headings['homepage-3']['id']);
+        $this->assertEquals(1, $headings['homepage-1']['id']);
+        $this->assertEquals(2, $headings['homepage-2']['id']);
+        $this->assertEquals(3, $headings['homepage-3']['id']);
         $this->assertEquals('Hi, I\'m Ahmed', $headings['homepage-1']['name']);
         $this->assertEquals('I\'m interested in programming', $headings['homepage-2']['name']);
         $this->assertEquals('You can learn about me on this website', $headings['homepage-3']['name']);

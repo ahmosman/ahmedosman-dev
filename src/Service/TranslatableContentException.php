@@ -2,7 +2,9 @@
 
 namespace App\Service;
 
-class TranslatableContentException extends \Exception
+use Exception;
+
+class TranslatableContentException extends Exception
 {
 
 }

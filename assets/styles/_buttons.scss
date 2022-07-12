@@ -1,0 +1,86 @@
+.btn {
+  &-hotpink {
+    background-color: hotpink;
+
+    &:hover {
+      background-color: rgba(255, 105, 180, 0.82);
+    }
+
+    &:focus,
+    &:active {
+      background-color: rgba(255, 105, 180, 0.82);
+      box-shadow: 0 0 0 3px rgba(232, 167, 200, 0.7);
+    }
+  }
+
+  &-red {
+    background-color: red;
+
+    &:hover {
+      background-color: rgba(154, 0, 0, 1);
+    }
+
+    &:focus,
+    &:active {
+      background-color: rgba(154, 0, 0, 1);
+
+      box-shadow: 0 0 0 3px rgba(238, 35, 63, 0.82);
+    }
+  }
+
+  &-lightpink {
+    background-color: lightpink;
+
+    &:hover {
+      background-color: rgba(255, 182, 193, 0.71);
+    }
+
+    &:focus,
+    &:active {
+      background-color: rgba(255, 182, 193, 0.71);
+      box-shadow: 0 0 0 3px rgba(255, 231, 235, 0.71);
+    }
+  }
+
+  &-mediumpurple {
+    background-color: mediumpurple;
+
+    &:hover {
+      background-color: rgba(147, 112, 219, 0.82);
+    }
+
+    &:focus,
+    &:active {
+      background-color: rgba(147, 112, 219, 0.82);
+      box-shadow: 0 0 0 3px rgba(209, 185, 252, 0.75);
+    }
+  }
+
+  &-orchid {
+    background-color: orchid;
+
+    &:hover {
+      background-color: rgba(218, 112, 214, 0.93);
+    }
+
+    &:focus,
+    &:active {
+      background-color: rgba(218, 112, 214, 0.93);
+      box-shadow: 0 0 0 3px rgba(224, 180, 221, 0.73);
+    }
+  }
+
+  &-darkviolet {
+    background-color: darkviolet;
+
+    &:hover {
+      background-color: rgba(148, 0, 211, 0.78);
+    }
+
+    &:focus,
+    &:active {
+      background-color: rgba(148, 0, 211, 0.78);
+      box-shadow: 0 0 0 3px rgba(195, 166, 241, 0.6);
+    }
+  }
+}

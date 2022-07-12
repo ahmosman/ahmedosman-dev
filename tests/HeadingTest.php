@@ -35,10 +35,10 @@ class HeadingTest extends DatabaseDependantWebTestCase
 
         $headingRepository = $this->entityManager->getRepository(Heading::class);
 
-        $headingRecord = $headingRepository->findOneBy(['textID'=> 'about-me']);
+        $headingRecord = $headingRepository->findOneBy(['textID' => 'about-me']);
         $headingEnRecord = $headingRecord->translate('en');
         $headingPlRecord = $headingRecord->translate('pl');
-        $heading2Record = $headingRepository->findOneBy(['textID'=> 'homepage-2']);
+        $heading2Record = $headingRepository->findOneBy(['textID' => 'homepage-2']);
         $heading2EnRecord = $heading2Record->translate('en');
         $heading2PlRecord = $heading2Record->translate('pl');
 
@@ -56,7 +56,7 @@ class HeadingTest extends DatabaseDependantWebTestCase
         $heading1 = new Heading();
         $heading1->setTextID('contact');
 
-        $heading2 =new Heading();
+        $heading2 = new Heading();
         $heading2->setTextID('contact');
 
         $this->entityManager->persist($heading1);

@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New{% endblock %}
-
 {% block body %}
-    <h1>Create new</h1>
+    <main class="edit">
+        <h1 class="edit__heading">Create new {{ entity_name }}</h1>
 
-    {{ include('CrudForm/_form.html.twig', {'button_label': 'Save', 'button_id': 'btn-save', 'button_class': 'btn-save'}) }}
+        {{ include('CrudForm/_form.html.twig', {'button_label': 'Save', 'button_id': 'btn-save', 'button_class': 'btn-orchid'}) }}
 
-    <a href="{{ path('dashboard') }}">back to list</a>
+        <a href="{{ path('dashboard_'~ app.request.get('_route')|split('_')[0]) }}">back to list</a>
+    </main>
 {% endblock %}

@@ -4,19 +4,19 @@ namespace App\Tests\Controller\Admin;
 
 use App\Service\StringFormatTrait;
 use App\Tests\DatabaseDependantWebTestCase;
+use Symfony\Component\HttpFoundation\Response;
 
 class DashboardControllerTest extends DatabaseDependantWebTestCase
 {
     use StringFormatTrait;
+
     private string $locale = 'pl';
 
     /** @test */
-    public function dashboardRequestIsPassingAndDisplayingMenu()
+    public function dashboardRequestIsRedirectingToHeading()
     {
-
-        $crawler = $this->client->request('GET', $this->router->generate('dashboard', ['_locale' => $this->locale]));
-        self::assertResponseStatusCodeSame(200);
-        $this->assertStringContainsString($this->removeWhiteCharacters('Heading Paragraph'),$this->removeWhiteCharacters($crawler->filter('.dashboard__menu')->text()));
+        $this->client->request('GET', $this->router->generate('dashboard', ['_locale' => $this->locale]));
+        self::assertResponseStatusCodeSame(Response::HTTP_FOUND);
     }
 
     /** @test */

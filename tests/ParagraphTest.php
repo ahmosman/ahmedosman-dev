@@ -32,7 +32,7 @@ class ParagraphTest extends DatabaseDependantWebTestCase
         $this->entityManager->flush();
 
         $paragraphRepository = $this->entityManager->getRepository(Paragraph::class);
-        $paragraphRecord = $paragraphRepository->findOneBy(['textID'=> 'about-me']);
+        $paragraphRecord = $paragraphRepository->findOneBy(['textID' => 'about-me']);
         $paragraphEnRecord = $paragraphRecord->translate('en');
         $paragraphPlRecord = $paragraphRecord->translate('pl');
 
@@ -40,11 +40,12 @@ class ParagraphTest extends DatabaseDependantWebTestCase
         $this->assertEquals('About me', $paragraphEnRecord->getTitle());
         $this->assertEquals(
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi ducimus eaque quis quod rerum ut. Consequatur debitis error, ipsam itaque laborum magni minima molestias non omnis quas reiciendis sed.',
-                    $paragraphEnRecord->getDescription()
+            $paragraphEnRecord->getDescription()
         );
         $this->assertEquals('O mnie', $paragraphPlRecord->getTitle());
         $this->assertEquals('Zażółć gęślą jaźń', $paragraphPlRecord->getDescription());
     }
+
     /** @test */
     public function paragraphsAreUniqueByTextID()
     {
@@ -73,7 +74,7 @@ class ParagraphTest extends DatabaseDependantWebTestCase
         $this->entityManager->flush();
 
         $paragraphRepository = $this->entityManager->getRepository(Paragraph::class);
-        $paragraphRecord = $paragraphRepository->findOneBy(['textID'=> 'contact']);
+        $paragraphRecord = $paragraphRepository->findOneBy(['textID' => 'contact']);
         $paragraphEnRecord = $paragraphRecord->translate('en');
         $paragraphPlRecord = $paragraphRecord->translate('pl');
 

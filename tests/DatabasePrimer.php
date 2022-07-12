@@ -3,6 +3,7 @@
 namespace App\Tests;
 
 use Doctrine\ORM\Tools\SchemaTool;
+use LogicException;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 class DatabasePrimer
@@ -11,7 +12,7 @@ class DatabasePrimer
     {
         // Make sure we are in the test environment
         if ('test' !== $kernel->getEnvironment()) {
-            throw new \LogicException('Primer must be executed in the test environment');
+            throw new LogicException('Primer must be executed in the test environment');
         }
 
         // Get the entity manager from the service container

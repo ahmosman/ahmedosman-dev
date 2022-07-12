@@ -114,36 +114,33 @@ class HeadingControllerTest extends DatabaseDependantWebTestCase
     }
 
     /** @test */
-    public function headingCanBeRemoved()
+    public function headingCanBeRemovedDuringEdition()
     {
         $originalNumObjectsInRepository = count($this->repository->findAll());
         $locale = 'pl';
-        $this->client->request(
-            'GET',
-            $this->router->generate(
-                'heading_new',
-                ['_locale' => $locale]
-            )
-        );
+        $this->client->request('GET', $this->router->generate(
+            'heading_new', ['_locale' => $locale]));
+
         self::assertResponseStatusCodeSame(200);
+
         $this->client->submitForm('btn-save', [
             'heading[textID]' => 'contact',
             'heading[name]' => 'kontakt',
         ]);
 
         $headingRecord = $this->repository->findOneBy(['textID' => 'contact']);
+
         self::assertSame(
             $originalNumObjectsInRepository + 1,
             count($this->repository->findAll())
         );
 
-        $this->client->request(
-            'GET',
-            $this->router->generate(
-                'heading_delete',
-                ['id' => $headingRecord->getId()]
-            )
-        );
+        $this->client->request('GET', $this->router->generate('heading_edit', ['id' => $headingRecord->getId()]));
+
+        self::assertResponseStatusCodeSame(200);
+
+        $this->client->submitForm('btn-delete');
+
         self::assertResponseStatusCodeSame(Response::HTTP_SEE_OTHER);
 
         self::assertSame(
@@ -191,6 +188,38 @@ class HeadingControllerTest extends DatabaseDependantWebTestCase
             'Who I am, where I am going',
             $crawler->filter('#heading_name')->attr('value')
         );
+    }
+
+    /** @test */
+    public function newEntityNameIsDisplayedCorrectlyDuringCreatingNew()
+    {
+        $locale = 'en';
+        $crawler = $this->client->request('GET',
+            $this->router->generate('heading_new', ['_locale' => $locale]));
+        self::assertResponseStatusCodeSame(200);
+        self::assertEquals('Create new Heading', $crawler->filter('.edit__heading')->text());
+    }
+
+    /** @test */
+    public function editEntityNameIsDisplayedCorrectlyDuringEdition()
+    {
+        $locale = 'en';
+        $this->client->request('GET',
+            $this->router->generate('heading_new', ['_locale' => $locale]));
+        self::assertResponseStatusCodeSame(200);
+
+
+        $this->client->submitForm('btn-save', [
+            'heading[textID]' => 'about-me',
+            'heading[name]' => 'Who I am, where I am going'
+        ]);
+
+        $crawler = $this->client->request(
+            'GET',
+            $this->router->generate('heading_edit', ['_locale' => $locale, 'id' => 1]));
+
+        self::assertResponseStatusCodeSame(200);
+        self::assertEquals('Edit Heading', $crawler->filter('.edit__heading')->text());
     }
 
     protected function setUp(): void

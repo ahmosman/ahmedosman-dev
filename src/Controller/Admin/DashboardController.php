@@ -18,9 +18,7 @@ class DashboardController extends AbstractLocaleController
     #[Route('/', name: 'dashboard')]
     public function index(): Response
     {
-        return $this->render('dashboard/dashboard.html.twig', [
-            'controller_name' => 'DashboardController',
-        ]);
+        return $this->redirectToRoute('dashboard_heading');
     }
 
     #[Route('/heading', name: 'dashboard_heading')]
@@ -35,7 +33,7 @@ class DashboardController extends AbstractLocaleController
 
         return $this->render('dashboard/heading.html.twig', [
             'paths' => $this->paths,
-            'headings' => $headings,
+            'headings' => $headings
         ]);
     }
 
@@ -53,7 +51,7 @@ class DashboardController extends AbstractLocaleController
 
         return $this->render('dashboard/paragraph.html.twig', [
             'paths' => $this->paths,
-            'paragraphs' => $paragraphs,
+            'paragraphs' => $paragraphs
         ]);
     }
 
