@@ -28,8 +28,7 @@ class ParagraphControllerTest extends DatabaseDependantWebTestCase
             'paragraph[description]' => 'Po zakończeniu gimnazjum zacząłem zastanawiać się co mnie satysfakcjonuje w życiu.',
         ]);
 
-        $paragraphRecord = $this->repository->findOneBy(['textID' => 'about-me']
-        );
+        $paragraphRecord = $this->repository->findOneBy(['textID' => 'about-me']);
         $paragraphTranslation = $paragraphRecord->translate($locale);
 
         self::assertEquals('about-me', $paragraphRecord->getTextID());
@@ -54,34 +53,26 @@ class ParagraphControllerTest extends DatabaseDependantWebTestCase
             'paragraph[description]' => 'New description',
         ]);
 
-        $paragraphRecord = $this->repository->findOneBy(['textID' => 'about-me']);
-
         $this->client->request('GET', $this->router->generate('paragraph_edit', [
             '_locale' => $locale,
-            'id' => $paragraphRecord->getId()
+            'id' => 1
         ]));
         self::assertResponseStatusCodeSame(200);
 
-        $this->client->submitForm('Update', [
+        $this->client->submitForm('btn-update', [
             'paragraph[title]' => 'O mnie',
             'paragraph[description]' => 'Po zakończeniu gimnazjum zacząłem zastanawiać się co mnie satysfakcjonuje w życiu.',
         ]);
 
         $locale = 'en';
-        $this->client->request(
-            'GET',
-            $this->router->generate(
-                'paragraph_edit',
-                [
-                    '_locale' => $locale,
-                    'id' => $paragraphRecord->getId()
-                ]
-            )
-        );
+        $this->client->request('GET', $this->router->generate('paragraph_edit', [
+            '_locale' => $locale,
+            'id' => 1
+        ]));
         self::assertResponseStatusCodeSame(200);
 
 
-        $this->client->submitForm('Update', [
+        $this->client->submitForm('btn-update', [
             'paragraph[title]' => 'About me',
             'paragraph[description]' => 'After ending middle school I started to wonder.',
         ]);

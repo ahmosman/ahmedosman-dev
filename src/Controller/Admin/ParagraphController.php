@@ -35,18 +35,14 @@ class ParagraphController extends AbstractTranslatableCrudController
     public function new(Request $request): Response
     {
         $this->setTranslatableEntity(new Paragraph());
-        $form = $this->createForm(ParagraphType::class);
 
+        $form = $this->createForm(ParagraphType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->setTranslatableFieldsAndFlushForm($form);
 
-            return $this->redirectToRoute(
-                'dashboard_paragraph',
-                [],
-                Response::HTTP_SEE_OTHER
-            );
+            return $this->redirectToRoute('dashboard_paragraph', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('CrudForm/_new.html.twig', [
@@ -60,20 +56,13 @@ class ParagraphController extends AbstractTranslatableCrudController
     {
         $this->setTranslatableEntity($paragraph);
 
-        $form = $this->createForm(
-            ParagraphType::class,
-            $this->createFormData()
-        );
+        $form = $this->createForm(ParagraphType::class, $this->createFormData());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->setTranslatableFieldsAndFlushForm($form);
 
-            return $this->redirectToRoute(
-                'dashboard_paragraph',
-                [],
-                Response::HTTP_SEE_OTHER
-            );
+            return $this->redirectToRoute('dashboard_paragraph', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('CrudForm/_edit.html.twig', [
@@ -98,11 +87,7 @@ class ParagraphController extends AbstractTranslatableCrudController
         $this->entityManager->remove($paragraph);
         $this->entityManager->flush();
 
-        return $this->redirectToRoute(
-            'dashboard_paragraph',
-            [],
-            Response::HTTP_SEE_OTHER
-        );
+        return $this->redirectToRoute('dashboard_paragraph', [], Response::HTTP_SEE_OTHER);
     }
 
 }

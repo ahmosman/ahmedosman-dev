@@ -3,11 +3,14 @@
 namespace App\Tests\Entity;
 
 use App\Entity\Paragraph;
+use App\Repository\ParagraphRepository;
 use App\Tests\DatabaseDependantWebTestCase;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
 class ParagraphTest extends DatabaseDependantWebTestCase
 {
+    private ParagraphRepository $repository;
+
     /** @test */
     public function paragraphCanBeAddedInBothLanguages()
     {
@@ -16,21 +19,16 @@ class ParagraphTest extends DatabaseDependantWebTestCase
         $paragraphEn = $paragraph->translate('en');
 
         $paragraphEn->setTitle('About me');
-        $paragraphEn->setDescription(
-            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi ducimus eaque quis quod rerum ut. Consequatur debitis error, ipsam itaque laborum magni minima molestias non omnis quas reiciendis sed.'
-        );
+        $paragraphEn->setDescription('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi ducimus eaque quis quod rerum ut. Consequatur debitis error, ipsam itaque laborum magni minima molestias non omnis quas reiciendis sed.');
 
         $paragraphPl = $paragraph->translate('pl');
         $paragraphPl->setTitle('O mnie');
-        $paragraphPl->setDescription(
-            'Zażółć gęślą jaźń'
-        );
+        $paragraphPl->setDescription('Zażółć gęślą jaźń');
 
         $this->entityManager->persist($paragraph);
         $this->entityManager->flush();
 
-        $paragraphRepository = $this->entityManager->getRepository(Paragraph::class);
-        $paragraphRecord = $paragraphRepository->findOneBy(['textID' => 'about-me']);
+        $paragraphRecord = $this->repository->findOneBy(['textID' => 'about-me']);
         $paragraphEnRecord = $paragraphRecord->translate('en');
         $paragraphPlRecord = $paragraphRecord->translate('pl');
 
@@ -71,8 +69,7 @@ class ParagraphTest extends DatabaseDependantWebTestCase
         $this->entityManager->persist($paragraph);
         $this->entityManager->flush();
 
-        $paragraphRepository = $this->entityManager->getRepository(Paragraph::class);
-        $paragraphRecord = $paragraphRepository->findOneBy(['textID' => 'contact']);
+        $paragraphRecord = $this->repository->findOneBy(['textID' => 'contact']);
         $paragraphEnRecord = $paragraphRecord->translate('en');
         $paragraphPlRecord = $paragraphRecord->translate('pl');
 
@@ -80,6 +77,12 @@ class ParagraphTest extends DatabaseDependantWebTestCase
         $this->assertEquals(null, $paragraphEnRecord->getDescription());
         $this->assertEquals(null, $paragraphPlRecord->getTitle());
         $this->assertEquals(null, $paragraphPlRecord->getDescription());
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->repository = $this->entityManager->getRepository(Paragraph::class);
     }
 
 }

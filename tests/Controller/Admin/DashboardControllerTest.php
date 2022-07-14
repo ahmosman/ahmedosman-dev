@@ -50,4 +50,24 @@ class DashboardControllerTest extends DatabaseDependantWebTestCase
         $this->assertEquals($this->router->generate('tool_new'), $this->removeWhiteCharacters($crawler->filter('.new_link')->attr('href')));
     }
 
+    /** @test */
+    public function dashboardTimelineCategoryRequestIsPassingAndDisplayingTimelineCategories()
+    {
+        $crawler = $this->client->request('GET', $this->router->generate('dashboard_timeline-category', ['_locale' => $this->locale]));
+        self::assertResponseStatusCodeSame(200);
+
+        $this->assertEquals('<th>ID</th><th>Name</th><th>Actions</th>', $this->removeWhiteCharacters($crawler->filter('.dashboard__list tr')->first()->html()));
+        $this->assertEquals($this->router->generate('timeline-category_new'), $this->removeWhiteCharacters($crawler->filter('.new_link')->attr('href')));
+    }
+
+    /** @test */
+    public function dashboardTimelineRequestIsPassingAndDisplayingTimelineCategories()
+    {
+        $crawler = $this->client->request('GET', $this->router->generate('dashboard_timeline', ['_locale' => $this->locale]));
+        self::assertResponseStatusCodeSame(200);
+
+        $this->assertEquals('<th>ID</th><th>Title</th><th>Timelinecategory</th><th>Actions</th>', $this->removeWhiteCharacters($crawler->filter('.dashboard__list tr')->first()->html()));
+        $this->assertEquals($this->router->generate('timeline_new'), $this->removeWhiteCharacters($crawler->filter('.new_link')->attr('href')));
+    }
+
 }

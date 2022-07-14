@@ -1,0 +1,21 @@
+{% extends 'dashboard/dashboard.html.twig' %}
+{% block newPath %}{{ path( paths.new ) }} {% endblock %}
+
+{% block crud_list %}
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Timeline category</th>
+            <th>Actions</th>
+        </tr>
+        {% for timeline in timelines %}
+            <tr>
+                <td>{{ timeline.id }}</td>
+                <td>{{ timeline.title }}</td>
+                <td>{{ timeline.timelineCategory }}</td>
+                <td>{{ include ('CrudForm/crudActionButtons.html.twig',{'edit_path': paths.edit, 'delete_path': paths.delete, 'id': timeline.id}) }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

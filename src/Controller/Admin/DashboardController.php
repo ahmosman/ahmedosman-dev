@@ -5,6 +5,8 @@ namespace App\Controller\Admin;
 use App\Controller\Abstract\AbstractLocaleController;
 use App\Repository\HeadingRepository;
 use App\Repository\ParagraphRepository;
+use App\Repository\TimelineCategoryRepository;
+use App\Repository\TimelineRepository;
 use App\Repository\ToolRepository;
 use App\Service\TranslatableDashboardFieldsGenerator;
 use Symfony\Component\HttpFoundation\Response;
@@ -59,17 +61,49 @@ class DashboardController extends AbstractLocaleController
     #[Route('/tool', name: 'dashboard_tool')]
     public function tool(ToolRepository $toolRepository): Response
     {
+        $tools = $toolRepository->findAllOrderBy('orderValue');
+
         $this->paths = [
             'new' => 'tool_new',
             'edit' => 'tool_edit',
             'delete' => 'tool_delete'
         ];
 
-        $tools = $toolRepository->findAllOrderBy('orderValue');
-
         return $this->render('dashboard/tool.html.twig', [
             'paths' => $this->paths,
             'tools' => $tools
+        ]);
+    }
+
+    #[Route('/timeline-category', name: 'dashboard_timeline-category')]
+    public function timelineCategory(TimelineCategoryRepository $timelineCategoryRepository): Response
+    {
+        $timelineCategories = (new TranslatableDashboardFieldsGenerator($timelineCategoryRepository->findAll(), ['id'], ['name'], $this->locale))->generate();
+
+        $this->paths = [
+            'new' => 'timeline-category_new',
+            'edit' => 'timeline-category_edit',
+            'delete' => 'timeline-category_delete'
+        ];
+
+        return $this->render('dashboard/timelineCategory.html.twig', [
+            'paths' => $this->paths,
+            'timelineCategories' => $timelineCategories
+        ]);
+    }
+
+    #[Route('/timeline', name: 'dashboard_timeline')]
+    public function timeline(TimelineRepository $timelineRepository)
+    {
+        $timelines = (new TranslatableDashboardFieldsGenerator($timelineRepository->findAll(),['id', 'timelineCategory'],['title'],$this->locale))->generate();
+        $this->paths = [
+            'new' => 'timeline_new',
+            'edit' => 'timeline_edit',
+            'delete' => 'timeline_delete'
+        ];
+        return $this->render('dashboard/timeline.html.twig', [
+            'paths' => $this->paths,
+            'timelines' => $timelines
         ]);
     }
 

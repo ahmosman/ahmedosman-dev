@@ -53,7 +53,7 @@ class ToolControllerTest extends DatabaseDependantWebTestCase
         ]));
         self::assertResponseStatusCodeSame(200);
 
-        $this->client->submitForm('Update', [
+        $this->client->submitForm('btn-update', [
             'tool[name]' => 'Symfony',
             'tool[imgSrc]' => 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/symfony/symfony-original.svg'
         ]);

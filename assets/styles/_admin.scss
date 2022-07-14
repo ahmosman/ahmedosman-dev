@@ -57,9 +57,17 @@
         width: 40vw;
       }
 
+      input[type=number] {
+        width: 10vw;
+      }
+
       textarea {
         height: 30vh;
         font-family: inherit;
+      }
+
+      select {
+        width: 10vw;
       }
     }
   }
