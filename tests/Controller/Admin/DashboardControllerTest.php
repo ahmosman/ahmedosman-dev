@@ -26,6 +26,7 @@ class DashboardControllerTest extends DatabaseDependantWebTestCase
 
         self::assertResponseStatusCodeSame(200);
         $this->assertEquals('<th>TextID</th><th>Name</th><th>Actions</th>', $this->removeWhiteCharacters($crawler->filter('.dashboard__list tr')->first()->html()));
+        $this->assertEquals($this->router->generate('heading_new'), $this->removeWhiteCharacters($crawler->filter('.new_link')->attr('href')));
 
     }
 
@@ -36,6 +37,17 @@ class DashboardControllerTest extends DatabaseDependantWebTestCase
         self::assertResponseStatusCodeSame(200);
 
         $this->assertEquals('<th>TextID</th><th>Title</th><th>Actions</th>', $this->removeWhiteCharacters($crawler->filter('.dashboard__list tr')->first()->html()));
+        $this->assertEquals($this->router->generate('paragraph_new'), $this->removeWhiteCharacters($crawler->filter('.new_link')->attr('href')));
+    }
+
+    /** @test */
+    public function dashboardToolRequestIsPassingAndDisplayingTools()
+    {
+        $crawler = $this->client->request('GET', $this->router->generate('dashboard_tool', ['_locale' => $this->locale]));
+        self::assertResponseStatusCodeSame(200);
+
+        $this->assertEquals('<th>Name</th><th>OrderValue</th><th>Actions</th>', $this->removeWhiteCharacters($crawler->filter('.dashboard__list tr')->first()->html()));
+        $this->assertEquals($this->router->generate('tool_new'), $this->removeWhiteCharacters($crawler->filter('.new_link')->attr('href')));
     }
 
 }

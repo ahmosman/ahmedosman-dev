@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Controller\Abstract\AbstractTranslatableCrudController;
 use App\Entity\Paragraph;
 use App\Form\ParagraphType;
 use Doctrine\ORM\EntityManagerInterface;

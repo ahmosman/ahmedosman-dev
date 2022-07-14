@@ -2,9 +2,10 @@
 
 namespace App\Controller\Admin;
 
-use App\Controller\AbstractLocaleController;
+use App\Controller\Abstract\AbstractLocaleController;
 use App\Repository\HeadingRepository;
 use App\Repository\ParagraphRepository;
+use App\Repository\ToolRepository;
 use App\Service\TranslatableDashboardFieldsGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -52,6 +53,23 @@ class DashboardController extends AbstractLocaleController
         return $this->render('dashboard/paragraph.html.twig', [
             'paths' => $this->paths,
             'paragraphs' => $paragraphs
+        ]);
+    }
+
+    #[Route('/tool', name: 'dashboard_tool')]
+    public function tool(ToolRepository $toolRepository): Response
+    {
+        $this->paths = [
+            'new' => 'tool_new',
+            'edit' => 'tool_edit',
+            'delete' => 'tool_delete'
+        ];
+
+        $tools = $toolRepository->findAllOrderBy('orderValue');
+
+        return $this->render('dashboard/tool.html.twig', [
+            'paths' => $this->paths,
+            'tools' => $tools
         ]);
     }
 

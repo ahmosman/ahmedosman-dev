@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Controller\Abstract\AbstractTranslatablePageContentController;
 use App\Entity\Heading;
 use App\Entity\Paragraph;
 use App\Service\TranslatableContentException;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Test\Controller;
+namespace App\Test\Controller\Admin;
 
 use App\Entity\Paragraph;
 use App\Repository\ParagraphRepository;
@@ -17,13 +17,9 @@ class ParagraphControllerTest extends DatabaseDependantWebTestCase
         $locale = 'pl';
         $originalNumObjectsInRepository = count($this->repository->findAll());
 
-        $this->client->request(
-            'GET',
-            $this->router->generate(
-                'paragraph_new',
-                ['_locale' => $locale]
-            )
-        );
+        $this->client->request('GET', $this->router->generate(
+            'paragraph_new',
+            ['_locale' => $locale]));
         self::assertResponseStatusCodeSame(200);
 
         $this->client->submitForm('btn-save', [
@@ -40,28 +36,16 @@ class ParagraphControllerTest extends DatabaseDependantWebTestCase
         self::assertEquals('O mnie', $paragraphTranslation->getTitle());
         self::assertEquals(
             'Po zakończeniu gimnazjum zacząłem zastanawiać się co mnie satysfakcjonuje w życiu.',
-            $paragraphTranslation->getDescription()
-        );
-        self::assertResponseRedirects(
-            $this->router->generate('dashboard_paragraph')
-        );
-        self::assertSame(
-            $originalNumObjectsInRepository + 1,
-            count($this->repository->findAll())
-        );
+            $paragraphTranslation->getDescription());
+        self::assertSame($originalNumObjectsInRepository + 1, count($this->repository->findAll()));
+        self::assertResponseRedirects($this->router->generate('dashboard_paragraph'));
     }
 
     /** @test */
     public function paragraphCanBeEditedDependingOnLocale(): void
     {
         $locale = 'pl';
-        $this->client->request(
-            'GET',
-            $this->router->generate(
-                'paragraph_new',
-                ['_locale' => $locale]
-            )
-        );
+        $this->client->request('GET', $this->router->generate('paragraph_new', ['_locale' => $locale]));
         self::assertResponseStatusCodeSame(200);
 
         $this->client->submitForm('btn-save', [
@@ -70,19 +54,12 @@ class ParagraphControllerTest extends DatabaseDependantWebTestCase
             'paragraph[description]' => 'New description',
         ]);
 
-        $paragraphRecord = $this->repository->findOneBy(['textID' => 'about-me']
-        );
+        $paragraphRecord = $this->repository->findOneBy(['textID' => 'about-me']);
 
-        $this->client->request(
-            'GET',
-            $this->router->generate(
-                'paragraph_edit',
-                [
-                    '_locale' => $locale,
-                    'id' => $paragraphRecord->getId()
-                ]
-            )
-        );
+        $this->client->request('GET', $this->router->generate('paragraph_edit', [
+            '_locale' => $locale,
+            'id' => $paragraphRecord->getId()
+        ]));
         self::assertResponseStatusCodeSame(200);
 
         $this->client->submitForm('Update', [
@@ -136,13 +113,9 @@ class ParagraphControllerTest extends DatabaseDependantWebTestCase
         $originalNumObjectsInRepository = count($this->repository->findAll());
 
         $locale = 'pl';
-        $this->client->request(
-            'GET',
-            $this->router->generate(
-                'paragraph_new',
-                ['_locale' => $locale]
-            )
-        );
+        $this->client->request('GET',
+            $this->router->generate('paragraph_new',
+                ['_locale' => $locale]));
         self::assertResponseStatusCodeSame(200);
 
         $this->client->submitForm('btn-save', [
@@ -151,30 +124,18 @@ class ParagraphControllerTest extends DatabaseDependantWebTestCase
             'paragraph[description]' => 'New description',
         ]);
 
-        $paragraphRecord = $this->repository->findOneBy(['textID' => 'about-me']
-        );
+        $paragraphRecord = $this->repository->findOneBy(['textID' => 'about-me']);
         self::assertSame(
             $originalNumObjectsInRepository + 1,
             count($this->repository->findAll())
         );
 
-        $this->client->request(
-            'GET',
-            $this->router->generate(
-                'paragraph_delete',
-                ['id' => $paragraphRecord->getId()]
-            )
-        );
+        $this->client->request('GET', $this->router->generate('paragraph_delete', ['id' => $paragraphRecord->getId()]));
         self::assertResponseStatusCodeSame(Response::HTTP_SEE_OTHER);
 
 
-        self::assertSame(
-            $originalNumObjectsInRepository,
-            count($this->repository->findAll())
-        );
-        self::assertResponseRedirects(
-            $this->router->generate('dashboard_paragraph')
-        );
+        self::assertSame($originalNumObjectsInRepository, count($this->repository->findAll()));
+        self::assertResponseRedirects($this->router->generate('dashboard_paragraph'));
     }
 
     /** @test */
@@ -258,8 +219,6 @@ class ParagraphControllerTest extends DatabaseDependantWebTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->repository = $this->entityManager->getRepository(
-            Paragraph::class
-        );
+        $this->repository = $this->entityManager->getRepository(Paragraph::class);
     }
 }

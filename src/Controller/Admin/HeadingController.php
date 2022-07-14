@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Controller\Abstract\AbstractTranslatableCrudController;
 use App\Entity\Heading;
 use App\Form\HeadingType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -38,11 +39,7 @@ class HeadingController extends AbstractTranslatableCrudController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->setTranslatableFieldsAndFlushForm($form);
 
-            return $this->redirectToRoute(
-                'dashboard_heading',
-                [],
-                Response::HTTP_SEE_OTHER
-            );
+            return $this->redirectToRoute('dashboard_heading', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('CrudForm/_new.html.twig', [
@@ -62,11 +59,7 @@ class HeadingController extends AbstractTranslatableCrudController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->setTranslatableFieldsAndFlushForm($form);
 
-            return $this->redirectToRoute(
-                'dashboard_heading',
-                [],
-                Response::HTTP_SEE_OTHER
-            );
+            return $this->redirectToRoute('dashboard_heading', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('CrudForm/_edit.html.twig', [
@@ -91,10 +84,7 @@ class HeadingController extends AbstractTranslatableCrudController
         $this->entityManager->flush();
 
         return $this->redirectToRoute(
-            'dashboard_heading',
-            [],
-            Response::HTTP_SEE_OTHER
-        );
+            'dashboard_heading', [], Response::HTTP_SEE_OTHER);
     }
 
 }

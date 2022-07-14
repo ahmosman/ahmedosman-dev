@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Tests;
+namespace App\Tests\Entity;
 
 use App\Entity\Paragraph;
+use App\Tests\DatabaseDependantWebTestCase;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
 class ParagraphTest extends DatabaseDependantWebTestCase

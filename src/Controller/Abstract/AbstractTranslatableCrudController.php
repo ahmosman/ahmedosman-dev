@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Abstract;
 
-use App\Controller\AbstractEntityLocaleController;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface;
 use Knp\DoctrineBehaviors\Contract\Entity\TranslationInterface;

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Tests;
+namespace App\Tests\Entity;
 
 use App\Entity\Heading;
+use App\Tests\DatabaseDependantWebTestCase;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
 class HeadingTest extends DatabaseDependantWebTestCase

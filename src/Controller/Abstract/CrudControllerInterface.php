@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Abstract;
 
 interface CrudControllerInterface
 {
