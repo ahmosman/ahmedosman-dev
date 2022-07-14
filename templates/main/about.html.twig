@@ -18,6 +18,19 @@
         </section>
         <section class="skills">
             <h1>{{ headings.skills.name }}</h1>
+            <h2>{{ headings.tools.name }}</h2>
+            <div class="tools">
+
+                {% for tool in tools %}
+                    <div class="circle">
+                        <div class="circle__content">
+                            <span>{{ tool.name }}</span>
+                            <img src="{{ tool.imgSrc }}" alt="{{ tool.name }}">
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
         </section>
     </main>
 {% endblock %}

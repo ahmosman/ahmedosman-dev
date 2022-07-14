@@ -12,10 +12,14 @@
             </ul>
         </nav>
         <section class="dashboard__list">
+
             <h1>{{ app.request.get('_route')|split('_')[1] }}</h1>
+
+            <a class="new_link" href="{% block newPath %}{% endblock %}">Add new</a>
+
             {% block crud_list %}
             {% endblock %}
-            <a class="new_link" href="{% block newPath %}{% endblock %}">Add new</a>
+
         </section>
     </main>
 {% endblock %}
