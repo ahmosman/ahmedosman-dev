@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Controller\Abstract\AbstractLocaleController;
+use App\Repository\CredentialRepository;
 use App\Repository\HeadingRepository;
 use App\Repository\ParagraphRepository;
 use App\Repository\TimelineCategoryRepository;
@@ -104,6 +105,21 @@ class DashboardController extends AbstractLocaleController
         return $this->render('dashboard/timeline.html.twig', [
             'paths' => $this->paths,
             'timelines' => $timelines
+        ]);
+    }
+
+    #[Route('/credential', name: 'dashboard_credential')]
+    public function credential(CredentialRepository $credentialRepository)
+    {
+        $credentials = (new TranslatableDashboardFieldsGenerator($credentialRepository->findAll(),['id'],['author'],$this->locale))->generate();
+        $this->paths = [
+            'new' => 'credential_new',
+            'edit' => 'credential_edit',
+            'delete' => 'credential_delete'
+        ];
+        return $this->render('dashboard/credential.html.twig', [
+            'paths' => $this->paths,
+            'credentials' => $credentials
         ]);
     }
 

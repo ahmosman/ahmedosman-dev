@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Controller\Abstract\AbstractTranslatablePageContentController;
+use App\Entity\Credential;
 use App\Entity\Heading;
 use App\Entity\Paragraph;
 use App\Entity\TimelineCategory;
@@ -53,11 +54,14 @@ class MainController extends AbstractTranslatablePageContentController
     {
         $tools = $this->entityManager->getRepository(Tool::class)->findAllOrderBy('orderValue');
         $timelineCategories = $this->contentGenerator->generateTranslatableCollectionContent(TimelineCategory::class, $this->locale);
+        $credentials = $this->contentGenerator->generateTranslatableContent(Credential::class, $this->locale);
+
         return $this->render('main/about.html.twig', [
             'headings' => $this->headings,
             'paragraphs' => $this->paragraphs,
             'tools' => $tools,
-            'timelineCategories' => $timelineCategories
+            'timelineCategories' => $timelineCategories,
+            'credentials' => $credentials
         ]);
     }
 

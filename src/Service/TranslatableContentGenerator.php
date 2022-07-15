@@ -87,6 +87,22 @@ class TranslatableContentGenerator
     /**
      * @throws TranslatableContentException
      */
+    public function generateTranslatableContent(string $entity, string $locale): array
+    {
+        $this->setLocale($locale);
+        $contentArray = [];
+        $delimiterStrings = $this->getDelimiterStringsForTranslatableEntity($entity);
+        $records = $this->findAllForEntity($entity);
+
+        foreach ($records as $record)
+            array_push($contentArray, $this->getDelimitedTranslationArray($delimiterStrings, $record));
+
+        return $contentArray;
+    }
+
+    /**
+     * @throws TranslatableContentException
+     */
     public function generateTranslatableCollectionContent(string $categoryEntity, string $locale): array
     {
         $this->setLocale($locale);
@@ -165,5 +181,4 @@ class TranslatableContentGenerator
         }
         throw new TranslatableContentException('Empty collection for category');
     }
-
 }

@@ -3,6 +3,7 @@
     //background: url("../images/ahmedosman-about-banner.jpg") no-repeat -20px 0;
     //background-size: 125vw;
     height: 75vw;
+    margin-top: $header-size;
 
     &::before {
       content: '';
@@ -118,6 +119,18 @@
           font-size: 1.2em;
           margin-top: 10px;
         }
+      }
+    }
+
+    .credential{
+      &__description{
+        font-style: italic;
+        margin: 5px 0;
+      }
+      &__author{
+        margin: 10px 0;
+        text-align: right;
+        font-weight: 700;
       }
     }
   }

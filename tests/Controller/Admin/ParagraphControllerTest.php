@@ -25,7 +25,7 @@ class ParagraphControllerTest extends DatabaseDependantWebTestCase
         $this->client->submitForm('btn-save', [
             'paragraph[textID]' => 'about-me',
             'paragraph[title]' => 'O mnie',
-            'paragraph[description]' => 'Po zakończeniu gimnazjum zacząłem zastanawiać się co mnie satysfakcjonuje w życiu.',
+            'paragraph[description]' => 'Po zakończeniu gimnazjum zacząłem zastanawiać się co mnie satysfakcjonuje w życiu.'
         ]);
 
         $paragraphRecord = $this->repository->findOneBy(['textID' => 'about-me']);
@@ -77,8 +77,7 @@ class ParagraphControllerTest extends DatabaseDependantWebTestCase
             'paragraph[description]' => 'After ending middle school I started to wonder.',
         ]);
 
-        $paragraphRecord = $this->repository->findOneBy(['textID' => 'about-me']
-        );
+        $paragraphRecord = $this->repository->findOneBy(['textID' => 'about-me']);
         $paragraphPl = $paragraphRecord->translate('pl');
         $paragraphEn = $paragraphRecord->translate('en');
 
@@ -86,16 +85,12 @@ class ParagraphControllerTest extends DatabaseDependantWebTestCase
         self::assertSame('About me', $paragraphEn->getTitle());
         self::assertSame(
             'After ending middle school I started to wonder.',
-            $paragraphEn->getDescription()
-        );
+            $paragraphEn->getDescription());
         self::assertSame('O mnie', $paragraphPl->getTitle());
         self::assertSame(
             'Po zakończeniu gimnazjum zacząłem zastanawiać się co mnie satysfakcjonuje w życiu.',
-            $paragraphPl->getDescription()
-        );
-        self::assertResponseRedirects(
-            $this->router->generate('dashboard_paragraph', ['_locale' => 'en'])
-        );
+            $paragraphPl->getDescription());
+        self::assertResponseRedirects($this->router->generate('dashboard_paragraph', ['_locale' => 'en']));
     }
 
     /** @test */
@@ -115,16 +110,12 @@ class ParagraphControllerTest extends DatabaseDependantWebTestCase
             'paragraph[description]' => 'New description',
         ]);
 
-        $paragraphRecord = $this->repository->findOneBy(['textID' => 'about-me']);
-        self::assertSame(
-            $originalNumObjectsInRepository + 1,
-            count($this->repository->findAll())
-        );
+        self::assertSame($originalNumObjectsInRepository + 1, count($this->repository->findAll()));
 
-        $this->client->request('GET', $this->router->generate('paragraph_delete', ['id' => $paragraphRecord->getId()]));
+        $this->client->request('GET', $this->router->generate('paragraph_delete', ['id' => 1]));
+
+
         self::assertResponseStatusCodeSame(Response::HTTP_SEE_OTHER);
-
-
         self::assertSame($originalNumObjectsInRepository, count($this->repository->findAll()));
         self::assertResponseRedirects($this->router->generate('dashboard_paragraph'));
     }

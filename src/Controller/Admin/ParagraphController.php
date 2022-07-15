@@ -26,9 +26,7 @@ class ParagraphController extends AbstractTranslatableCrudController
     {
         $this->entity->setTextID($form['textID']->getData());
         $this->entityTranslation->setTitle($form['title']->getData());
-        $this->entityTranslation->setDescription(
-            $form['description']->getData()
-        );
+        $this->entityTranslation->setDescription($form['description']->getData());
     }
 
     #[Route('/new', name: 'paragraph_new', methods: ['GET', 'POST'])]

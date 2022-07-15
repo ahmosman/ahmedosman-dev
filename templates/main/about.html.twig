@@ -46,6 +46,13 @@
                     {% endfor %}
                 </div>
             {% endfor %}
+            <h2>{{ headings.credentials.name }}</h2>
+            {% for credential in credentials %}
+                <div class="credential">
+                    <div class="credential__description">{{ credential.description|nl2br }}</div>
+                    <div class="credential__author">{{ credential.author }}</div>
+                </div>
+            {% endfor %}
         </section>
     </main>
 {% endblock %}

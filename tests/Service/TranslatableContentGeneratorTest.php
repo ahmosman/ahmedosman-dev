@@ -2,9 +2,9 @@
 
 namespace App\Tests\Service;
 
+use App\Entity\Credential;
 use App\Entity\Heading;
 use App\Entity\Paragraph;
-use App\Entity\Timeline;
 use App\Entity\TimelineCategory;
 use App\Service\TranslatableContentException;
 use App\Service\TranslatableContentGenerator;
@@ -215,6 +215,39 @@ class TranslatableContentGeneratorTest extends DatabaseDependantWebTestCase
         self::assertEquals('luty 2017 - czerwiec 2020', $timelineCategories[1]['timelines'][1]['dateRange']);
         self::assertEquals('2017-02-01', $timelineCategories[1]['timelines'][1]['date']->format('Y-m-d'));
 
+    }
+
+    /** @test
+     * @throws TranslatableContentException
+     */
+    public function credentialTranslationArrayIsGeneratedInPl()
+    {
+        $locale = 'pl';
+        $this->client->request('GET', $this->router->generate(
+            'credential_new',
+            ['_locale' => $locale]));
+        self::assertResponseStatusCodeSame(200);
+
+        $this->client->submitForm('btn-save', [
+            'credential[description]' => 'Testowy opis referencji',
+            'credential[author]' => 'Testowy autor'
+        ]);
+
+        $this->client->request('GET', $this->router->generate(
+            'credential_new',
+            ['_locale' => $locale]));
+
+        $this->client->submitForm('btn-save', [
+            'credential[description]' => 'Testowy opis referencji2',
+            'credential[author]' => 'Testowy autor2'
+        ]);
+
+        $credentials = $this->contentGenerator->generateTranslatableContent(Credential::class, $locale);
+
+        self::assertEquals('Testowy opis referencji', $credentials[0]['description']);
+        self::assertEquals('Testowy autor', $credentials[0]['author']);
+        self::assertEquals('Testowy opis referencji2', $credentials[1]['description']);
+        self::assertEquals('Testowy autor2', $credentials[1]['author']);
     }
 
 // TODO   /** @test */
