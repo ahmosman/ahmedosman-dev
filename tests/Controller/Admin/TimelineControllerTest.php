@@ -74,9 +74,6 @@ class TimelineControllerTest extends DatabaseDependantWebTestCase
         $this->entityManager->persist($timelineCategory);
         $this->entityManager->flush();
 
-        $timelineCategoryRepository = $this->entityManager->getRepository(TimelineCategory::class);
-        $timelineCategoryRecord = $timelineCategoryRepository->find(1);
-
         $this->client->request('GET', $this->router->generate(
             'timeline_new', ['_locale' => $locale]));
         self::assertResponseStatusCodeSame(200);
@@ -88,7 +85,7 @@ class TimelineControllerTest extends DatabaseDependantWebTestCase
             'timeline[date][day]' => 11,
             'timeline[dateRange]' => 'czerwiec 2018 - sierpień 2029',
             'timeline[link]' => 'Test link',
-            'timeline[timelineCategory]' => $timelineCategoryRecord
+            'timeline[timelineCategory]' => $timelineCategory
         ]);
 
         $this->client->request('GET', $this->router->generate('timeline_edit', [

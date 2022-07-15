@@ -25,8 +25,8 @@ class MainController extends AbstractTranslatablePageContentController
     public function __construct(RequestStack $requestStack, EntityManagerInterface $entityManager, TranslatableContentGenerator $contentGenerator)
     {
         parent::__construct($requestStack, $entityManager, $contentGenerator);
-        $this->headings = $this->contentGenerator->generateContentTextIDArray(Heading::class, $this->locale);
-        $this->paragraphs = $this->contentGenerator->generateContentTextIDArray(Paragraph::class, $this->locale);
+        $this->headings = $this->contentGenerator->generateTranslatableTextIDArrayContent(Heading::class, $this->locale);
+        $this->paragraphs = $this->contentGenerator->generateTranslatableTextIDArrayContent(Paragraph::class, $this->locale);
     }
 
     #[Route('/')]

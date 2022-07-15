@@ -7,13 +7,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JetBrains\PhpStorm\Pure;
-use Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface;
-use Knp\DoctrineBehaviors\Model\Translatable\TranslatableTrait;
 
 #[ORM\Entity(repositoryClass: TimelineCategoryRepository::class)]
-class TimelineCategory implements TranslatableInterface
+class TimelineCategory extends AbstractTranslatableCategoryEntity
 {
-    use TranslatableTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -68,4 +65,8 @@ class TimelineCategory implements TranslatableInterface
         return $this->getId();
     }
 
+    public function getTranslatableCollection(): Collection
+    {
+        return $this->getTimelines();
+    }
 }
