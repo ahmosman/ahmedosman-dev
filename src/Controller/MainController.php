@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Controller\Abstract\AbstractTranslatablePageContentController;
 use App\Entity\Heading;
 use App\Entity\Paragraph;
+use App\Entity\TimelineCategory;
 use App\Entity\Tool;
 use App\Service\TranslatableContentException;
 use App\Service\TranslatableContentGenerator;
@@ -44,15 +45,19 @@ class MainController extends AbstractTranslatablePageContentController
         ]);
     }
 
+    /**
+     * @throws TranslatableContentException
+     */
     #[Route('/{_locale<%app.supported_locales%>}/about', name: 'about')]
     public function about(): Response
     {
         $tools = $this->entityManager->getRepository(Tool::class)->findAllOrderBy('orderValue');
-
+        $timelineCategories = $this->contentGenerator->generateTranslatableCollectionContent(TimelineCategory::class, $this->locale);
         return $this->render('main/about.html.twig', [
             'headings' => $this->headings,
             'paragraphs' => $this->paragraphs,
-            'tools' => $tools
+            'tools' => $tools,
+            'timelineCategories' => $timelineCategories
         ]);
     }
 

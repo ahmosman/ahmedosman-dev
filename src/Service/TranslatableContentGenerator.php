@@ -3,10 +3,10 @@
 namespace App\Service;
 
 use App\Entity\AbstractTranslatableCategoryEntity;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\PersistentCollection;
 use Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface;
-
 
 class TranslatableContentGenerator
 {
@@ -112,12 +112,27 @@ class TranslatableContentGenerator
     /**
      * @throws TranslatableContentException
      */
+
+    private function getKeyOfClassFromArray(array $assocArray, string $categoryClass): string
+    {
+        foreach ($assocArray as $key => $value) {
+            if (is_object($value) && get_class($value) == $categoryClass)
+                return $key;
+        }
+        throw new TranslatableContentException('Array doesn\'t have ' . $categoryClass . ' collection value');
+    }
+
+    /**
+     * @throws TranslatableContentException
+     */
     private function getTranslatedCollectionArrayForCategoryRecord(AbstractTranslatableCategoryEntity $category): array
     {
         $collectionArray = [];
 
         $translatableCollection = $category->getTranslatableCollection();
-        $collectionDelimiters = $this->getDelimiterStringsForTranslatableEntity(get_class($translatableCollection[0]));
+        $collectionEntityName = $this->getCollectionEntityName($translatableCollection);
+
+        $collectionDelimiters = $this->getDelimiterStringsForTranslatableEntity($collectionEntityName);
 
         /** @var TranslatableInterface $collectionRecord */
         foreach ($translatableCollection as $collectionRecord)
@@ -143,14 +158,12 @@ class TranslatableContentGenerator
     /**
      * @throws TranslatableContentException
      */
-
-    private function getKeyOfClassFromArray(array $assocArray, string $categoryClass): string
+    private function getCollectionEntityName(Collection $translatableCollection): string
     {
-        foreach ($assocArray as $key => $value) {
-            if (is_object($value) && get_class($value) == $categoryClass)
-                return $key;
+        if (count($translatableCollection) > 0) {
+            return get_class($translatableCollection[0]);
         }
-        throw new TranslatableContentException('Array doesn\'t have ' . $categoryClass . ' collection value');
+        throw new TranslatableContentException('Empty collection for category');
     }
 
 }

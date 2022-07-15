@@ -18,6 +18,7 @@
         </section>
         <section class="skills">
             <h1>{{ headings.skills.name }}</h1>
+
             <h2>{{ headings.tools.name }}</h2>
             <div class="tools">
 
@@ -29,8 +30,22 @@
                         </div>
                     </div>
                 {% endfor %}
-
             </div>
+            {% for timelineCategory in timelineCategories %}
+                <h2>{{ timelineCategory.name }}</h2>
+
+                <div class="timelines">
+                    {% for timeline in timelineCategory.timelines %}
+                        <div class="timeline">
+                            <div class="timeline__date">{{ timeline.dateRange }}</div>
+                            <div class="timeline__titles">
+                                <div class="timeline__title">{{ timeline.title }}</div>
+                                <div class="timeline__subtitle">{{ timeline.subtitle }}</div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
         </section>
     </main>
 {% endblock %}
