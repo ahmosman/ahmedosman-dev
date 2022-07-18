@@ -32,15 +32,15 @@
                 {% endfor %}
             </div>
             {% for timelineCategory in timelineCategories %}
-                <h2>{{ timelineCategory.name }}</h2>
+                <h2>{{ timelineCategory.translate(locale).name }}</h2>
 
                 <div class="timelines">
                     {% for timeline in timelineCategory.timelines %}
                         <div class="timeline">
-                            <div class="timeline__date">{{ timeline.dateRange }}</div>
+                            <div class="timeline__date">{{ timeline.translate(locale).dateRange }}</div>
                             <div class="timeline__titles">
-                                <div class="timeline__title">{{ timeline.title }}</div>
-                                <div class="timeline__subtitle">{{ timeline.subtitle }}</div>
+                                <div class="timeline__title">{{ timeline.translate(locale).title }}</div>
+                                <div class="timeline__subtitle">{{ timeline.translate(locale).subtitle }}</div>
                             </div>
                         </div>
                     {% endfor %}
@@ -49,8 +49,8 @@
             <h2>{{ headings.credentials.name }}</h2>
             {% for credential in credentials %}
                 <div class="credential">
-                    <div class="credential__description">{{ credential.description|nl2br }}</div>
-                    <div class="credential__author">{{ credential.author }}</div>
+                    <div class="credential__description">{{ credential.translate(locale).description|nl2br }}</div>
+                    <div class="credential__author">{{ credential.translate(locale).author }}</div>
                 </div>
             {% endfor %}
         </section>

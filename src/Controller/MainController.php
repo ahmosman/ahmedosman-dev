@@ -54,8 +54,8 @@ class MainController extends AbstractTranslatablePageContentController
     public function about(): Response
     {
         $tools = $this->entityManager->getRepository(Tool::class)->findAllOrderBy('orderValue');
-        $timelineCategories = $this->contentGenerator->generateTranslatableCollectionContent(TimelineCategory::class, $this->locale);
-        $credentials = $this->contentGenerator->generateTranslatableContent(Credential::class, $this->locale);
+        $timelineCategories = $this->entityManager->getRepository(TimelineCategory::class)->findAll();
+        $credentials = $this->entityManager->getRepository(Credential::class)->findAll();
 
         return $this->render('main/about.html.twig', [
             'headings' => $this->headings,

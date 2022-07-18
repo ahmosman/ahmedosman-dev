@@ -2,10 +2,7 @@
 
 namespace App\Service;
 
-use App\Entity\AbstractTranslatableCategoryEntity;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\PersistentCollection;
 use Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface;
 
 class TranslatableContentGenerator
@@ -82,103 +79,5 @@ class TranslatableContentGenerator
             unset($array[$key]);
         }
         return $array;
-    }
-
-    /**
-     * @throws TranslatableContentException
-     */
-    public function generateTranslatableContent(string $entity, string $locale): array
-    {
-        $this->setLocale($locale);
-        $contentArray = [];
-        $delimiterStrings = $this->getDelimiterStringsForTranslatableEntity($entity);
-        $records = $this->findAllForEntity($entity);
-
-        foreach ($records as $record)
-            array_push($contentArray, $this->getDelimitedTranslationArray($delimiterStrings, $record));
-
-        return $contentArray;
-    }
-
-    /**
-     * @throws TranslatableContentException
-     */
-    public function generateTranslatableCollectionContent(string $categoryEntity, string $locale): array
-    {
-        $this->setLocale($locale);
-
-        $contentArray = [];
-        $categories = $this->findAllForEntity($categoryEntity);
-
-        $categoryDelimiters = $this->getDelimiterStringsForTranslatableEntity($categoryEntity);
-
-        /** @var AbstractTranslatableCategoryEntity $category */
-        foreach ($categories as $category) {
-            $categoryArray = $this->getDelimitedTranslationArray($categoryDelimiters, $category);
-
-            $collectionKey = $this->getKeyOfClassFromArray($categoryArray, PersistentCollection::class);
-
-            $categoryArray[$collectionKey] = $this->getTranslatedCollectionArrayForCategoryRecord($category);
-
-            array_push($contentArray, $categoryArray);
-        }
-        return $contentArray;
-    }
-
-    /**
-     * @throws TranslatableContentException
-     */
-
-    private function getKeyOfClassFromArray(array $assocArray, string $categoryClass): string
-    {
-        foreach ($assocArray as $key => $value) {
-            if (is_object($value) && get_class($value) == $categoryClass)
-                return $key;
-        }
-        throw new TranslatableContentException('Array doesn\'t have ' . $categoryClass . ' collection value');
-    }
-
-    /**
-     * @throws TranslatableContentException
-     */
-    private function getTranslatedCollectionArrayForCategoryRecord(AbstractTranslatableCategoryEntity $category): array
-    {
-        $collectionArray = [];
-
-        $translatableCollection = $category->getTranslatableCollection();
-        $collectionEntityName = $this->getCollectionEntityName($translatableCollection);
-
-        $collectionDelimiters = $this->getDelimiterStringsForTranslatableEntity($collectionEntityName);
-
-        /** @var TranslatableInterface $collectionRecord */
-        foreach ($translatableCollection as $collectionRecord)
-            array_push($collectionArray, $this->getDelimitedCollectionTranslationArray($collectionDelimiters, $collectionRecord, get_class($category)));
-
-        return $collectionArray;
-    }
-
-    /**
-     * @throws TranslatableContentException
-     */
-    private function getDelimitedCollectionTranslationArray(array $collectionDelimiters, TranslatableInterface $collectionRecord, string $categoryEntityToUnset): array
-    {
-        $delimitedCollectionRecordArray = $this->delimitedRecordArray($collectionDelimiters['entity'], (array)$collectionRecord);
-        $categoryKeyToUnset = $this->getKeyOfClassFromArray($delimitedCollectionRecordArray, $categoryEntityToUnset);
-
-        unset($delimitedCollectionRecordArray[$categoryKeyToUnset]);
-
-        $delimitedTranslationCollectionRecordArray = $this->delimitedRecordArray($collectionDelimiters['translation'], (array)$collectionRecord->translate($this->locale));
-        return $delimitedCollectionRecordArray + $delimitedTranslationCollectionRecordArray;
-    }
-
-    /**
-     * @throws TranslatableContentException
-     */
-    private function getCollectionEntityName(Collection $translatableCollection): string
-    {
-        if (count($translatableCollection) > 0) {
-            return get_class($translatableCollection[0]);
-        }
-        throw new TranslatableContentException('Empty collection for category');
     }
 }
