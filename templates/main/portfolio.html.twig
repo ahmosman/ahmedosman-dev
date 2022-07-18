@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for slide in slides %}
+        <img src="{{ uploaded_asset(slide.imagePath) }}" alt="">
+        {{ dump(slide) }}
+    {% endfor %}
+{% endblock %}
+
