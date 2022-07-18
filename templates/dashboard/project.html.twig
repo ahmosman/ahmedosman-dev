@@ -1,0 +1,23 @@
+{% extends 'dashboard/dashboard.html.twig' %}
+{% block newPath %}{{ path( paths.new ) }} {% endblock %}
+{% block crud_list %}
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Order value</th>
+            <th>Image filename</th>
+            <th>Actions</th>
+        </tr>
+        {% for project in projects %}
+            <tr>
+                <td>{{ project.id }}</td>
+                <td>{{ project.title }}</td>
+                <td>{{ project.orderValue }}</td>
+                <td>{{ project.imageFilename }}</td>
+                <td>{{ include ('CrudForm/crudActionButtons.html.twig',{'edit_path': paths.edit, 'delete_path': paths.delete, 'id': projectSlide.id}) }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

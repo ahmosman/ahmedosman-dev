@@ -24,6 +24,9 @@ class ProjectSlide implements TranslatableInterface
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $imageFilename;
 
+    #[ORM\ManyToOne(targetEntity: Project::class, inversedBy: 'projectSlides')]
+    private $project;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -54,6 +57,18 @@ class ProjectSlide implements TranslatableInterface
     public function setImageFilename(?string $imageFilename): self
     {
         $this->imageFilename = $imageFilename;
+
+        return $this;
+    }
+
+    public function getProject(): ?Project
+    {
+        return $this->project;
+    }
+
+    public function setProject(?Project $project): self
+    {
+        $this->project = $project;
 
         return $this;
     }

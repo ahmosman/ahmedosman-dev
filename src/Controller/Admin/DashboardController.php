@@ -6,6 +6,7 @@ use App\Controller\Abstract\AbstractLocaleController;
 use App\Repository\CredentialRepository;
 use App\Repository\HeadingRepository;
 use App\Repository\ParagraphRepository;
+use App\Repository\ProjectRepository;
 use App\Repository\ProjectSlideRepository;
 use App\Repository\TimelineCategoryRepository;
 use App\Repository\TimelineRepository;
@@ -136,6 +137,21 @@ class DashboardController extends AbstractLocaleController
         return $this->render('dashboard/projectSlide.html.twig', [
             'paths' => $this->paths,
             'projectSlides' => $projectSlides
+        ]);
+    }
+
+    #[Route('/project', name: 'dashboard_project')]
+    public function project(ProjectRepository $projectRepository)
+    {
+        $projects = (new TranslatableDashboardFieldsGenerator($projectRepository->findAll(),['id','title', 'orderValue', 'imageFilename'],[],$this->locale))->generate();
+        $this->paths = [
+            'new' => 'project_new',
+            'edit' => 'project_edit',
+            'delete' => 'project_delete'
+        ];
+        return $this->render('dashboard/project.html.twig', [
+            'paths' => $this->paths,
+            'projects' => $projects
         ]);
     }
 

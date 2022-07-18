@@ -2,13 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\ProjectSlideRepository;
-use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Contract\Entity\TranslationInterface;
 use Knp\DoctrineBehaviors\Model\Translatable\TranslationTrait;
+use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
-class ProjectSlideTranslation implements TranslationInterface
+class ProjectTranslation implements TranslationInterface
 {
     use TranslationTrait;
 
@@ -17,12 +16,42 @@ class ProjectSlideTranslation implements TranslationInterface
     #[ORM\Column(type: 'integer')]
     private $id;
 
+    #[ORM\Column(type: 'string', length: 50)]
+    private $title;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $subtitle;
+
     #[ORM\Column(type: 'text', nullable: true)]
     private $description;
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function getSubtitle(): ?string
+    {
+        return $this->subtitle;
+    }
+
+    public function setSubtitle(?string $subtitle): self
+    {
+        $this->subtitle = $subtitle;
+
+        return $this;
     }
 
     public function getDescription(): ?string
@@ -36,5 +65,4 @@ class ProjectSlideTranslation implements TranslationInterface
 
         return $this;
     }
-
 }

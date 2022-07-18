@@ -90,4 +90,15 @@ class DashboardControllerTest extends DatabaseDependantWebTestCase
         $this->assertEquals($this->router->generate('project-slide_new'), $this->removeWhiteCharacters($crawler->filter('.new_link')->attr('href')));
     }
 
+
+    /** @test */
+    public function dashboardProjectRequestIsPassingAndDisplayingProjects()
+    {
+        $crawler = $this->client->request('GET', $this->router->generate('dashboard_project', ['_locale' => $this->locale]));
+        self::assertResponseStatusCodeSame(200);
+
+        $this->assertEquals('<th>ID</th><th>Title</th><th>Ordervalue</th><th>Imagefilename</th><th>Actions</th>', $this->removeWhiteCharacters($crawler->filter('.dashboard__list tr')->first()->html()));
+        $this->assertEquals($this->router->generate('project_new'), $this->removeWhiteCharacters($crawler->filter('.new_link')->attr('href')));
+    }
+
 }

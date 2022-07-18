@@ -7,7 +7,7 @@ use Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface;
 use Knp\DoctrineBehaviors\Contract\Entity\TranslationInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-abstract class AbstractTranslatableCrudController extends AbstractEntityLocaleController implements TranslatableCrudControllerInterface
+abstract class AbstractTranslatableCrudController extends AbstractEntityLocaleController
 {
     protected TranslatableInterface $entity;
     protected TranslationInterface $entityTranslation;
@@ -31,4 +31,6 @@ abstract class AbstractTranslatableCrudController extends AbstractEntityLocaleCo
         $this->entityManager->flush();
     }
 
+    abstract public function setTranslatableEntityFieldsFromForm($form);
+    abstract public function createFormData(): array;
 }

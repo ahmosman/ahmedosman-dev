@@ -37,6 +37,7 @@ class ProjectSlideControllerTest extends DatabaseDependantWebTestCase
         $projectSlideRecord = $this->repository->find(1);
         $projectSlideTranslation = $projectSlideRecord->translate($locale);
 
+
         self::assertEquals('Testowy opis', $projectSlideTranslation->getDescription());
         self::assertEquals(2, $projectSlideRecord->getOrderValue());
         self::assertSame($originalNumObjectsInRepository + 1, count($this->repository->findAll()));
@@ -97,6 +98,7 @@ class ProjectSlideControllerTest extends DatabaseDependantWebTestCase
     {
         $locale = 'pl';
         $originalNumObjectsInRepository = count($this->repository->findAll());
+
         $this->client->request('GET', $this->router->generate(
             'project-slide_new', ['_locale' => $locale]));
         self::assertResponseStatusCodeSame(200);
@@ -108,6 +110,7 @@ class ProjectSlideControllerTest extends DatabaseDependantWebTestCase
 
         self::assertSame($originalNumObjectsInRepository + 1,
             count($this->repository->findAll()));
+
         $this->client->request('GET', $this->router->generate('project-slide_delete', ['id' => 1]));
 
 

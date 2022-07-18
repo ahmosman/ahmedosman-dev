@@ -36,6 +36,7 @@ class ProjectSlideTest extends DatabaseDependantWebTestCase
         $projectSlideEnRecord = $projectSlideRecord->translate('en');
         $projectSlidePlRecord = $projectSlideRecord->translate('pl');
 
+
         self::assertEquals(2, $projectSlideRecord->getOrderValue());
         self::assertEquals('test-image.jpg', $projectSlideRecord->getImageFilename());
         self::assertEquals('Test description', $projectSlideEnRecord->getDescription());
