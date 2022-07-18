@@ -12,7 +12,7 @@
         {% for project in projects %}
             <tr>
                 <td>{{ project.id }}</td>
-                <td>{{ project.title }}</td>
+                <td>{{ project.translate(locale).title }}</td>
                 <td>{{ project.orderValue }}</td>
                 <td>{{ project.imageFilename }}</td>
                 <td>{{ include ('CrudForm/crudActionButtons.html.twig',{'edit_path': paths.edit, 'delete_path': paths.delete, 'id': project.id}) }}</td>

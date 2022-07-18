@@ -2,12 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\HeadingRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Contract\Entity\TranslationInterface;
 use Knp\DoctrineBehaviors\Model\Translatable\TranslationTrait;
 
-#[ORM\Entity(repositoryClass: HeadingRepository::class)]
+#[ORM\Entity]
 class HeadingTranslation implements TranslationInterface
 {
 

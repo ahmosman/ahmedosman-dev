@@ -11,7 +11,6 @@ use App\Repository\ProjectSlideRepository;
 use App\Repository\TimelineCategoryRepository;
 use App\Repository\TimelineRepository;
 use App\Repository\ToolRepository;
-use App\Service\TranslatableDashboardFieldsGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -30,7 +29,7 @@ class DashboardController extends AbstractLocaleController
     #[Route('/heading', name: 'dashboard_heading')]
     public function heading(HeadingRepository $headingRepository): Response
     {
-        $headings = (new TranslatableDashboardFieldsGenerator($headingRepository->findAll(), ['id', 'textID'], ['name'], $this->locale))->generate();
+        $headings = $headingRepository->findAll();
         $this->paths = [
             'new' => 'heading_new',
             'edit' => 'heading_edit',
@@ -47,7 +46,7 @@ class DashboardController extends AbstractLocaleController
     public function paragraph(ParagraphRepository $paragraphRepository): Response
     {
 
-        $paragraphs = (new TranslatableDashboardFieldsGenerator($paragraphRepository->findAll(), ['id', 'textID'], ['title', 'description'], $this->locale))->generate();
+        $paragraphs = $paragraphRepository->findAll();
 
         $this->paths = [
             'new' => 'paragraph_new',
@@ -81,7 +80,7 @@ class DashboardController extends AbstractLocaleController
     #[Route('/timeline-category', name: 'dashboard_timeline-category')]
     public function timelineCategory(TimelineCategoryRepository $timelineCategoryRepository): Response
     {
-        $timelineCategories = (new TranslatableDashboardFieldsGenerator($timelineCategoryRepository->findAll(), ['id'], ['name'], $this->locale))->generate();
+        $timelineCategories = $timelineCategoryRepository->findAll();
 
         $this->paths = [
             'new' => 'timeline-category_new',
@@ -98,7 +97,7 @@ class DashboardController extends AbstractLocaleController
     #[Route('/timeline', name: 'dashboard_timeline')]
     public function timeline(TimelineRepository $timelineRepository)
     {
-        $timelines = (new TranslatableDashboardFieldsGenerator($timelineRepository->findAll(),['id', 'timelineCategory'],['title'],$this->locale))->generate();
+        $timelines = $timelineRepository->findAll();
         $this->paths = [
             'new' => 'timeline_new',
             'edit' => 'timeline_edit',
@@ -113,7 +112,7 @@ class DashboardController extends AbstractLocaleController
     #[Route('/credential', name: 'dashboard_credential')]
     public function credential(CredentialRepository $credentialRepository)
     {
-        $credentials = (new TranslatableDashboardFieldsGenerator($credentialRepository->findAll(),['id'],['author'],$this->locale))->generate();
+        $credentials = $credentialRepository->findAll();
         $this->paths = [
             'new' => 'credential_new',
             'edit' => 'credential_edit',
@@ -128,7 +127,7 @@ class DashboardController extends AbstractLocaleController
     #[Route('/project-slide', name: 'dashboard_project-slide')]
     public function projectSlide(ProjectSlideRepository $projectSlideRepository)
     {
-        $projectSlides = (new TranslatableDashboardFieldsGenerator($projectSlideRepository->findAll(),['id','orderValue', 'imageFilename','project'],['description'],$this->locale))->generate();
+        $projectSlides = $projectSlideRepository->findAll();
         $this->paths = [
             'new' => 'project-slide_new',
             'edit' => 'project-slide_edit',
@@ -143,7 +142,7 @@ class DashboardController extends AbstractLocaleController
     #[Route('/project', name: 'dashboard_project')]
     public function project(ProjectRepository $projectRepository)
     {
-        $projects = (new TranslatableDashboardFieldsGenerator($projectRepository->findAll(),['id', 'orderValue', 'imageFilename'],['title'],$this->locale))->generate();
+        $projects = $projectRepository->findAll();
         $this->paths = [
             'new' => 'project_new',
             'edit' => 'project_edit',

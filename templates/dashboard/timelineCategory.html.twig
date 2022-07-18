@@ -10,7 +10,7 @@
         {% for timelineCategory in timelineCategories %}
             <tr>
                 <td>{{ timelineCategory.id }}</td>
-                <td>{{ timelineCategory.name }}</td>
+                <td>{{ timelineCategory.translate(locale).name }}</td>
                 <td>{{ include ('CrudForm/crudActionButtons.html.twig',{'edit_path': paths.edit, 'delete_path': paths.delete, 'id': timelineCategory.id}) }}</td>
             </tr>
         {% endfor %}
