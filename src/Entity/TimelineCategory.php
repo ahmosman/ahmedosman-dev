@@ -28,6 +28,11 @@ class TimelineCategory implements TranslatableInterface
         $this->timelines = new ArrayCollection();
     }
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
     /**
      * @return Collection<int, Timeline>
      */
@@ -60,11 +65,7 @@ class TimelineCategory implements TranslatableInterface
 
     #[Pure] public function __toString(): string
     {
-        return $this->getId();
+        return $this->translate('pl')->getName();
     }
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 }

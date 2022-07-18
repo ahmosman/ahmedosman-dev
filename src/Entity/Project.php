@@ -34,6 +34,11 @@ class Project implements TranslatableInterface
         $this->projectSlides = new ArrayCollection();
     }
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
     public function getImageFilename(): ?string
     {
         return $this->imageFilename;
@@ -90,11 +95,7 @@ class Project implements TranslatableInterface
 
     #[Pure] public function __toString(): string
     {
-        return $this->getId();
+        return $this->translate('pl')->getTitle();
     }
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 }

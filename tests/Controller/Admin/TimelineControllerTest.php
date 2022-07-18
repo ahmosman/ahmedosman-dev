@@ -40,7 +40,7 @@ class TimelineControllerTest extends DatabaseDependantWebTestCase
             'timeline[date][day]' => 1,
             'timeline[dateRange]' => 'czerwiec 2018 - sierpień 2019',
             'timeline[link]' => 'Test link',
-            'timeline[timelineCategory]' => $timelineCategoryRecord
+            'timeline[timelineCategory]' => $timelineCategoryRecord->getId()
         ]);
         self::assertResponseStatusCodeSame(Response::HTTP_SEE_OTHER);
 
@@ -85,7 +85,7 @@ class TimelineControllerTest extends DatabaseDependantWebTestCase
             'timeline[date][day]' => 11,
             'timeline[dateRange]' => 'czerwiec 2018 - sierpień 2029',
             'timeline[link]' => 'Test link',
-            'timeline[timelineCategory]' => $timelineCategory
+            'timeline[timelineCategory]' => $timelineCategory->getId()
         ]);
 
         $this->client->request('GET', $this->router->generate('timeline_edit', [
