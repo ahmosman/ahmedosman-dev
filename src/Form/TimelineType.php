@@ -23,6 +23,7 @@ class TimelineType extends AbstractType
             ])
             ->add('timelineCategory', EntityType::class, [
                 'class' => TimelineCategory::class
-            ]);
+            ])
+        ;
     }
 }

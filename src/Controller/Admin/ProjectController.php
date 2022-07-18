@@ -69,6 +69,7 @@ class ProjectController extends AbstractTranslatableCrudController
         return [
             'title' => $this->entityTranslation->getTitle(),
             'subtitle' => $this->entityTranslation->getSubtitle(),
+            'shortDescription' => $this->entityTranslation->getShortDescription(),
             'description' => $this->entityTranslation->getDescription(),
             'orderValue' => $this->entity->getOrderValue()
         ];
@@ -89,6 +90,7 @@ class ProjectController extends AbstractTranslatableCrudController
         $this->entityTranslation->setTitle($form['title']->getData());
         $this->entityTranslation->setSubtitle($form['subtitle']->getData());
         $this->entityTranslation->setDescription($form['description']->getData());
+        $this->entityTranslation->setShortDescription($form['shortDescription']->getData());
 
         $uploadedFile = $form['imageFile']->getData();
         if ($uploadedFile) {

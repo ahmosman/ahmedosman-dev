@@ -29,10 +29,12 @@ class ProjectTest extends DatabaseDependantWebTestCase
         $projectPl->setTitle('Polbahasa');
         $projectPl->setSubtitle('Słownik indonezyjsko-polski');
         $projectPl->setDescription('Testowy opis słownika');
+        $projectPl->setShortDescription('Krótki opis słownika');
 
         $projectEn->setTitle('Polbahasa');
         $projectEn->setSubtitle('Indonesian-Polish dictionary');
         $projectEn->setDescription('Test dictionary description');
+        $projectEn->setShortDescription('Short dictionary description');
 
         $this->entityManager->persist($project);
         $this->entityManager->flush();
@@ -47,8 +49,10 @@ class ProjectTest extends DatabaseDependantWebTestCase
         self::assertEquals('Polbahasa', $projectPlRecord->getTitle());
         self::assertEquals('Słownik indonezyjsko-polski', $projectPlRecord->getSubtitle());
         self::assertEquals('Testowy opis słownika', $projectPlRecord->getDescription());
+        self::assertEquals('Krótki opis słownika', $projectPlRecord->getShortDescription());
         self::assertEquals('Polbahasa', $projectEnRecord->getTitle());
         self::assertEquals('Indonesian-Polish dictionary', $projectEnRecord->getSubtitle());
         self::assertEquals('Test dictionary description', $projectEnRecord->getDescription());
+        self::assertEquals('Short dictionary description', $projectEnRecord->getShortDescription());
     }
 }

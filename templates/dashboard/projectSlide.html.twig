@@ -16,7 +16,7 @@
                 <td>{{ projectSlide.description }}</td>
                 <td>{{ projectSlide.orderValue }}</td>
                 <td>{{ projectSlide.imageFilename }}</td>
-                <td></td>
+                <td>{{ projectSlide.project }}</td>
                 <td>{{ include ('CrudForm/crudActionButtons.html.twig',{'edit_path': paths.edit, 'delete_path': paths.delete, 'id': projectSlide.id}) }}</td>
             </tr>
         {% endfor %}

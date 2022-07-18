@@ -128,7 +128,7 @@ class DashboardController extends AbstractLocaleController
     #[Route('/project-slide', name: 'dashboard_project-slide')]
     public function projectSlide(ProjectSlideRepository $projectSlideRepository)
     {
-        $projectSlides = (new TranslatableDashboardFieldsGenerator($projectSlideRepository->findAll(),['id','orderValue', 'imageFilename'],['description'],$this->locale))->generate();
+        $projectSlides = (new TranslatableDashboardFieldsGenerator($projectSlideRepository->findAll(),['id','orderValue', 'imageFilename','project'],['description'],$this->locale))->generate();
         $this->paths = [
             'new' => 'project-slide_new',
             'edit' => 'project-slide_edit',
@@ -143,7 +143,7 @@ class DashboardController extends AbstractLocaleController
     #[Route('/project', name: 'dashboard_project')]
     public function project(ProjectRepository $projectRepository)
     {
-        $projects = (new TranslatableDashboardFieldsGenerator($projectRepository->findAll(),['id','title', 'orderValue', 'imageFilename'],[],$this->locale))->generate();
+        $projects = (new TranslatableDashboardFieldsGenerator($projectRepository->findAll(),['id', 'orderValue', 'imageFilename'],['title'],$this->locale))->generate();
         $this->paths = [
             'new' => 'project_new',
             'edit' => 'project_edit',

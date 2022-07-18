@@ -52,6 +52,7 @@ class ProjectControllerTest extends DatabaseDependantWebTestCase
         $this->client->submitForm('btn-save', [
             'project[title]' => 'Polbahadasa',
             'project[subtitle]' => 'Słowadsnik indonezyjsko-polski',
+            'project[shortDescription]' => 'opisa ktotki',
             'project[description]' => '123Testowy opis 1słownika',
             'project[orderValue]' => 3
         ]);
@@ -65,6 +66,7 @@ class ProjectControllerTest extends DatabaseDependantWebTestCase
         $this->client->submitForm('btn-update', [
             'project[title]' => 'Polbahasa',
             'project[subtitle]' => 'Słownik indonezyjsko-polski',
+            'project[shortDescription]' => 'Krótki opis słownika',
             'project[description]' => 'Testowy opis słownika',
             'project[orderValue]' => 3
         ]);
@@ -79,6 +81,7 @@ class ProjectControllerTest extends DatabaseDependantWebTestCase
         $this->client->submitForm('btn-update', [
             'project[title]' => 'Polbahasa',
             'project[subtitle]' => 'Indonesian-Polish dictionary',
+            'project[shortDescription]' => 'Short dictionary description',
             'project[description]' => 'Test dictionary description',
             'project[orderValue]' => 3
         ]);
@@ -92,9 +95,11 @@ class ProjectControllerTest extends DatabaseDependantWebTestCase
         self::assertEquals(3, $projectRecord->getOrderValue());
         self::assertEquals('Polbahasa', $projectPl->getTitle());
         self::assertEquals('Słownik indonezyjsko-polski', $projectPl->getSubtitle());
+        self::assertEquals('Krótki opis słownika', $projectPl->getShortDescription());
         self::assertEquals('Testowy opis słownika', $projectPl->getDescription());
         self::assertEquals('Polbahasa', $projectEn->getTitle());
         self::assertEquals('Indonesian-Polish dictionary', $projectEn->getSubtitle());
+        self::assertEquals('Short dictionary description', $projectEn->getShortDescription());
         self::assertEquals('Test dictionary description', $projectEn->getDescription());
         self::assertResponseRedirects($this->router->generate('dashboard_project', ['_locale' => $locale]));
 
@@ -114,6 +119,7 @@ class ProjectControllerTest extends DatabaseDependantWebTestCase
             'project[title]' => 'Polbahasa',
             'project[subtitle]' => 'Słownik indonezyjsko-polski',
             'project[description]' => 'Testowy opis słownika',
+            'project[shortDescription]' => 'Krótki opis słownika',
             'project[orderValue]' => 3
         ]);
 

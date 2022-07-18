@@ -68,7 +68,8 @@ class ProjectSlideController extends AbstractTranslatableCrudController
     {
         return [
             'description' => $this->entityTranslation->getDescription(),
-            'orderValue' => $this->entity->getOrderValue()
+            'orderValue' => $this->entity->getOrderValue(),
+            'project' => $this->entity->getProject()
         ];
     }
 
@@ -83,6 +84,7 @@ class ProjectSlideController extends AbstractTranslatableCrudController
     public function setTranslatableEntityFieldsFromForm($form)
     {
         $this->entity->setOrderValue($form['orderValue']->getData());
+        $this->entity->setProject($form['project']->getData());
         $this->entityTranslation->setDescription($form['description']->getData());
 
         $uploadedFile = $form['imageFile']->getData();

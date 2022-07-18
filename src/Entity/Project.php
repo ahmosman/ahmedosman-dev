@@ -6,6 +6,7 @@ use App\Repository\ProjectRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\Pure;
 use Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface;
 use Knp\DoctrineBehaviors\Model\Translatable\TranslatableTrait;
 
@@ -31,11 +32,6 @@ class Project implements TranslatableInterface
     public function __construct()
     {
         $this->projectSlides = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getImageFilename(): ?string
@@ -90,5 +86,15 @@ class Project implements TranslatableInterface
         $this->orderValue = $orderValue;
 
         return $this;
+    }
+
+    #[Pure] public function __toString(): string
+    {
+        return $this->getId();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
     }
 }

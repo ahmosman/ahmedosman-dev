@@ -2,6 +2,8 @@
 
 namespace App\Form;
 
+use App\Entity\Project;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -19,6 +21,9 @@ class ProjectSlideType extends AbstractType
             ->add('imageFile', FileType::class,[
                 'required' => false,
                 'constraints' => new Image()
+            ])
+            ->add('project', EntityType::class, [
+                'class' => Project::class
             ])
         ;
     }
