@@ -6,7 +6,7 @@ use App\Controller\Abstract\AbstractTranslatablePageContentController;
 use App\Entity\Credential;
 use App\Entity\Heading;
 use App\Entity\Paragraph;
-use App\Entity\ProjectSlide;
+use App\Entity\Project;
 use App\Entity\TimelineCategory;
 use App\Entity\Tool;
 use App\Service\TranslatableContentException;
@@ -69,10 +69,11 @@ class MainController extends AbstractTranslatablePageContentController
     #[Route('/{_locale<%app.supported_locales%>}/portfolio', name: 'portfolio')]
     public function portfolio(): Response
     {
-        $projectSlides = $this->entityManager->getRepository(ProjectSlide::class)->findAll();
+        $projects = $this->entityManager->getRepository(Project::class)->findAllOrderBy('orderValue');
 
         return $this->render('main/portfolio.html.twig', [
-            'slides' => $projectSlides
+            'headings' => $this->headings,
+            'projects' => $projects
         ]);
     }
 

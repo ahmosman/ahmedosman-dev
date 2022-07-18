@@ -38,4 +38,9 @@ class ProjectRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    public function findAllOrderBy(string $orderByWhat, string $ascOrDesc = 'asc'): array
+    {
+        return $this->findBy([], [$orderByWhat => $ascOrDesc]);
+    }
 }
