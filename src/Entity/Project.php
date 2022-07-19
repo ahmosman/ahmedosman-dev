@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ProjectRepository;
+use App\Service\UploaderHelper;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -22,6 +23,12 @@ class Project implements TranslatableInterface
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $imageFilename;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $githubLink;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $webLink;
 
     #[ORM\OneToMany(mappedBy: 'project', targetEntity: ProjectSlide::class)]
     private $projectSlides;
@@ -50,6 +57,31 @@ class Project implements TranslatableInterface
 
         return $this;
     }
+
+    public function getGithubLink(): ?string
+    {
+        return $this->githubLink;
+    }
+
+    public function setGithubLink(?string $githubLink): self
+    {
+        $this->githubLink = $githubLink;
+
+        return $this;
+    }
+
+    public function getWebLink(): ?string
+    {
+        return $this->webLink;
+    }
+
+    public function setWebLink(?string $webLink): self
+    {
+        $this->webLink = $webLink;
+
+        return $this;
+    }
+
 
     /**
      * @return Collection<int, ProjectSlide>
@@ -91,6 +123,11 @@ class Project implements TranslatableInterface
         $this->orderValue = $orderValue;
 
         return $this;
+    }
+
+    public function getImagePath()
+    {
+        return UploaderHelper::PROJECT_IMAGE . '/' . $this->getImageFilename();
     }
 
     #[Pure] public function __toString(): string

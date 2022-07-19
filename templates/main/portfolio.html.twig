@@ -5,18 +5,61 @@
         <h1>{{ headings.my_projects.name }}</h1>
         <section class="projects">
             {% for project in projects %}
-                <div class="project">
-                    <div class="project__content">
-                        <h2 class="project__subtitle">{{ project.translate(locale).subtitle|raw }}</h2>
-                        <h3 class="project__title">{{ project.translate(locale).title }}</h3>
-                        <div class="project__short_description">{{ project.translate(locale).shortDescription }}</div>
+                <div class="project_box">
+                    <div class="project_box__content">
+                        <h2 class="project_box__subtitle">{{ project.translate(locale).subtitle|raw }}</h2>
+                        <h3 class="project_box__title">{{ project.translate(locale).title }}</h3>
+                        <div class="project_box__short_description">{{ project.translate(locale).shortDescription }}</div>
                     </div>
-                    <div class="project__button">
-                        <button class="project__check-btn btn-mediumpurple">{{ headings.portfolio_check.name }}</button>
+                    <div class="project_box__button">
+                        <button class="project_box__check-btn check-btn btn-mediumpurple"
+                                id="{{ project.translate('pl').title|replace({' ': '-'}) }}">{{ headings.portfolio_check.name }}</button>
                     </div>
                 </div>
             {% endfor %}
         </section>
+        <div class="overlay hidden"></div>
+        <div class="project" style="display: none;"></div>
     </main>
+
+    {% for project in projects %}
+        <template id="{{ project.translate('pl').title|replace({' ': '-'}) }}">
+            <i class="fa-solid fa-x project__exit"></i>
+            <span class="project__links">
+
+                {% if project.webLink is not empty %}
+                    <a href="{{ project.webLink }}"><i class="fa-solid fa-laptop"></i></a>
+                {% endif %}
+
+                {% if project.githubLink is not empty %}
+                    <a href="{{ project.githubLink }}"><i class="fa-brands fa-github"></i></a>
+                {% endif %}
+
+            </span>
+            <div class="project__content">
+                <h1 class="project__title">{{ project.translate(locale).title }}</h1>
+                <h2 class="project__subtitle">{{ project.translate(locale).subtitle|raw }}</h2>
+                <div class="project__description">{{ project.translate(locale).description }}</div>
+                <img src="{{ uploaded_asset(project.imagePath) }}" alt="{{ project.translate(locale).title }}">
+            </div>
+            <div class="project__slides">
+                {% for slide in project.projectSlides %}
+                    <div class="slide">
+                        <div class="slide__description">{{ slide.translate(locale).description|nl2br }}</div>
+                        <img src="{{ uploaded_asset(slide.imagePath) }}" alt="">
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="project__tools">
+                <h2>{{ headings.used_tools.name }}</h2>
+                <div>{{ project.translate(locale).usedTools }}</div>
+            </div>
+
+        </template>
+    {% endfor %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('portfolio') }}
 {% endblock %}
 

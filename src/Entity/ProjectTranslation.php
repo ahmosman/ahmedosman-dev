@@ -28,6 +28,9 @@ class ProjectTranslation implements TranslationInterface
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $shortDescription;
 
+    #[ORM\Column(type: 'text', nullable: true)]
+    private $usedTools;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -77,6 +80,18 @@ class ProjectTranslation implements TranslationInterface
     public function setShortDescription(?string $shortDescription): self
     {
         $this->shortDescription = $shortDescription;
+        return $this;
+    }
+
+    public function getUsedTools(): ?string
+    {
+        return $this->usedTools;
+    }
+
+    public function setUsedTools(?string $usedTools): self
+    {
+        $this->usedTools = $usedTools;
+
         return $this;
     }
 }

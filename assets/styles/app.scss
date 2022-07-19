@@ -17,6 +17,26 @@ body {
   font-family: Lato, sans-serif;
   font-size: 12px;
   width: 100%;
+
+  //Simple scrollbar
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: rgba(0,0,0,0.1);
+  }
+  &::-webkit-scrollbar-thumb{
+    border-radius: 10px;
+    background: rgba(0,0,0,0.2);
+  }
+  &::-webkit-scrollbar-thumb:hover{
+    background: rgba(0,0,0,0.4);
+  }
+  &::-webkit-scrollbar-thumb:active{
+    background: rgba(0,0,0,.9);
+  }
 }
 
 h1, h2, h3 {
@@ -28,7 +48,7 @@ a {
   color: white;
 }
 
-p{
+p {
   line-height: 1.3em;
 }
 
@@ -73,4 +93,12 @@ header {
     }
   }
 
+}
+
+.hidden {
+  display: none;
+}
+
+.overflow_hidden{
+  overflow: hidden;
 }

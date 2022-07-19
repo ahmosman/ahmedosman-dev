@@ -21,6 +21,9 @@ class ProjectTest extends DatabaseDependantWebTestCase
         $project = new Project();
 
         $project->setImageFilename('test-image.jpg');
+        $project->setGithubLink('https://github.com/ahmosman/polbahasa');
+        $project->setWebLink('https://polbahasa.pl/');
+        $project->setImageFilename('test-image.jpg');
         $project->setOrderValue(1);
 
         $projectPl = $project->translate('pl');
@@ -29,11 +32,13 @@ class ProjectTest extends DatabaseDependantWebTestCase
         $projectPl->setTitle('Polbahasa');
         $projectPl->setSubtitle('Słownik indonezyjsko-polski');
         $projectPl->setDescription('Testowy opis słownika');
+        $projectPl->setUsedTools('Testowe technologie');
         $projectPl->setShortDescription('Krótki opis słownika');
 
         $projectEn->setTitle('Polbahasa');
         $projectEn->setSubtitle('Indonesian-Polish dictionary');
         $projectEn->setDescription('Test dictionary description');
+        $projectEn->setUsedTools('Test tools');
         $projectEn->setShortDescription('Short dictionary description');
 
         $this->entityManager->persist($project);
@@ -44,15 +49,19 @@ class ProjectTest extends DatabaseDependantWebTestCase
         $projectEnRecord = $projectRecord->translate('en');
 
 
+        self::assertEquals('https://github.com/ahmosman/polbahasa', $projectRecord->getGithubLink());
+        self::assertEquals('https://polbahasa.pl/', $projectRecord->getWebLink());
         self::assertEquals('test-image.jpg', $projectRecord->getImageFilename());
         self::assertEquals(1, $projectRecord->getOrderValue());
         self::assertEquals('Polbahasa', $projectPlRecord->getTitle());
         self::assertEquals('Słownik indonezyjsko-polski', $projectPlRecord->getSubtitle());
         self::assertEquals('Testowy opis słownika', $projectPlRecord->getDescription());
         self::assertEquals('Krótki opis słownika', $projectPlRecord->getShortDescription());
+        self::assertEquals('Testowe technologie', $projectPlRecord->getUsedTools());
         self::assertEquals('Polbahasa', $projectEnRecord->getTitle());
         self::assertEquals('Indonesian-Polish dictionary', $projectEnRecord->getSubtitle());
         self::assertEquals('Test dictionary description', $projectEnRecord->getDescription());
         self::assertEquals('Short dictionary description', $projectEnRecord->getShortDescription());
+        self::assertEquals('Test tools', $projectEnRecord->getUsedTools());
     }
 }

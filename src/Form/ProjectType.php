@@ -19,6 +19,13 @@ class ProjectType extends AbstractType
             ->add('subtitle', TextType::class)
             ->add('shortDescription', TextareaType::class)
             ->add('description', TextareaType::class)
+            ->add('usedTools', TextareaType::class)
+            ->add('githubLink', TextType::class,[
+                'required' => false
+            ])
+            ->add('webLink', TextType::class,[
+                'required' => false
+            ])
             ->add('orderValue', IntegerType::class)
             ->add('imageFile', FileType::class,[
                 'required' => false,

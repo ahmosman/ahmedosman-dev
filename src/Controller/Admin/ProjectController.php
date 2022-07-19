@@ -71,7 +71,10 @@ class ProjectController extends AbstractTranslatableCrudController
             'subtitle' => $this->entityTranslation->getSubtitle(),
             'shortDescription' => $this->entityTranslation->getShortDescription(),
             'description' => $this->entityTranslation->getDescription(),
-            'orderValue' => $this->entity->getOrderValue()
+            'usedTools' => $this->entityTranslation->getUsedTools(),
+            'orderValue' => $this->entity->getOrderValue(),
+            'githubLink' => $this->entity->getGithublink(),
+            'webLink' => $this->entity->getWebLink()
         ];
     }
 
@@ -86,11 +89,14 @@ class ProjectController extends AbstractTranslatableCrudController
     public function setTranslatableEntityFieldsFromForm($form)
     {
         $this->entity->setOrderValue($form['orderValue']->getData());
+        $this->entity->setGithubLink($form['githubLink']->getData());
+        $this->entity->setWebLink($form['webLink']->getData());
 
         $this->entityTranslation->setTitle($form['title']->getData());
         $this->entityTranslation->setSubtitle($form['subtitle']->getData());
         $this->entityTranslation->setDescription($form['description']->getData());
         $this->entityTranslation->setShortDescription($form['shortDescription']->getData());
+        $this->entityTranslation->setUsedTools($form['usedTools']->getData());
 
         $uploadedFile = $form['imageFile']->getData();
         if ($uploadedFile) {
