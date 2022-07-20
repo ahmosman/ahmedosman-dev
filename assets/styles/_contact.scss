@@ -1,5 +1,5 @@
 .contact {
-  padding-top: $header-size;
+  padding-top: $header-footer-size;
 
   &::before {
     content: '';
@@ -36,10 +36,6 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-
-    a {
-      text-decoration: none;
-    }
   }
 
   &__link {

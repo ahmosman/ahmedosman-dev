@@ -20,10 +20,11 @@
     {% endblock %}
 </head>
 <body>
-<header>
-    <div class="nav__main">
-        <a href="{{ path('homepage',{'_locale': app.request.locale}) }}">ahmedosman.dev</a>
-        <span class="nav__languages">
+<div class="page_wrapper">
+    <header>
+        <div class="nav__main">
+            <a href="{{ path('homepage',{'_locale': app.request.locale}) }}">ahmedosman.dev</a>
+            <span class="nav__languages">
         {% if app.request.locale == 'pl' %}
 
             <span>PL</span>
@@ -35,11 +36,25 @@
             <span>EN</span>
         {% endif %}
         </span>
-    </div>
-    <div class="nav__bars">
-        <i class="fa-solid fa-bars gradient_font"></i>
-    </div>
-</header>
-{% block body %}{% endblock %}
+        </div>
+        <div class="nav__bars">
+            <i class="fa-solid fa-bars gradient_font"></i>
+        </div>
+    </header>
+
+    {% block body %}{% endblock %}
+
+    <footer class="footer">
+        <div class="footer__content">
+            <div class="footer__copyright">
+                Copyright © 2022 Ahmed Osman
+            </div>
+            <div class="footer__links">
+                <a href="#">{{ 'policy'|trans }}</a>
+                <a href="#">{{ 'sources'|trans }}</a>
+            </div>
+        </div>
+    </footer>
+</div>
 </body>
 </html>

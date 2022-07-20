@@ -1,7 +1,6 @@
 .about {
   &__banner {
     height: 75vw;
-    margin-top: $header-size;
 
     &::before {
       content: '';
@@ -98,15 +97,19 @@
 
       .timeline {
         margin-top: 20px;
+        display: flex;
 
         &__date {
           width: 30%;
+          padding-right: 5px;
         }
-
-        display: flex;
 
         &__titles {
           width: 70%;
+
+          a {
+            text-decoration: underline;
+          }
         }
 
         &__title {
@@ -120,12 +123,13 @@
       }
     }
 
-    .credential{
-      &__description{
+    .credential {
+      &__description {
         font-style: italic;
         margin: 5px 0;
       }
-      &__author{
+
+      &__author {
         margin: 10px 0;
         text-align: right;
         font-weight: 700;

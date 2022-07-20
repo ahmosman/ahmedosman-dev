@@ -1,6 +1,5 @@
 .portfolio {
   height: 100%;
-  padding-top: $header-size;
   background-image: url("../images/background-purple-waves.png");
   background-repeat: no-repeat;
   background-size: cover;
@@ -13,8 +12,8 @@
     content: '';
     display: block;
     height: 100%;
-    position: absolute;
     width: 100%;
+    position: fixed;
     z-index: -1;
   }
 

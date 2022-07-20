@@ -6,21 +6,31 @@
             <h1>{{ headings.contact_1.name }}</h1>
             <h2>{{ headings.contact_2.name }}</h2>
             <div class="contact__links">
+
                 <div class="contact__link">
                     <i class="fa-regular fa-envelope gradient_font"></i>
                     <div>ahmedosman.inf@gmail.com</div>
                 </div>
-                <a href="https://github.com/ahmosman">
+
+                <a href="https://github.com/ahmosman" target="_blank">
                     <div class="contact__link">
                         <i class="fa-brands fa-github gradient_font"></i>
                     </div>
                 </a>
-                <a href="">
+
+                <a href="" target="_blank">
                     <div class="contact__link">
                         <i class="fa-brands fa-linkedin gradient_font"></i>
                     </div>
                 </a>
-                <a href="">
+
+                <a href="
+                {% if locale == 'pl' %}
+                     {{ uploaded_asset('document/CV-ahmed-osman-web-pl.pdf') }}
+                {% elseif locale == 'en' %}
+                     {{ uploaded_asset('document/CV-ahmed-osman-web-en.pdf') }}
+                {% endif %}
+                " target="_blank">
                     <div class="contact__link">
                         <i class="fa-regular fa-file gradient_font"></i>
                         <div> CV</div>
