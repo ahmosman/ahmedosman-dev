@@ -39,7 +39,14 @@
                         <div class="timeline">
                             <div class="timeline__date">{{ timeline.translate(locale).dateRange }}</div>
                             <div class="timeline__titles">
-                                <div class="timeline__title">{{ timeline.translate(locale).title }}</div>
+                                {% if timeline.link is not empty %}
+                                    <a href="{{ uploaded_asset(timeline.documentPath) }}" target="_blank">
+                                        <div class="timeline__title">{{ timeline.translate(locale).title }}</div>
+                                    </a>
+                                {% else %}
+                                    <div class="timeline__title">{{ timeline.translate(locale).title }}</div>
+                                {% endif %}
+
                                 <div class="timeline__subtitle">{{ timeline.translate(locale).subtitle }}</div>
                             </div>
                         </div>

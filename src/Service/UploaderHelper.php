@@ -9,6 +9,7 @@ use Gedmo\Sluggable\Util\Urlizer;
 class UploaderHelper
 {
     const PROJECT_IMAGE = 'project_image';
+    const DOCUMENT = 'document';
 
     private string $uploadsPath;
     private RequestStackContext $requestStackContext;

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\TimelineRepository;
+use App\Service\UploaderHelper;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface;
@@ -66,5 +67,10 @@ class Timeline implements TranslatableInterface
         $this->timelineCategory = $timelineCategory;
 
         return $this;
+    }
+
+    public function getDocumentPath()
+    {
+        return UploaderHelper::DOCUMENT . '/' . $this->getLink();
     }
 }
