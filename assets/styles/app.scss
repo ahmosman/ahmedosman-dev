@@ -1,4 +1,4 @@
-@import 'config', 'buttons', 'admin', 'home', 'about', 'portfolio';
+@import 'config', 'buttons', 'admin', 'home', 'about', 'portfolio', 'contact';
 
 * {
   box-sizing: border-box;
@@ -6,9 +6,8 @@
   padding: 0;
 }
 
-html,
 body {
-  height: 100%;
+  min-height: 100vh;
 }
 
 body {
@@ -93,6 +92,9 @@ header {
     }
   }
 
+  a{
+    text-decoration: none;
+  }
 }
 
 .hidden {
@@ -101,4 +103,10 @@ header {
 
 .overflow_hidden{
   overflow: hidden;
+}
+
+.gradient_font{
+  background: -webkit-linear-gradient(300deg, rgba(227, 44, 255, 1) 0%, rgba(110, 10, 125, 1) 80%, rgba(103, 6, 117, 1) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

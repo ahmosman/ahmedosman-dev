@@ -31,6 +31,7 @@ class Project implements TranslatableInterface
     private $webLink;
 
     #[ORM\OneToMany(mappedBy: 'project', targetEntity: ProjectSlide::class)]
+    #[ORM\OrderBy(['orderValue' => 'ASC'])]
     private $projectSlides;
 
     #[ORM\Column(type: 'integer', nullable: true)]

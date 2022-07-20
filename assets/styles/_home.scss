@@ -1,5 +1,5 @@
 .home {
-  height: calc(100% - 45px);
+  height: 100vh;
   display: flex;
   justify-content: center;
 
@@ -18,6 +18,7 @@
   }
 
   &__container {
+    padding-top: $header-size;
     height: 100%;
     text-align: center;
     line-height: 2.3em;

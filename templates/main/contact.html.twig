@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main class="contact">
+        <div class="contact__container">
+            <h1>{{ headings.contact_1.name }}</h1>
+            <h2>{{ headings.contact_2.name }}</h2>
+            <div class="contact__links">
+                <div class="contact__link">
+                    <i class="fa-regular fa-envelope gradient_font"></i>
+                    <div>ahmedosman.inf@gmail.com</div>
+                </div>
+                <a href="https://github.com/ahmosman">
+                    <div class="contact__link">
+                        <i class="fa-brands fa-github gradient_font"></i>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="contact__link">
+                        <i class="fa-brands fa-linkedin gradient_font"></i>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="contact__link">
+                        <i class="fa-regular fa-file gradient_font"></i>
+                        <div> CV</div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </main>
+{% endblock %}
+

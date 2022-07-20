@@ -69,12 +69,19 @@ class MainController extends AbstractTranslatablePageContentController
     #[Route('/{_locale<%app.supported_locales%>}/portfolio', name: 'portfolio')]
     public function portfolio(): Response
     {
-//        TODO: Sort projectSlides by orderValue
         $projects = $this->entityManager->getRepository(Project::class)->findAllOrderBy('orderValue');
 
         return $this->render('main/portfolio.html.twig', [
             'headings' => $this->headings,
             'projects' => $projects
+        ]);
+    }
+
+    #[Route('/{_locale<%app.supported_locales%>}/contact', name: 'contact')]
+    public function contact(): Response
+    {
+        return $this->render('main/contact.html.twig', [
+            'headings' => $this->headings
         ]);
     }
 

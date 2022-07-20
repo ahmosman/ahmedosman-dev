@@ -1,0 +1,61 @@
+.contact {
+  padding-top: $header-size;
+
+  &::before {
+    content: '';
+    background: url("../images/backgorund-technology-contact.jpg") no-repeat center;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 70%;
+  }
+
+  &__container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    h1 {
+      margin: 20px 0;
+      font-size: 2.1em;
+    }
+
+    h2 {
+      margin: 10px 0;
+      font-size: 1.5em;
+    }
+  }
+
+  &__links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  &__link {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100px;
+
+    i {
+      font-size: 5em;
+    }
+
+    div {
+      font-size: 0.9em;
+      margin: 5px 0;
+    }
+  }
+}
