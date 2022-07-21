@@ -1,7 +1,15 @@
 $background-color: #6E0095;
 $background-color-transparent: rgba(110, 0, 149, 0.8);
 $border-color: #D45AFF;
-$header-footer-size: 45px;
+
+@mixin header_footer($size){
+  header, footer{
+    height: $size;
+  }
+  main {
+    padding: $size 0;
+  }
+}
 
 @mixin background_purple_waves {
   background-image: url("../images/background-purple-waves.png");

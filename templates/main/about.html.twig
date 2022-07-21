@@ -7,59 +7,67 @@
                 {{ headings.about_banner.name|raw }}
             </div>
         </div>
-        <section class="me">
-            <h1>{{ paragraphs.about_me.title }}</h1>
-            <img src="{{ asset('images/ahmedosman-portrait.jpg') }}" alt="Ahmed Osman Photo">
-            <p>{{ paragraphs.about_me.description|nl2br }}</p>
-        </section>
-        <section class="intentions">
-            <h1>{{ paragraphs.my_intentions.title }}</h1>
-            <p>{{ paragraphs.my_intentions.description }}</p>
-        </section>
-        <section class="skills">
-            <h1>{{ headings.skills.name }}</h1>
+        <div class="about__content">
 
-            <h2>{{ headings.tools.name }}</h2>
-            <div class="tools">
+            <section class="me">
+                <h1>{{ paragraphs.about_me.title }}</h1>
+                <div>
+                    <img src="{{ asset('images/ahmedosman-portrait.jpg') }}" alt="Ahmed Osman Photo">
+                    <p>{{ paragraphs.about_me.description|nl2br }}</p>
+                </div>
+            </section>
 
-                {% for tool in tools %}
-                    <div class="circle">
-                        <div class="circle__content">
-                            <span>{{ tool.name }}</span>
-                            <img src="{{ tool.imgSrc }}" alt="{{ tool.name }}">
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-            {% for timelineCategory in timelineCategories %}
-                <h2>{{ timelineCategory.translate(locale).name }}</h2>
+            <section class="intentions">
+                <h1>{{ paragraphs.my_intentions.title }}</h1>
+                <p>{{ paragraphs.my_intentions.description }}</p>
+            </section>
 
-                <div class="timelines">
-                    {% for timeline in timelineCategory.timelines %}
-                        <div class="timeline">
-                            <div class="timeline__date">{{ timeline.translate(locale).dateRange }}</div>
-                            <div class="timeline__titles">
-                                {% if timeline.link is not empty %}
-                                    <a href="{{ uploaded_asset(timeline.documentPath) }}" target="_blank">
-                                        <div class="timeline__title">{{ timeline.translate(locale).title }}</div>
-                                    </a>
-                                {% else %}
-                                    <div class="timeline__title">{{ timeline.translate(locale).title }}</div>
-                                {% endif %}
+            <section class="skills">
+                <h1>{{ headings.skills.name }}</h1>
 
-                                <div class="timeline__subtitle">{{ timeline.translate(locale).subtitle }}</div>
+                <h2>{{ headings.tools.name }}</h2>
+                <div class="tools">
+
+                    {% for tool in tools %}
+                        <div class="circle">
+                            <div class="circle__content">
+                                <span>{{ tool.name }}</span>
+                                <img src="{{ tool.imgSrc }}" alt="{{ tool.name }}">
                             </div>
                         </div>
                     {% endfor %}
                 </div>
-            {% endfor %}
-            <h2>{{ headings.credentials.name }}</h2>
-            {% for credential in credentials %}
-                <div class="credential">
-                    <div class="credential__description">{{ credential.translate(locale).description|nl2br }}</div>
-                    <div class="credential__author">{{ credential.translate(locale).author }}</div>
-                </div>
-            {% endfor %}
-        </section>
+                {% for timelineCategory in timelineCategories %}
+                    <h2>{{ timelineCategory.translate(locale).name }}</h2>
+
+                    <div class="timelines">
+                        {% for timeline in timelineCategory.timelines %}
+                            <div class="timeline">
+                                <div class="timeline__date">{{ timeline.translate(locale).dateRange }}</div>
+                                <div class="timeline__titles">
+                                    {% if timeline.link is not empty %}
+                                        <a href="{{ uploaded_asset(timeline.documentPath) }}" target="_blank">
+                                            <div class="timeline__title">{{ timeline.translate(locale).title }}</div>
+                                        </a>
+                                    {% else %}
+                                        <div class="timeline__title">{{ timeline.translate(locale).title }}</div>
+                                    {% endif %}
+
+                                    <div class="timeline__subtitle">{{ timeline.translate(locale).subtitle }}</div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+                <h2>{{ headings.credentials.name }}</h2>
+                {% for credential in credentials %}
+                    <div class="credential">
+                        <div class="credential__description">{{ credential.translate(locale).description|nl2br }}</div>
+                        <div class="credential__author">{{ credential.translate(locale).author }}</div>
+                    </div>
+                {% endfor %}
+            </section>
+
+        </div>
     </main>
 {% endblock %}

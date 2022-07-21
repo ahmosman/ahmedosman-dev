@@ -1,5 +1,7 @@
 @import 'config', 'buttons', 'admin', 'home', 'about', 'portfolio', 'contact', 'menu', 'sources';
 
+@include header_footer(45px);
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -11,6 +13,7 @@
   width: 100%;
   min-height: 100%;
   overflow: auto;
+  overflow-x: hidden;
 }
 
 
@@ -73,7 +76,6 @@ header {
   z-index: 2;
   width: 100%;
   display: flex;
-  height: 45px;
   align-items: center;
   background-color: $background-color-transparent;
   font-size: 1rem;
@@ -91,13 +93,20 @@ header {
       }
     }
 
-    &__bars {
+    &__menu {
+      display: none;
+      justify-content: space-between;
       margin-left: auto;
-      margin-right: 20px;
-      font-size: 1.7rem;
-      display: flex;
-      align-items: center;
+      margin-right: 3vw;
+      div{
+        padding: 20px;
+      }
     }
+  }
+
+  a:hover, a.selected{
+    padding-bottom: 10px;
+    border-bottom: 5px solid $menu-color ;
   }
 
 }
@@ -106,26 +115,23 @@ header {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: $header-footer-size;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   text-align: center;
   background-color: $background-color-transparent;
+  font-size: 12px;
 
   &__links {
     a {
-      &:not(:first-of-type):before {
+      &:not(:first-of-type)::before {
         display: inline-block;
         content: ' • ';
         padding: 0 5px;
       }
     }
   }
-}
-
-main {
-  padding: $header-footer-size 0;
 }
 
 .hidden {
@@ -141,3 +147,5 @@ main {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+@import "responsive";

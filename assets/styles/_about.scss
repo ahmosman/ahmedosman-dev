@@ -14,11 +14,17 @@
     }
 
     .headings {
-      font-size: 1.4em;
+      font-size: 6vw;
       line-height: 1.3em;
       padding-left: 10%;
       padding-top: 15%;
     }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   section {
@@ -39,6 +45,11 @@
   .me {
     img {
       width: 200px;
+    }
+    div{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
   }
 
@@ -62,6 +73,7 @@
       justify-content: center;
       flex-wrap: wrap;
       width: 100%;
+      max-width: 800px;
 
       .circle {
         display: flex;
