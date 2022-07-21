@@ -22,7 +22,7 @@ Encore
      */
     .addEntry('app', './assets/app.js')
     .addEntry('portfolio', './assets/js/portfolio.js')
-    .addEntry('mobile_menu', './assets/js/mobile_menu.js')
+    .addEntry('menu_mobile', './assets/js/menu_mobile.js')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
@@ -60,18 +60,18 @@ Encore
     // enables Sass/SCSS support
     .enableSassLoader()
 
-    // uncomment if you use TypeScript
-    //.enableTypeScriptLoader()
+// uncomment if you use TypeScript
+//.enableTypeScriptLoader()
 
-    // uncomment if you use React
-    //.enableReactPreset()
+// uncomment if you use React
+//.enableReactPreset()
 
-    // uncomment to get integrity="..." attributes on your script & link tags
-    // requires WebpackEncoreBundle 1.4 or higher
-    //.enableIntegrityHashes(Encore.isProduction())
+// uncomment to get integrity="..." attributes on your script & link tags
+// requires WebpackEncoreBundle 1.4 or higher
+//.enableIntegrityHashes(Encore.isProduction())
 
-    // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
+// uncomment if you're having problems with a jQuery plugin
+//.autoProvidejQuery()
 ;
 
 module.exports = Encore.getWebpackConfig();
