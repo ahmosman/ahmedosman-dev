@@ -1,0 +1,11 @@
+.sources{
+  height: 100vh;
+  @include background_purple_waves;
+  ul{
+    max-width: 80vw;
+    font-size: 1.2em;
+  }
+  li{
+    margin: 10px;
+  }
+}

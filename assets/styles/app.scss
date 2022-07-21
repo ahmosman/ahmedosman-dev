@@ -1,4 +1,4 @@
-@import 'config', 'buttons', 'admin', 'home', 'about', 'portfolio', 'contact', 'menu';
+@import 'config', 'buttons', 'admin', 'home', 'about', 'portfolio', 'contact', 'menu', 'sources';
 
 * {
   box-sizing: border-box;
@@ -6,7 +6,7 @@
   padding: 0;
 }
 
-.page_wrapper{
+.page_wrapper {
   position: absolute;
   width: 100%;
   min-height: 100%;
@@ -26,19 +26,23 @@ body {
     width: 6px;
     height: 6px;
   }
+
   &::-webkit-scrollbar-track {
     border-radius: 10px;
-    background: rgba(0,0,0,0.1);
+    background: rgba(0, 0, 0, 0.1);
   }
-  &::-webkit-scrollbar-thumb{
+
+  &::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background: rgba(0,0,0,0.2);
+    background: rgba(0, 0, 0, 0.2);
   }
-  &::-webkit-scrollbar-thumb:hover{
-    background: rgba(0,0,0,0.4);
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.4);
   }
-  &::-webkit-scrollbar-thumb:active{
-    background: rgba(0,0,0,.9);
+
+  &::-webkit-scrollbar-thumb:active {
+    background: rgba(0, 0, 0, .9);
   }
 }
 
@@ -98,7 +102,7 @@ header {
 
 }
 
-.footer{
+.footer {
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -109,9 +113,9 @@ header {
   text-align: center;
   background-color: $background-color-transparent;
 
-  &__links{
+  &__links {
     a {
-      &:not(:first-of-type):before{
+      &:not(:first-of-type):before {
         display: inline-block;
         content: ' • ';
         padding: 0 5px;
@@ -120,7 +124,7 @@ header {
   }
 }
 
-main{
+main {
   padding: $header-footer-size 0;
 }
 
@@ -128,11 +132,11 @@ main{
   display: none;
 }
 
-.overflow_hidden{
+.overflow_hidden {
   overflow: hidden;
 }
 
-.gradient_font{
+.gradient_font {
   background: -webkit-linear-gradient(300deg, rgba(227, 44, 255, 1) 0%, rgba(110, 10, 125, 1) 80%, rgba(103, 6, 117, 1) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

@@ -1,25 +1,6 @@
 .portfolio {
   height: 100%;
-  background-image: url("../images/background-purple-waves.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  &::before {
-    background: linear-gradient(184deg, rgba(182, 63, 225, 1) 0%, rgba(124, 1, 167, 1) 35%, rgba(102, 7, 136, 1) 90%, rgba(94, 0, 128, 1) 100%);
-    content: '';
-    display: block;
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    z-index: -1;
-  }
-
-  h1 {
-    margin: 35px 0;
-  }
+  @include background_purple_waves;
 
   .projects {
     display: flex;
@@ -104,11 +85,12 @@
       font-size: 2em;
     }
 
-    &__exit {
+    i.project__exit {
       font-weight: 700;
       position: absolute;
       right: 15px;
       top: 10px;
+      color: rgba(58, 58, 58, 0.65);
 
       &:hover {
         cursor: pointer;
@@ -136,9 +118,10 @@
       }
     }
 
-    &__tools{
+    &__tools {
       margin: 30px 0 15px 0;
-      *{
+
+      * {
         margin: 10px 0;
       }
     }

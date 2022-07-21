@@ -85,4 +85,12 @@ class MainController extends AbstractTranslatablePageContentController
         ]);
     }
 
+    #[Route('/{_locale<%app.supported_locales%>}/sources', name: 'sources')]
+    public function sources(): Response
+    {
+        return $this->render('main/sources.html.twig', [
+            'headings' => $this->headings
+        ]);
+    }
+
 }
