@@ -15,22 +15,28 @@
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
 
+    {{ encore_entry_script_tags('mobile_menu') }}
+
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
 </head>
 <body>
 <div class="page_wrapper">
+    <div class="menu_mobile">
+        {% include 'mobile/menu_mobile.html.twig' %}
+    </div>
+
     <header>
         <div class="nav__main">
-            <a href="{{ path('homepage',{'_locale': app.request.locale}) }}">ahmedosman.dev</a>
+            <a href="{{ path('homepage') }}">ahmedosman.dev</a>
             <span class="nav__languages">
-        {% if app.request.locale == 'pl' %}
+        {% if locale == 'pl' %}
 
             <span>PL</span>
             |
             <a href="{% block enPath %}{{ path(app.request.get('_route'),{'_locale':'en'}) }}{% endblock %}">EN</a>
-        {% elseif app.request.locale == 'en' %}
+        {% elseif locale == 'en' %}
             <a href="{% block plPath %}{{ path(app.request.get('_route'),{'_locale':'pl'}) }}{% endblock %}">PL</a>
             |
             <span>EN</span>
@@ -38,7 +44,6 @@
         </span>
         </div>
         <div class="nav__bars">
-            <i class="fa-solid fa-bars gradient_font"></i>
         </div>
     </header>
 

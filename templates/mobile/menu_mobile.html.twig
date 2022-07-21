@@ -1,0 +1,15 @@
+<div class="menu_mobile__wrapper">
+    <div class="options">
+        <a href="{{ path('about') }}" class="option {% if app.request.get('_route') == 'about' %} selected {% endif %}">{{ 'about'|trans }}</a>
+        <a href="{{ path('portfolio') }}" class="option {% if app.request.get('_route') == 'portfolio' %} selected {% endif %}">{{ 'portfolio'|trans }}</a>
+        <a href="{{ path('contact') }}" class="option {% if app.request.get('_route') == 'contact' %} selected {% endif %}">{{ 'contact'|trans }}</a>
+    </div>
+</div>
+<svg class="x" xmlns="http://www.w3.org/2000/svg" height="40" width="220">
+    <g class="top-bars" stroke-width="4">
+        <path class="bar bar1" d="M 176,20 H 204"/>
+        <path class="bar bar2" d="M 176,29 H 204"/>
+    </g>
+</svg>
+<div class="menu-click-area"></div>
+

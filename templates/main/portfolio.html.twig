@@ -28,11 +28,11 @@
             <span class="project__links">
 
                 {% if project.webLink is not empty %}
-                    <a href="{{ project.webLink }}"><i class="fa-solid fa-laptop"></i></a>
+                    <a href="{{ project.webLink }}" target="_blank"><i class="fa-solid fa-laptop"></i></a>
                 {% endif %}
 
                 {% if project.githubLink is not empty %}
-                    <a href="{{ project.githubLink }}"><i class="fa-brands fa-github"></i></a>
+                    <a href="{{ project.githubLink }}" target="_blank"><i class="fa-brands fa-github"></i></a>
                 {% endif %}
 
             </span>
