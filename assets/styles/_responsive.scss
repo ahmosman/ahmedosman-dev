@@ -1,3 +1,17 @@
+@media screen and (min-width: 320px) {
+  body {
+    font-size: 14px;
+  }
+  .portfolio {
+    .projects {
+      .project_box {
+        max-width: 270px;
+        max-height: 260px;
+      }
+    }
+  }
+}
+
 @media screen and (min-width: 380px) {
   .contact {
     &__link {
@@ -390,3 +404,4 @@
     }
   }
 }
+
