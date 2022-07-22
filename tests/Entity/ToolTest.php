@@ -10,11 +10,6 @@ use App\Tests\DatabaseDependantWebTestCase;
 class ToolTest extends DatabaseDependantWebTestCase
 {
     private ToolRepository $repository;
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->repository = $this->entityManager->getRepository(Tool::class);
-    }
 
     /** @test */
     public function toolCanBeAddedToDatabase()
@@ -55,8 +50,14 @@ class ToolTest extends DatabaseDependantWebTestCase
         $tools = $this->repository->findAllOrderBy('orderValue');
 
 
-        self::assertEquals('Symfony',$tools[0]->getName());
-        self::assertEquals('Github',$tools[1]->getName());
+        self::assertEquals('Symfony', $tools[0]->getName());
+        self::assertEquals('Github', $tools[1]->getName());
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->repository = $this->entityManager->getRepository(Tool::class);
     }
 
 }

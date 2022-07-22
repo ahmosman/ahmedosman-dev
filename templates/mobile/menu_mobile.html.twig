@@ -1,8 +1,18 @@
 <div class="menu_mobile__wrapper">
     <div class="options">
-        <a href="{{ path('about') }}" class="option {% if app.request.get('_route') == 'about' %} selected {% endif %}">{{ 'about'|trans }}</a>
-        <a href="{{ path('portfolio') }}" class="option {% if app.request.get('_route') == 'portfolio' %} selected {% endif %}">{{ 'portfolio'|trans }}</a>
-        <a href="{{ path('contact') }}" class="option {% if app.request.get('_route') == 'contact' %} selected {% endif %}">{{ 'contact'|trans }}</a>
+        <a href="{{ path('about') }}"
+           class="option {% if app.request.get('_route') == 'about' %} selected {% endif %}">{{ 'about'|trans }}</a>
+
+        <a href="{{ path('portfolio') }}"
+           class="option {% if app.request.get('_route') == 'portfolio' %} selected {% endif %}">{{ 'portfolio'|trans }}</a>
+
+        <a href="{{ path('contact') }}"
+           class="option {% if app.request.get('_route') == 'contact' %} selected {% endif %}">{{ 'contact'|trans }}</a>
+
+        {% if is_granted('ROLE_USER') %}
+            <a href="{{ path('app_logout') }}" class="option">{{ 'logout'|trans }}</a>
+        {% endif %}
+
     </div>
 </div>
 <svg class="x" xmlns="http://www.w3.org/2000/svg" height="40" width="220">

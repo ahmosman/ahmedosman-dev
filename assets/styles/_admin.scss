@@ -84,7 +84,31 @@
     margin: 10px 0;
   }
 
-  button{
+  button {
     margin: 15px 0;
+  }
+}
+
+.login {
+
+  display: flex;
+  justify-content: center;
+
+  form {
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+
+    input, h1, div {
+      margin: 20px 0;
+    }
+
+    input:not(input[type=checkbox]) {
+      width: 350px;
+    }
+
+    button {
+      width: 70px;
+    }
   }
 }

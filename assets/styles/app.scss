@@ -81,6 +81,9 @@ button {
   color: white;
   border-radius: 15px;
   font-size: 1em;
+  &:hover{
+    cursor: pointer;
+  }
 }
 
 header {
@@ -113,6 +116,12 @@ header {
       margin-right: 3vw;
       div{
         padding: 20px;
+      }
+    }
+
+    &__logged{
+      span{
+        margin: 0 10px;
       }
     }
   }

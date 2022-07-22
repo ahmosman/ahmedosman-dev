@@ -2,4 +2,10 @@
     <div><a href="{{ path('about') }}" {% if app.request.get('_route') == 'about' %} class="selected" {% endif %}>{{ 'about'|trans }}</a></div>
     <div><a href="{{ path('portfolio') }}" {% if app.request.get('_route') == 'portfolio' %} class="selected" {% endif %}>{{ 'portfolio'|trans }}</a></div>
     <div><a href="{{ path('contact') }}" {% if app.request.get('_route') == 'contact' %} class="selected" {% endif %}>{{ 'contact'|trans }}</a></div>
+    {% if is_granted('ROLE_USER') %}
+        <div class="nav__logged">
+            <span>{{ 'hello'|trans }}, {{ app.user.username }}</span>
+            <a href="{{ path('app_logout') }}">{{ 'logout'|trans }}</a>
+        </div>
+    {% endif %}
 </div>
