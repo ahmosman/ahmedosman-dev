@@ -42,6 +42,39 @@
       }
     }
   }
+
+  .portfolio {
+    .projects {
+      .project_box {
+        max-width: 300px;
+        max-height: 270px;
+      }
+    }
+
+    .project {
+      img {
+        width: 350px;
+      }
+
+      &__links {
+        margin-right: 15px;
+
+        i {
+          margin: 5px;
+        }
+      }
+
+      i.project__exit {
+        right: 20px;
+      }
+    }
+
+    .slide {
+      &__description {
+        margin: 30px 0 20px 0;
+      }
+    }
+  }
 }
 
 @media screen and (min-width: 600px) {
@@ -109,6 +142,10 @@
     }
   }
 
+  .content_wrapper > div {
+    max-width: 800px;
+  }
+
   .about {
     &__banner {
       height: 64vw;
@@ -119,8 +156,12 @@
       }
     }
 
+    &__content {
+      padding-top: 15px;
+    }
+
     section {
-      max-width: 800px;
+      margin: 25px 20px;
     }
 
     .me {
@@ -134,21 +175,6 @@
       }
     }
 
-    p {
-      margin-top: 20px;
-    }
-  }
-
-
-  .about {
-    &__content {
-      padding-top: 15px;
-    }
-
-    section {
-      margin: 25px 20px;
-    }
-
     .skills {
       h2 {
         margin: 30px 0;
@@ -160,6 +186,44 @@
           height: 140px;
           font-size: 18px;
         }
+      }
+    }
+
+    p {
+      margin-top: 20px;
+    }
+  }
+
+  .portfolio {
+    h1 {
+      align-self: flex-end;
+    }
+
+    .project {
+      &__title_section {
+        flex-direction: row-reverse;
+
+        .content {
+          margin: 0 30px;
+        }
+      }
+
+      img {
+        width: 300px;
+      }
+
+      &__tools {
+        margin-top: 45px;
+      }
+    }
+
+    .slide {
+      flex-direction: row-reverse;
+      align-items: center;
+      margin: 30px 0;
+
+      &__description {
+        margin: 0 30px;
       }
     }
   }
@@ -177,6 +241,11 @@
     font-size: 20px;
   }
 
+  .content_wrapper > div {
+    max-width: 1000px;
+  }
+
+
   .about {
 
     &__banner {
@@ -193,13 +262,35 @@
       font-size: 70px;
     }
 
-    section {
-      max-width: 1000px;
-    }
-
     .me {
       img {
         margin-right: 80px;
+        width: 350px;
+      }
+    }
+  }
+
+  .portfolio {
+    .projects {
+      .project_box {
+        max-width: 350px;
+        max-height: 300px;
+
+        &__check-btn {
+          padding: 15px 30px;
+          border-radius: 25px;
+        }
+
+        &__content * {
+          margin: 15px 25px;
+        }
+      }
+    }
+
+    .project {
+      padding: 40px 50px;
+
+      img {
         width: 350px;
       }
     }
@@ -210,11 +301,56 @@
   body {
     font-size: 20px;
   }
-
+  .content_wrapper > div {
+    max-width: 1300px;
+  }
   .about {
 
-    section {
-      max-width: 1200px;
+    &__banner {
+      &::before {
+        background-position: -20px -80px;
+      }
+    }
+
+
+    .skills {
+      .tools {
+        max-width: 900px;
+
+        .circle {
+          width: 150px;
+          height: 150px;
+          margin: 30px;
+        }
+      }
+    }
+  }
+  .portfolio {
+    .projects {
+      .project_box {
+        max-width: 390px;
+        max-height: 340px;
+      }
+    }
+
+    .project {
+      padding: 50px 70px;
+
+      img {
+        width: 400px;
+      }
+
+      i {
+        font-size: 2.7em;
+      }
+
+      &__links {
+        margin-right: 20px;
+
+        i {
+          margin: 10px;
+        }
+      }
     }
   }
 }

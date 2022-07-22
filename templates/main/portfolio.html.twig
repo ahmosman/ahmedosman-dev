@@ -2,24 +2,28 @@
 
 {% block body %}
     <main class="portfolio">
-        <h1>{{ headings.my_projects.name }}</h1>
-        <section class="projects">
-            {% for project in projects %}
-                <div class="project_box">
-                    <div class="project_box__content">
-                        <h2 class="project_box__subtitle">{{ project.translate(locale).subtitle|raw }}</h2>
-                        <h3 class="project_box__title">{{ project.translate(locale).title }}</h3>
-                        <div class="project_box__short_description">{{ project.translate(locale).shortDescription }}</div>
-                    </div>
-                    <div class="project_box__button">
-                        <button class="project_box__check-btn check-btn btn-mediumpurple"
-                                id="{{ project.translate('pl').title|replace({' ': '-'}) }}">{{ headings.portfolio_check.name }}</button>
-                    </div>
-                </div>
-            {% endfor %}
-        </section>
-        <div class="overlay hidden"></div>
-        <div class="project" style="display: none;"></div>
+        <div class="content_wrapper">
+            <div class="portfolio__content">
+                <h1>{{ headings.my_projects.name }}</h1>
+                <section class="projects">
+                    {% for project in projects %}
+                        <div class="project_box">
+                            <div class="project_box__content">
+                                <h2 class="project_box__subtitle">{{ project.translate(locale).subtitle|raw }}</h2>
+                                <h3 class="project_box__title">{{ project.translate(locale).title }}</h3>
+                                <div class="project_box__short_description">{{ project.translate(locale).shortDescription }}</div>
+                            </div>
+                            <div class="project_box__button">
+                                <button class="project_box__check-btn check-btn btn-mediumpurple"
+                                        id="{{ project.translate('pl').title|replace({' ': '-'}) }}">{{ headings.portfolio_check.name }}</button>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </section>
+                <div class="overlay hidden"></div>
+                <div class="project" style="display: none;"></div>
+            </div>
+        </div>
     </main>
 
     {% for project in projects %}
@@ -36,10 +40,12 @@
                 {% endif %}
 
             </span>
-            <div class="project__content">
-                <h1 class="project__title">{{ project.translate(locale).title }}</h1>
-                <h2 class="project__subtitle">{{ project.translate(locale).subtitle|raw }}</h2>
-                <div class="project__description">{{ project.translate(locale).description }}</div>
+            <div class="project__title_section">
+                <div class="content">
+                    <h1 class="project__title">{{ project.translate(locale).title }}</h1>
+                    <h2 class="project__subtitle">{{ project.translate(locale).subtitle|raw }}</h2>
+                    <div class="project__description">{{ project.translate(locale).description }}</div>
+                </div>
                 <img src="{{ uploaded_asset(project.imagePath) }}" alt="{{ project.translate(locale).title }}">
             </div>
             <div class="project__slides">

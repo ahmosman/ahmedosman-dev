@@ -15,9 +15,6 @@ $border-color: #D45AFF;
   background-image: url("../images/background-purple-waves.png");
   background-repeat: no-repeat;
   background-size: cover;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 
   &::before {
     background: linear-gradient(184deg, rgba(182, 63, 225, 1) 0%, rgba(124, 1, 167, 1) 35%, rgba(102, 7, 136, 1) 90%, rgba(94, 0, 128, 1) 100%);
