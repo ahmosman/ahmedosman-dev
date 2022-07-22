@@ -1,3 +1,11 @@
+@media screen and (min-width: 380px) {
+  .contact {
+    &__link {
+      margin: 30px;
+    }
+  }
+}
+
 @media screen and (min-width: 500px) {
   body {
     font-size: 15px;
@@ -96,6 +104,16 @@
           border-radius: 90px;
           margin: 20px;
         }
+      }
+    }
+  }
+
+  .sources {
+    &__content {
+      align-items: flex-start;
+
+      li {
+        margin: 20px;
       }
     }
   }
@@ -213,7 +231,8 @@
       img {
         width: 350px;
       }
-      &__overflow{
+
+      &__overflow {
         overflow-y: scroll;
       }
 
@@ -304,6 +323,12 @@
       img {
         width: 450px;
       }
+    }
+  }
+
+  .contact {
+    &__link {
+      margin: 45px;
     }
   }
 }

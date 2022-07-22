@@ -2,42 +2,45 @@
 
 {% block body %}
     <main class="contact">
-        <div class="contact__container">
-            <h1>{{ headings.contact_1.name }}</h1>
-            <h2>{{ headings.contact_2.name }}</h2>
-            <div class="contact__links">
+        <div class="content_wrapper">
+            <div class="contact__content">
+                <h1>{{ headings.contact_1.name }}</h1>
+                <h2>{{ headings.contact_2.name }}</h2>
+                <div class="contact__links">
 
-                <div class="contact__link">
-                    <i class="fa-regular fa-envelope gradient_font"></i>
-                    <div>ahmedosman.inf@gmail.com</div>
-                </div>
-
-                <a href="https://github.com/ahmosman" target="_blank">
                     <div class="contact__link">
-                        <i class="fa-brands fa-github gradient_font"></i>
+                        <i class="fa-regular fa-envelope gradient_font"></i>
+                        <div>ahmedosman.inf@gmail.com</div>
                     </div>
-                </a>
 
-                <a href="" target="_blank">
                     <div class="contact__link">
-                        <i class="fa-brands fa-linkedin gradient_font"></i>
+                        <a href="https://github.com/ahmosman" target="_blank">
+                            <i class="fa-brands fa-github gradient_font"></i>
+                        </a>
                     </div>
-                </a>
 
-                <a href="
+                    <div class="contact__link">
+                        <a href="" target="_blank">
+                            <i class="fa-brands fa-linkedin gradient_font"></i>
+                        </a>
+                    </div>
+
+                    <div class="contact__link">
+                        <a href="
                 {% if locale == 'pl' %}
                      {{ uploaded_asset('document/CV-ahmed-osman-web-pl.pdf') }}
                 {% elseif locale == 'en' %}
                      {{ uploaded_asset('document/CV-ahmed-osman-web-en.pdf') }}
                 {% endif %}
                 " target="_blank">
-                    <div class="contact__link">
-                        <i class="fa-regular fa-file gradient_font"></i>
-                        <div> CV</div>
+                            <i class="fa-regular fa-file gradient_font"></i>
+                            <div> CV</div>
+                        </a>
                     </div>
-                </a>
 
+                </div>
             </div>
+
         </div>
     </main>
 {% endblock %}
