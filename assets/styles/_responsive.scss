@@ -68,6 +68,40 @@
   }
 }
 
+@media screen and (min-width: 700px) {
+  .home {
+
+    &::before {
+      height: 75%;
+    }
+
+    &__headings {
+      height: 80%;
+      justify-content: flex-start;
+
+      h1, h2 {
+        line-height: 1.3em;
+      }
+
+      h1 {
+        margin: 50px 0;
+        font-size: 3em;
+      }
+
+      h2 {
+        margin: 20px 0;
+        font-size: 2em;
+      }
+    }
+
+    &__links {
+      flex-direction: row;
+      height: 20%;
+      font-size: 3em;
+    }
+  }
+}
+
 @media screen and (min-width: 900px) {
   header {
     .nav__main {
@@ -124,7 +158,7 @@
         .circle {
           width: 140px;
           height: 140px;
-          font-size: 1.2em;
+          font-size: 18px;
         }
       }
     }
