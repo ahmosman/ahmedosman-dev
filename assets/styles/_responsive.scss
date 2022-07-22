@@ -200,6 +200,8 @@
     }
 
     .project {
+      overflow: hidden;
+
       &__title_section {
         flex-direction: row-reverse;
 
@@ -209,11 +211,20 @@
       }
 
       img {
-        width: 300px;
+        width: 350px;
+      }
+      &__overflow{
+        overflow-y: scroll;
       }
 
       &__tools {
         margin-top: 45px;
+      }
+
+      &__slides {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
 
@@ -291,7 +302,7 @@
       padding: 40px 50px;
 
       img {
-        width: 350px;
+        width: 450px;
       }
     }
   }
@@ -337,7 +348,7 @@
       padding: 50px 70px;
 
       img {
-        width: 400px;
+        width: 500px;
       }
 
       i {

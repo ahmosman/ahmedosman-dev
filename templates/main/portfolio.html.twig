@@ -48,19 +48,20 @@
                 </div>
                 <img src="{{ uploaded_asset(project.imagePath) }}" alt="{{ project.translate(locale).title }}">
             </div>
-            <div class="project__slides">
-                {% for slide in project.projectSlides %}
-                    <div class="slide">
-                        <div class="slide__description">{{ slide.translate(locale).description|nl2br }}</div>
-                        <img src="{{ uploaded_asset(slide.imagePath) }}" alt="">
-                    </div>
-                {% endfor %}
+            <div class="project__overflow">
+                <div class="project__slides">
+                    {% for slide in project.projectSlides %}
+                        <div class="slide">
+                            <div class="slide__description">{{ slide.translate(locale).description|nl2br }}</div>
+                            <img src="{{ uploaded_asset(slide.imagePath) }}" alt="">
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="project__tools">
+                    <h2>{{ headings.used_tools.name }}</h2>
+                    <div>{{ project.translate(locale).usedTools }}</div>
+                </div>
             </div>
-            <div class="project__tools">
-                <h2>{{ headings.used_tools.name }}</h2>
-                <div>{{ project.translate(locale).usedTools }}</div>
-            </div>
-
         </template>
     {% endfor %}
 {% endblock %}
