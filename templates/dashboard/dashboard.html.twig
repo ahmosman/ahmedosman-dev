@@ -4,27 +4,31 @@
 
 {% block body %}
     <main class="dashboard">
-        <nav class="dashboard__menu">
-            <ul>
-                <li><a href="{{ path('dashboard_heading') }}">Heading</a></li>
-                <li><a href="{{ path('dashboard_paragraph') }}">Paragraph</a></li>
-                <li><a href="{{ path('dashboard_tool') }}">Tool</a></li>
-                <li><a href="{{ path('dashboard_timeline-category') }}">Timeline category</a></li>
-                <li><a href="{{ path('dashboard_timeline') }}">Timeline</a></li>
-                <li><a href="{{ path('dashboard_credential') }}">Credential</a></li>
-                <li><a href="{{ path('dashboard_project') }}">Project</a></li>
-                <li><a href="{{ path('dashboard_project-slide') }}">Project slide</a></li>
-            </ul>
-        </nav>
-        <section class="dashboard__list">
+        <div class="content_wrapper">
+            <div class="dashboard__content">
+                <nav class="dashboard__menu">
+                    <ul>
+                        <li><a href="{{ path('dashboard_heading') }}">Heading</a></li>
+                        <li><a href="{{ path('dashboard_paragraph') }}">Paragraph</a></li>
+                        <li><a href="{{ path('dashboard_tool') }}">Tool</a></li>
+                        <li><a href="{{ path('dashboard_timeline-category') }}">Timeline category</a></li>
+                        <li><a href="{{ path('dashboard_timeline') }}">Timeline</a></li>
+                        <li><a href="{{ path('dashboard_credential') }}">Credential</a></li>
+                        <li><a href="{{ path('dashboard_project') }}">Project</a></li>
+                        <li><a href="{{ path('dashboard_project-slide') }}">Project slide</a></li>
+                    </ul>
+                </nav>
+                <section class="dashboard__list">
 
-            <h1>{{ app.request.get('_route')|split('_')[1] }}</h1>
+                    <h1>{{ app.request.get('_route')|split('_')[1] }}</h1>
 
-            <a class="new_link" href="{% block newPath %}{% endblock %}">Add new</a>
+                    <a class="new_link" href="{% block newPath %}{% endblock %}">Add new</a>
 
-            {% block crud_list %}
-            {% endblock %}
+                    {% block crud_list %}
+                    {% endblock %}
 
-        </section>
+                </section>
+            </div>
+        </div>
     </main>
 {% endblock %}

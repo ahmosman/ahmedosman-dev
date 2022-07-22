@@ -1,9 +1,13 @@
 .dashboard {
   display: flex;
-  margin: 50px;
-  border: 2px solid #410441;
-  font-size: 16px;
-  padding: 0;
+  justify-content: center;
+
+  &__content {
+    display: flex;
+    border: 2px solid #410441;
+    margin: 30px 0;
+    width: 1300px;
+  }
 
   &__menu {
     border-right: 2px solid #410441;
@@ -36,8 +40,11 @@
 }
 
 .edit {
-  padding: 40px;
-  font-size: 16px;
+  padding-left: 60px;
+
+  h1 {
+    margin: 20px 0;
+  }
 
   form > div {
     div {
@@ -75,5 +82,9 @@
 
   form {
     margin: 10px 0;
+  }
+
+  button{
+    margin: 15px 0;
   }
 }
