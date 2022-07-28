@@ -13,7 +13,7 @@
                 <section class="me">
                     <h1>{{ paragraphs.about_me.title }}</h1>
                     <div>
-                        <img src="{{ asset('images/ahmedosman-portrait.jpg') }}" alt="Ahmed Osman Photo">
+                        <img src="{{ asset('images/ahmedosman-portrait.jpg') }}" alt="">
                         <p>{{ paragraphs.about_me.description|nl2br }}</p>
                     </div>
                 </section>
@@ -33,7 +33,7 @@
                             <div class="circle">
                                 <div class="circle__content">
                                     <span>{{ tool.name }}</span>
-                                    <img src="{{ tool.imgSrc }}" alt="{{ tool.name }}">
+                                    <img src="{{ tool.imgSrc }}" alt="">
                                 </div>
                             </div>
                         {% endfor %}
