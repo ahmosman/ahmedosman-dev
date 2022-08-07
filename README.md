@@ -6,7 +6,7 @@ My personal site<br><br>
 ## About
 This project is developed using Symfony 6. <br>
 In this website most of the sections are created using  <a href="https://github.com/KnpLabs/DoctrineBehaviors/blob/master/docs/translatable.md">Doctrine Behaviors</a> for translations.
-All the translatable content can be edited depending on language locale (e.g. /pl/ or /en/ in URL). It is managed by admin dashboard presented below. <br>
+All the translatable content can be edited depending on the language locale (e.g. /pl/ or /en/ in URL). It is managed by an admin dashboard presented below. <br>
 
 ![Alt text](public/images/admin-dashboard.jpg)
 
