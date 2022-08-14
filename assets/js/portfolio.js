@@ -1,6 +1,5 @@
 $(document).ready(function () {
     $('.check-btn').click(function () {
-        console.log($(this).attr('id'))
 
         $('body').addClass('overflow_hidden')
 
