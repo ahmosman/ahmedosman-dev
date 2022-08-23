@@ -21,7 +21,7 @@ class TimelineCategory implements TranslatableInterface
     private $id;
 
     #[ORM\OneToMany(mappedBy: 'timelineCategory', targetEntity: Timeline::class)]
-    #[ORM\OrderBy(['date' => 'ASC'])]
+    #[ORM\OrderBy(['date' => 'DESC'])]
     private $timelines;
 
     public function __construct()
